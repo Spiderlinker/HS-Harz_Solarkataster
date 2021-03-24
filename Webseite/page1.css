@@ -1,0 +1,160 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #f1f1f1;
+}
+
+#regForm {
+	background-color: #ffffff;
+	margin: 100px auto;
+	font-family: Raleway;
+	padding: 40px;
+	width: 70%;
+	min-width: 300px;
+}
+
+h1 {
+	text-align: center;
+}
+
+input {
+	padding: 10px;
+	width: 100%;
+	font-size: 17px;
+	font-family: Raleway;
+	border: 1px solid #aaaaaa;
+}
+
+/* Mark input boxes that gets an error on validation: */
+
+input.invalid {
+	background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+
+.tab {
+	display: none;
+}
+
+button {
+	background-color: #4CAF50;
+	color: #ffffff;
+	border: none;
+	padding: 10px 20px;
+	font-size: 17px;
+	font-family: Raleway;
+	cursor: pointer;
+}
+
+button:hover {
+	opacity: 0.8;
+}
+
+#prevBtn {
+	background-color: #bbbbbb;
+}
+
+/* Make circles that indicate the steps of the form: */
+
+.step {
+	height: 15px;
+	width: 15px;
+	margin: 0 2px;
+	background-color: #bbbbbb;
+	border: none;
+	border-radius: 50%;
+	display: inline-block;
+	opacity: 0.5;
+}
+
+.step.active {
+	opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+
+.step.finish {
+	background-color: #4CAF50;
+}
+
+/* =========================================== */
+/* ======== TOOLTIP - Dachausrichtung ======== */
+/* =========================================== */
+
+.tooltip {
+	text-decoration: none;
+	position: relative;
+}
+
+.tooltip span {
+	display: none;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	color: black;
+	background: white;
+}
+
+.tooltip span img {
+	float: left;
+	margin: 0px 8px 8px 0;
+}
+
+.tooltip:hover span {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	width: auto;
+	border: 1px solid black;
+	margin-top: 12px;
+	margin-left: 32px;
+	overflow: hidden;
+	padding: 8px;
+}
+
+
+/* =========================================== */
+/* =========== Monatlich / Jährlich ========== */
+/* =========================================== */
+
+ /* Style the tab */
+ .stromtab {
+	overflow: hidden;
+	border: 1px solid #ccc;
+	background-color: #f1f1f1;
+  }
+  
+  /* Style the buttons that are used to open the tab content */
+  .stromtab button {
+	background-color: inherit;
+	float: left;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+	color: black;
+  }
+  
+  /* Change background color of buttons on hover */
+  .stromtab button:hover {
+	background-color: #ddd;
+  }
+  
+  /* Create an active/current tablink class */
+  .stromtab button.active {
+	background-color: #ccc;
+  }
+  
+  /* Style the tab content */
+  .tabcontent {
+	display: none;
+	padding: 6px 12px;
+	border: 1px solid #ccc;
+	border-top: none;
+  } 
