@@ -83,11 +83,11 @@ function calculateWithYearlyValues(n){
     //electricity revenue
     var electricityProduced = irradiation*areaFactor*((peakEfficiency*neededAmountOfModules)/1000)*(1-(degreeOfEffectiveness/100));
     var dailyConsumption = n*(dailyElectricityConsumption/100);
-    //TODO electricityCostsTotal
+    //electricityCostsTotal
     savedelectricityCostsTotal = calculateSavedElectricityCosts(electricityProduced, dailyConsumption);
-    //TODO eeg
+    //eeg
     eegCostsTotal = calculateEEGCosts(electricityProduced,dailyConsumption);
-    //TODO revenue
+    //revenue
     revenueTotal = electricityProduced - dailyConsumption;
     //TODO min and max amortization
 }
