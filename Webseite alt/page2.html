@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <title> Beispiel 1 </title>
+    <meta name="author" content="Administrator" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="page2.css" title="style1" />
+</head>
+
+
+<script type="text/javascript" src="javascript.js"></script>
+
+<body>
+    <h3>Stromverbrauch</h3>
+    <form>
+        <!-- Tab links -->
+        <div class="tab">
+            <button class="tablinks" type="button" onclick="switchTab(event, 'monthly')">monatlich</button>
+            <button class="tablinks" type="button" onclick="switchTab(event, 'yearly')">jährlich</button>
+        </div>
+
+        <!-- Tab content -->
+        <div id="monthly" class="tabcontent">
+            <h4>Monatlicher Stromverbrauch</h4>
+            <table>
+                <tr>
+                    <td>Januar</td>
+                    <td><input type="text" class="textbox" name="january" placeholder="100 kWh" required></td>
+                </tr>
+                <tr>
+                    <td>Februar</td>
+                    <td><input type="text" class="textbox" name="february" placeholder="100 kWh" required></td>
+                </tr>
+                <tr>
+                    <td>März</td>
+                    <td><input type="text" class="textbox" name="march" placeholder="100 kWh" required></td>
+                </tr>
+                <tr>
+                    <td>April</td>
+                    <td><input type="text" class="textbox" name="april" placeholder="100 kWh" required></td>
+                </tr>
+                <tr>
+                    <td>Mai</td>
+                    <td><input type="text" class="textbox" name="may" placeholder="100 kWh" required></td>
+                </tr>
+                <tr>
+                    <td>Juni</td>
+                    <td><input type="text" class="textbox" name="june" placeholder="100 kWh" required></td>
+                </tr>
+                <tr>
+                    <td>Juli</td>
+                    <td><input type="text" class="textbox" name="july" placeholder="100 kWh" required></td>
+                </tr>
+                <tr>
+                    <td>August</td>
+                    <td><input type="text" class="textbox" name="august" placeholder="100 kWh" required></td>
+                </tr>
+                <tr>
+                    <td>September</td>
+                    <td><input type="text" class="textbox" name="september" placeholder="100 kWh" required></td>
+                </tr>
+                <tr>
+                    <td>Oktober</td>
+                    <td><input type="text" class="textbox" name="october" placeholder="100 kWh" required></td>
+                </tr>
+                <tr>
+                    <td>November</td>
+                    <td><input type="text" class="textbox" name="november" placeholder="100 kWh" required></td>
+                </tr>
+                <tr>
+                    <td>Dezember</td>
+                    <td><input type="text" class="textbox" name="december" placeholder="100 kWh" required></td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="yearly" class="tabcontent">
+            <table>
+                <tr>
+                    <td>Jährlicher Stromverbrauch</td>
+                    <td><input type="text" class="textbox" name="january" placeholder="100 kWh" required></td>
+                </tr>
+            </table>
+        </div>
+
+        <br>
+
+        Tagesstromverbrauch  <input type="text" class="textbox" name="consumption" placeholder="50%" required>
+
+
+        <div style="text-align: right;">
+            <button class="next-button" type="submit" action="javascript:;" onSubmit="submit1()" enctype="multipart/form-data">Weiter</button>
+        </div>
+    </form>
+
+</body>
+
+</html>

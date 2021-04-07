@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <title> Beispiel 1 </title>
+    <meta name="author" content="Administrator" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="page2.css" title="style1" />
+</head>
+
+
+<script type="text/javascript" src="javascript.js"></script>
+
+<body>
+    <h3>Kosten</h3>
+    <form>
+        <table>
+            <tr>
+                <td>EEG Umlage</td>
+                <td><input type="text" class="textbox" name="eeg" placeholder="6,1" required></td>
+                <td>ct / kWh</td>
+            </tr>
+            <tr>
+                <td>Stromkosten</td>
+                <td><input type="text" class="textbox" name="stromkosten" placeholder="27,5" required></td>
+                <td>ct / kWh</td>
+            </tr>
+            <tr>
+                <td><h4>Gesamtkosten</h4></td>
+            </tr>
+            <tr>
+                <td>Minimum</td>
+                <td><input type="text" class="textbox" name="minimum" placeholder="250" required></td>
+                <td>EUR / m²</td>
+            </tr>
+            <tr>
+                <td>Maximum</td>
+                <td><input type="text" class="textbox" name="maximum" placeholder="450" required></td>
+                <td>EUR / m²</td>
+            </tr>
+        </table>
+
+        <br>
+
+        Amortisationszeit: ...
+
+        <br>
+
+        <div style="text-align: right;">
+            <button class="next-button" type="submit" action="javascript:;" onSubmit="submit2()"
+                enctype="multipart/form-data">Weiter</button>
+        </div>
+    </form>
+
+</body>
+
+</html>
