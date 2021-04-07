@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
 
 <head>
-    <title> Beispiel 1 </title>
-    <meta name="author" content="Administrator" />
+    <title> Solarkataster Wernigerode </title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="page1.css" title="style" />
+    <link rel="stylesheet" type="text/css" href="index.css" title="style" />
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 </head>
 
@@ -15,21 +14,29 @@
 
     <form id="regForm" action="/action_page.php">
         <h1>Solarkataster</h1>
+
         <!-- One "tab" for each step in the form: -->
-        <div class="tab">Informationen über das Dach:
+
+        <!-- ############# ##### ############# -->
+        <!-- ############# TAB 1 ############# -->
+        <!-- ############# ##### ############# -->
+
+        <div class="tab">
+            <h4>Informationen über das Dach</h4>
             <table>
                 <tr>
                     <td>Dachwinkel</td>
                     <td><input type="text" class="textbox" name="dachwinkel" value="40" placeholder="40"></td>
-                    <td>°</td>
+                    <td>Grad</td>
                 </tr>
                 <tr>
                     <td>Dachausrichtung</td>
-                    <td><input type="text" class="textbox" name="dachausrichtung" value="90" placeholder="90° - 270°"></td>
-                    <td>°</td>
+                    <td><input type="text" class="textbox" name="dachausrichtung" value="90" placeholder="90° - 270°">
+                    </td>
+                    <td>Grad</td>
                     <td>
                         <a class="tooltip" href="">
-                            ?
+                            <img src="img/info.png" width="24" style="float:right;"/>
                             <span><img src="img/dachausrichtung.png" width="300">
                                 Die Gradzahl wird anhand der Ausrichtung des Daches bestimmt.
                             </span>
@@ -43,10 +50,16 @@
                 </tr>
             </table>
         </div>
-        <div class="tab">Stromverbrauch Info:
+
+        <!-- ############# ##### ############# -->
+        <!-- ############# TAB 2 ############# -->
+        <!-- ############# ##### ############# -->
+
+        <div class="tab"><h4>Stromverbrauch Info</h4>
             <!-- Tab links -->
             <div class="stromtab">
-                <button class="tablinks" type="button" onclick="switchTab(event, 'monthly')" id="monthlyTabButton">monatlich</button>
+                <button class="tablinks" type="button" onclick="switchTab(event, 'monthly')"
+                    id="monthlyTabButton">monatlich</button>
                 <button class="tablinks" type="button" onclick="switchTab(event, 'yearly')">jährlich</button>
             </div>
 
@@ -129,11 +142,67 @@
 
             <br>
 
-            Tagesstromverbrauch <input type="text" class="textbox" id="consumption" name="consumption" placeholder="50%">%
+            <div>
+                <p>Für wen wird die Solaranlage geplant?</p>
+                <input type="radio" id="privateUsage" name="usage" value="Privathaushalt" checked="checked"
+                    onclick="radioButtonChecked(event, 'private');">
+                <label for="privateUsage"> Privathaushalt</label>
+                <br>
+                <input type="radio" id="commercialUsage" name="usage" value="Gewerblich"
+                    onclick="radioButtonChecked(event, 'commercial');">
+                <label for="commercialUsage"> Gewerbe</label>
+
+                <p>Wie sieht das Verbrauchsprofil aus?</p>
+                <div id="private" class="radioGroup">
+                    <input type="radio" id="privateDaytime" name="privateUsageDetail" value="privateDaytime"
+                        checked="checked" onclick="setDailyConsumptionPercentage(event);">
+                    <label for="privateDaytime"> Eher tagsüber (Home-Office)</label>
+                    <br>
+                    <input type="radio" id="privateEvening" name="privateUsageDetail" value="privateEvening"
+                        onclick="setDailyConsumptionPercentage(event);">
+                    <label for="privateEvening"> Eher abends (Arbeit in Büro)</label>
+                    <br>
+                    <input type="radio" id="privateSpreadOverDay" name="privateUsageDetail" value="privateSpreadOverDay"
+                        onclick="setDailyConsumptionPercentage(event);">
+                    <label for="privateSpreadOverDay"> Rund um die Uhr</label>
+                </div>
+                <div id="commercial" class="radioGroup">
+                    <input type="radio" id="commercialDaytime" name="commercialUsageDetail" value="commercialDaytime"
+                        checked="checked" onclick="setDailyConsumptionPercentage(event);">
+                    <label for="commercialDaytime"> Eher tagsüber von 8 - 18 Uhr</label>
+                    <br>
+                    <input type="radio" id="commercialEvening" name="commercialUsageDetail" value="commercialEvening"
+                        onclick="setDailyConsumptionPercentage(event);">
+                    <label for="commercialEvening"> Eher abends (Restaurant, Bar)</label>
+                    <br>
+                    <input type="radio" id="commercialSpreadOverDay" name="commercialUsageDetail"
+                        value="commercialSpreadOverDay" onclick="setDailyConsumptionPercentage(event);">
+                    <label for="commercialSpreadOverDay"> Rund um die Uhr (Schichtbetrieb)</label>
+                </div>
+            </div>
+
+            <br>
+
+            <div style="display: table;">
+                <div style="display: table-cell;">Tagesstromverbrauch: </div>
+                <div style="display: table-cell;"><input type="text" class="textbox consumptionInput" id="consumption"
+                        name="consumption" placeholder="50" size="1%"></div>
+                <div style="display: table-cell;"> %</div>
+            </div>
 
         </div>
-        <div class="tab">Kosten:
+
+        <!-- ############# ##### ############# -->
+        <!-- ############# TAB 3 ############# -->
+        <!-- ############# ##### ############# -->
+
+        <div class="tab">
             <table>
+                <tr>
+                    <td>
+                        <h4>Kosten</h4>
+                    </td>
+                </tr>
                 <tr>
                     <td>EEG Umlage</td>
                     <td><input type="text" class="textbox" name="eeg" placeholder="6,1"></td>
@@ -160,14 +229,47 @@
                     <td>EUR / m²</td>
                 </tr>
             </table>
-
-            <br>
-
-            Amortisationszeit: ...
         </div>
-        <div class="tab">Zusammenfassung:
 
+
+        <!-- ############# ##### ############# -->
+        <!-- ############# TAB 4 ############# -->
+        <!-- ############# ##### ############# -->
+
+        <div class="tab">
+            <table>
+                <tr>
+                    <td>
+                        <h4>Zusammenfassung</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kosten Minimum</td>
+                    <td><input type="text" class="textbox" name="eeg" placeholder="6,1"></td>
+                    <td>Amortisationszeit</td>
+                </tr>
+                <tr>
+                    <td>Stromkosten</td>
+                    <td><input type="text" class="textbox" name="stromkosten" placeholder="27,5"></td>
+                    <td>ct / kWh</td>
+                </tr>
+                <tr>
+                    <td>Minimum</td>
+                    <td><input type="text" class="textbox" name="minimum" placeholder="250"></td>
+                    <td>EUR / m²</td>
+                </tr>
+                <tr>
+                    <td>Maximum</td>
+                    <td><input type="text" class="textbox" name="maximum" placeholder="450"></td>
+                    <td>EUR / m²</td>
+                </tr>
+            </table>
         </div>
+
+        <!-- ############# ######## ############# -->
+        <!-- ############# End TABS ############# -->
+        <!-- ############# ######## ############# -->
+
         <div style="overflow:auto;">
             <div style="float:right;">
                 <button type="button" id="prevBtn" onclick="nextPrev(-1)">Zurück</button>
