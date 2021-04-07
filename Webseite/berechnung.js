@@ -38,6 +38,9 @@ var areaFactorTable = [
         [36,37,41,46,52,60,67,75,81,87,92,94,95,94,92,87,81,75,67,60,52,46,41,37,36],
         [33,34,37,43,48,54,61,67,74,78,83,84,85,84,83,78,74,67,61,54,48,43,37,34,33]   
     ];
+//amortization
+var minCostPerModule = 250;
+var maxCostPerModule = 450;
 
 /*
 values that need to be calculated
@@ -48,6 +51,8 @@ var neededRoofAreaTotal;
 var savedelectricityCostsTotal;
 var eegCostsTotal;
 var revenueTotal; 
+var amortizationMin;
+var amortizationMax;
 
 function readElectricityConsumption(n){
     if(n.getElementById.value == "monthly"){
@@ -89,7 +94,15 @@ function calculateWithYearlyValues(n){
     eegCostsTotal = calculateEEGCosts(electricityProduced,dailyConsumption);
     //revenue
     revenueTotal = electricityProduced - dailyConsumption;
-    //TODO min and max amortization
+    //min and max amortization
+    amortizationMin = calculateAmortization(minCostPerModule);
+    amortizationMax = calculateAmortization(maxCostPerModule);
+}
+
+function calculateAmortization(moduleCosts){
+    amortizationYear0 = moduleCosts * neededAmountOfModules;
+    amortizationYear1 = amortizationYear0 - revenueTotal + (0,01 * amortizationYear0);
+    return amortizationYear0 / (amortizationYear0 - amortizationYear1);
 }
 
 function calculatePVEfficiency(){
