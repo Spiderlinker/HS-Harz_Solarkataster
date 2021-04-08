@@ -19,6 +19,8 @@ showTab(currentTab); // Display the current tab
 document.getElementById("monthlyTabButton").click(); // open monthly electricity consumption
 document.getElementById("privateUsage").click(); // select private usage radio button
 
+//getMonthlyAverageRadiationForLocation(51.821, 10.750);
+
 function showTab(n) {
   // This function will display the specified tab of the form...
   var tabs = document.getElementsByClassName("tab");
@@ -189,4 +191,32 @@ function radioButtonChecked(evt, radioGroup){
 
 function setDailyConsumptionPercentage(event){
   document.getElementById("consumption").value = dailyConsumptionPercentageMap[event.currentTarget.value];
+}
+
+function getMonthlyAverageRadiationForLocation(latitude, longitude){
+  $.ajax({
+    type: "POST",
+    url: 'pvgis.php',
+    dataType: 'json',
+    data: {lat: latitude, lon: longitude}
+    }).done(function( response ) {
+        rawMonthlyRadiation = response.data.outputs.monthly;
+        
+        var averageMonthlyRadiation = Array(12).fill(0);
+        var sum = 0;
+        
+        for (var i = 0; i < rawMonthlyRadiation.length; i++){
+            currentRadiation = rawMonthlyRadiation[i];
+            averageMonthlyRadiation[currentRadiation.month - 1] += currentRadiation['H(h)_m'];
+        }
+        
+        for(i = 0; i < averageMonthlyRadiation.length; i++){
+            averageMonthlyRadiation[i] /= 12;
+            sum += averageMonthlyRadiation[i];
+        }
+        
+        console.log(averageMonthlyRadiation);
+        console.log(sum);
+        
+  });
 }

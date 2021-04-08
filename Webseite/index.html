@@ -8,10 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="index.css" title="style" />
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <script src="jquery.js"></script>
 </head>
 
 <body>
-
     <form id="regForm" action="/action_page.php">
         <h1>Solarkataster</h1>
 
@@ -36,7 +36,7 @@
                     <td>Grad</td>
                     <td>
                         <a class="tooltip" href="">
-                            <img src="img/info.png" width="24" style="float:right;"/>
+                            <img src="img/info.png" width="24" style="float:right;" />
                             <span><img src="img/dachausrichtung.png" width="300">
                                 Die Gradzahl wird anhand der Ausrichtung des Daches bestimmt.
                             </span>
@@ -55,7 +55,8 @@
         <!-- ############# TAB 2 ############# -->
         <!-- ############# ##### ############# -->
 
-        <div class="tab"><h4>Stromverbrauch Info</h4>
+        <div class="tab">
+            <h4>Stromverbrauch Info</h4>
             <!-- Tab links -->
             <div class="stromtab">
                 <button class="tablinks" type="button" onclick="switchTab(event, 'monthly')"
