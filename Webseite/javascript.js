@@ -200,13 +200,13 @@ function getMonthlyAverageRadiationForLocation(latitude, longitude){
     dataType: 'json',
     data: {lat: latitude, lon: longitude}
     }).done(function( response ) {
-        rawMonthlyRadiation = response.data.outputs.monthly;
+        var rawMonthlyRadiation = response.data.outputs.monthly;
         
         var averageMonthlyRadiation = Array(12).fill(0);
         var sum = 0;
         
         for (var i = 0; i < rawMonthlyRadiation.length; i++){
-            currentRadiation = rawMonthlyRadiation[i];
+            var currentRadiation = rawMonthlyRadiation[i];
             averageMonthlyRadiation[currentRadiation.month - 1] += currentRadiation['H(h)_m'];
         }
         
