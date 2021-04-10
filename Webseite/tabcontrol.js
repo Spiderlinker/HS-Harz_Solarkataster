@@ -5,21 +5,7 @@ var TAB_COMSUMPTION = 1;
 var TAB_COSTS = 2;
 var TAB_SUMMARY = 3;
 
-var dailyConsumptionPercentageMap = {
-  privateDaytime: 50,
-  privateEvening: 35,
-  privateSpreadOverDay: 25,
-
-  commercialDaytime: 80,
-  commercialEvening: 35,
-  commercialSpreadOverDay: 25
-}
-
 showTab(currentTab); // Display the current tab
-document.getElementById("monthlyTabButton").click(); // open monthly electricity consumption
-document.getElementById("privateUsage").click(); // select private usage radio button
-
-//getMonthlyAverageRadiationForLocation(51.821, 10.750);
 
 function showTab(n) {
   // This function will display the specified tab of the form...
@@ -173,50 +159,3 @@ function switchTab(evt, tabName) {
   evt.currentTarget.className += " active";
 }
 
-function radioButtonChecked(evt, radioGroup){
-  // Get all elements with class="radioGroup" and hide them
-  var tabcontent = document.getElementsByClassName("radioGroup");
-  for (var i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  var radioGroupToActivate = document.getElementById(radioGroup);
-  radioGroupToActivate.style.display = "block"; // show radio group
-  
-  // select first element in radio group (if exists)
-  var childElements = radioGroupToActivate.getElementsByTagName("input");
-  if(childElements.length > 0){
-    childElements[0].click();
-  }
-}
-
-function setDailyConsumptionPercentage(event){
-  document.getElementById("consumption").value = dailyConsumptionPercentageMap[event.currentTarget.value];
-}
-
-function getMonthlyAverageRadiationForLocation(latitude, longitude){
-  $.ajax({
-    type: "POST",
-    url: 'pvgis.php',
-    dataType: 'json',
-    data: {lat: latitude, lon: longitude}
-    }).done(function( response ) {
-        var rawMonthlyRadiation = response.data.outputs.monthly;
-        
-        var averageMonthlyRadiation = Array(12).fill(0);
-        var sum = 0;
-        
-        for (var i = 0; i < rawMonthlyRadiation.length; i++){
-            var currentRadiation = rawMonthlyRadiation[i];
-            averageMonthlyRadiation[currentRadiation.month - 1] += currentRadiation['H(h)_m'];
-        }
-        
-        for(i = 0; i < averageMonthlyRadiation.length; i++){
-            averageMonthlyRadiation[i] /= 12;
-            sum += averageMonthlyRadiation[i];
-        }
-        
-        console.log(averageMonthlyRadiation);
-        console.log(sum);
-        
-  });
-}

@@ -6,13 +6,20 @@
     <title> Solarkataster Wernigerode </title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="index.css" title="style" />
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <script src="jquery.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="index.css" title="style" />
+
+    <!-- include JavaScript files -->
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="radioButton.js"></script>
+    <script type="text/javascript" src="pvgis.js"></script>
+    <!--<script type="text/javascript" src="berechnung.js"></script>-->
+    <!-- tabControl.js ist weiter unten hinzugefügt (Ende <body>) -->
 </head>
 
 <body>
-    <form id="regForm" action="/action_page.php">
+    <form id="regForm" action="/summary.php">
         <h1>Solarkataster</h1>
 
         <!-- One "tab" for each step in the form: -->
@@ -288,7 +295,11 @@
 
     <!-- Muss am Ende stehen, da sonst das Stylesheet noch nicht geladen wurde 
          und das Script auf dieses zugreifen muss, siehe https://stackoverflow.com/a/42370248-->
-    <script type="text/javascript" src="javascript.js"></script>
+    <script type="text/javascript" src="tabcontrol.js"></script>
+    <script>
+        document.getElementById("monthlyTabButton").click(); // open monthly electricity consumption
+        document.getElementById("privateUsage").click(); // select private usage radio button
+    </script>
 </body>
 
 </html>
