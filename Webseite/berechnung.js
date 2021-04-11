@@ -168,130 +168,15 @@ function calculateEEGCosts(pvEffiency, dailyConsumption) {
 }
 
 //returns the index of the roof orientation for the area factor table
-function getIndexRoofOrientation() {
-    //TODO round roof angle
-    roofOrientationRounded15 = round(roofOrientation / 15)/* * 15 */; 
+function getIndexRoofOrientation() {    
     // * 15 not needed, it already returns the correct index
     // * 15 would round the value to the nearest 15-step value
-
-    var indexRoofOrientation = roofOrientationRounded15;
-    // switch (roofAngle) { // TODO roofAngle or roofOrientation?
-    //     case 0:
-    //         indexRoofOrientation = 0;
-    //         break;
-    //     case 15:
-    //         indexRoofOrientation = 1;
-    //         break;
-    //     case 30:
-    //         indexRoofOrientation = 2;
-    //         break;
-    //     case 45:
-    //         indexRoofOrientation = 3;
-    //         break;
-    //     case 60:
-    //         indexRoofOrientation = 4;
-    //         break;
-    //     case 75:
-    //         indexRoofOrientation = 5;
-    //         break;
-    //     case 90:
-    //         indexRoofOrientation = 6;
-    //         break;
-    //     case 105:
-    //         indexRoofOrientation = 7;
-    //         break;
-    //     case 120:
-    //         indexRoofOrientation = 8;
-    //         break;
-    //     case 135:
-    //         indexRoofOrientation = 9;
-    //         break;
-    //     case 150:
-    //         indexRoofOrientation = 10;
-    //         break;
-    //     case 165:
-    //         indexRoofOrientation = 11;
-    //         break;
-    //     case 180:
-    //         indexRoofOrientation = 12;
-    //         break;
-    //     case 195:
-    //         indexRoofOrientation = 13;
-    //         break;
-    //     case 210:
-    //         indexRoofOrientation = 14;
-    //         break;
-    //     case 225:
-    //         indexRoofOrientation = 15;
-    //         break;
-    //     case 240:
-    //         indexRoofOrientation = 16;
-    //         break;
-    //     case 255:
-    //         indexRoofOrientation = 17;
-    //         break;
-    //     case 270:
-    //         indexRoofOrientation = 18;
-    //         break;
-    //     case 285:
-    //         indexRoofOrientation = 19;
-    //         break;
-    //     case 300:
-    //         indexRoofOrientation = 20;
-    //         break;
-    //     case 315:
-    //         indexRoofOrientation = 21;
-    //         break;
-    //     case 330:
-    //         indexRoofOrientation = 22;
-    //         break;
-    //     case 345:
-    //         indexRoofOrientation = 23;
-    //         break;
-    //     case 360:
-    //         indexRoofOrientation = 24;
-    //         break;
-    // }
-    return indexRoofOrientation;
+    return round(roofOrientation / 15)/* * 15 */; 
 }
 
 //returns the index of the roof angle for the area factor table
 function getIndexRoofAngle() {
-    //TODO round roof angle
-    roofAngleRounded15 = round(roofAngle / 10)/* * 10 */; 
-
-    var indexRoofAngle = roofAngleRounded15;
-    // switch (roofAngle) {
-    //     case 0:
-    //         indexRoofAngle = 0;
-    //         break;
-    //     case 10:
-    //         indexRoofAngle = 1;
-    //         break;
-    //     case 20:
-    //         indexRoofAngle = 2;
-    //         break;
-    //     case 30:
-    //         indexRoofAngle = 3;
-    //         break;
-    //     case 40:
-    //         indexRoofAngle = 4;
-    //         break;
-    //     case 50:
-    //         indexRoofAngle = 5;
-    //         break;
-    //     case 60:
-    //         indexRoofAngle = 6;
-    //         break;
-    //     case 70:
-    //         indexRoofAngle = 7;
-    //         break;
-    //     case 80:
-    //         indexRoofAngle = 8;
-    //         break;
-    //     case 90:
-    //         indexRoofAngle = 9;
-    //         break;
-    // }
-    return indexRoofAngle;
+    // * 10 not needed, it already returns the correct index
+    // * 10 would round the value to the nearest 10-step value
+    return round(roofAngle / 10)/* * 10 */; 
 }
