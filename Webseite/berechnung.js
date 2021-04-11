@@ -113,13 +113,13 @@ function calculateWithMonthlyValues(n) {
 }
 
 //calculate all needed values with a yearly consumption value
-function calculateWithYearlyValues(n) {
+function calculateWithYearlyValues(yearlyConsumption) {
     calculatePVEfficiency();
-    calculateNeededModules(n);
+    calculateNeededModules(yearlyConsumption);
 
     //electricity revenue
     var electricityProduced = irradiation * areaFactor * ((peakEfficiency * neededAmountOfModules) / 1000) * (1 - (degreeOfEffectiveness / 100));
-    var dailyConsumption = n * (dailyElectricityConsumption / 100);
+    var dailyConsumption = yearlyConsumption * (dailyElectricityConsumption / 100);
     //electricityCostsTotal
     savedelectricityCostsTotal = calculateSavedElectricityCosts(electricityProduced, dailyConsumption);
     //eeg
@@ -143,9 +143,9 @@ function calculatePVEfficiency() {
     pvEfficiencyPerModule = irradiation * areaFactor * (peakEfficiency / 1000) * (1 - (degreeOfEffectiveness / 100));
 }
 
-function calculateNeededModules(n) {
+function calculateNeededModules(yearlyConsumption) {
     //Calculate amounts of needed modules and area
-    neededAmountOfModules = n / pvEfficiencyPerModule;
+    neededAmountOfModules = yearlyConsumption / pvEfficiencyPerModule;
     neededRoofAreaTotal = neededAmountOfModules * neededRoofAreaPerModule;
 }
 
