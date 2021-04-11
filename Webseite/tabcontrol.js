@@ -8,6 +8,7 @@ var TAB_SUMMARY = 3;
 showTab(currentTab); // Display the current tab
 
 function showTab(n) {
+  console.log("showTab")
   // This function will display the specified tab of the form...
   var tabs = document.getElementsByClassName("tab");
   tabs[n].style.display = "block";
@@ -27,6 +28,7 @@ function showTab(n) {
 }
 
 function nextPrev(n) {
+  console.log("nextPrev: " + n)
   // This function will figure out which tab to display
   var tabs = document.getElementsByClassName("tab");
   // Exit the function if any field in the current tab is invalid:
@@ -46,6 +48,7 @@ function nextPrev(n) {
 }
 
 function validateForm() {
+  console.log("validate form")
   // This function deals with validation of the form fields
   var tabs = document.getElementsByClassName("tab");
   var inputFields = tabs[currentTab].getElementsByTagName("input");
@@ -56,6 +59,7 @@ function validateForm() {
   // ENTWEDER alle monatlichen Verbrauchsdaten
   // ODER der jährliche Stromverbrauch eingetragen ist
   if (currentTab == TAB_COMSUMPTION) {
+    console.log("consumption tab validation")
     valid = isConsumptionTabValid();
     finishStep(valid);
     return valid;
@@ -65,12 +69,14 @@ function validateForm() {
   for (var i = 0; i < inputFields.length; i++) {
     // If a field is empty...
     if (inputFields[i].value == "") {
+      console.log("invalid form: " + inputFields[i])
       // add an "invalid" class to the field:
       inputFields[i].className += " invalid";
       // and set the current valid status to false
       valid = false;
     }
   }
+  console.log("finish step " + valid)
   finishStep(valid);
   return valid; // return the valid status
 }
@@ -111,7 +117,7 @@ function isConsumptionTabValid() {
   // +++++++++++++++++++++++++++++++
 
   // auch noch das letzte Eingabefeld prüfen
-  var consumptionField = document.getElementById("consumption");
+  var consumptionField = document.getElementById("dailyConsumption");
   if (consumptionField.value == "") {
     // add an "invalid" class to the field:
     consumptionField.className += " invalid";

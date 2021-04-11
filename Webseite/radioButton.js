@@ -1,4 +1,8 @@
 
+// Optimale Werte für Dächer. Werte können bei Flachdächern verwendet werden
+const OPTIMAL_ROOF_ANGLE = 30;
+const OPTIMAL_ROOF_ORIENTATION = 180;
+
 /*
  * Prozentwerte für den Strom, der tagsüber verbraucht wird.
  * Werte sind über ein Key-Value-Prinzip in dieser Variable hinterlegt
@@ -23,18 +27,25 @@ var dailyConsumptionPercentageMap = {
  */
 function radioButtonChecked(evt, radioGroup) {
   // Get all elements with class="radioGroup" and hide them
-  var tabcontent = document.getElementsByClassName("radioGroup");
+  var tabcontent = document.getElementsByClassName(evt.currentTarget.getAttribute("group"));
   for (var i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
   }
   var radioGroupToActivate = document.getElementById(radioGroup);
   radioGroupToActivate.style.display = "block"; // show radio group
 
-  // select first element in radio group (if exists)
-  var childElements = radioGroupToActivate.getElementsByTagName("input");
-  if (childElements.length > 0) {
-    childElements[0].click();
+  if (radioGroupToActivate.getAttribute("selectFirstInput")) {
+    // select first element in radio group (if exists)
+    var childElements = radioGroupToActivate.getElementsByTagName("input");
+    if (childElements.length > 0) {
+      childElements[0].click();
+    }
   }
+}
+
+function setDefaultRoofValues(){
+  document.getElementById("roofAngle").value = OPTIMAL_ROOF_ANGLE;
+  document.getElementById("roofOrientation").value = OPTIMAL_ROOF_ORIENTATION;
 }
 
 /* 
@@ -44,5 +55,5 @@ function radioButtonChecked(evt, radioGroup) {
  * RadioButtons entnommen.
  */
 function setDailyConsumptionPercentage(event) {
-  document.getElementById("consumption").value = dailyConsumptionPercentageMap[event.currentTarget.value];
+  document.getElementById("dailyConsumption").value = dailyConsumptionPercentageMap[event.currentTarget.value];
 }
