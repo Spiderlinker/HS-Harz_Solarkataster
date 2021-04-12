@@ -89,7 +89,7 @@ function isConsumptionTabValid() {
   // +++++++++++++++++++++++
 
   // Ist monatlich oder jährlicher Stromverbrauch ausgewählt?
-  var monthlyComsumption = document.getElementById("monthlyTabButton");
+  var monthlyComsumption = document.getElementById("btnMonthlyTab");
   var tabToCheck;
   if (monthlyComsumption.className.includes("active")) {
     // monatlicher Stromverbrauch aktiviert

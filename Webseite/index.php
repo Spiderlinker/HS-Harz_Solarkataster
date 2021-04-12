@@ -18,7 +18,7 @@
 </head>
 
 <?php
-include('costs.php');
+    include('costs.php');
 ?>
 
 <body>
@@ -42,10 +42,12 @@ include('costs.php');
 
             <div>
                 <h4>Wie ist Ihre Dachform?</h4>
-                <input type="radio" id="btnPitchedRoof" name="roofType" value="pitchedRoof" group="roofType" checked="checked" onclick="radioButtonChecked(event, 'pitchedRoof');" />
+                <input type="radio" id="btnPitchedRoof" name="roofType" value="pitchedRoof" group="roofType"
+                    checked="checked" onclick="radioButtonChecked(event, 'pitchedRoof');" />
                 <label for="btnPitchedRoof"> Schrägdach</label>
                 <br />
-                <input type="radio" id="btnFlatRoof" name="roofType" value="flatRoof" group="roofType" onclick="radioButtonChecked(event, 'flatRoof'); setDefaultRoofValues();" />
+                <input type="radio" id="btnFlatRoof" name="roofType" value="flatRoof" group="roofType"
+                    onclick="radioButtonChecked(event, 'flatRoof'); setDefaultRoofValues();" />
                 <label for="btnFlatRoof"> Flachdach</label>
 
 
@@ -60,12 +62,14 @@ include('costs.php');
                     <table>
                         <tr>
                             <td>Dachwinkel</td>
-                            <td><input type="text" class="textbox" id="roofAngle" name="roofAngle" value="40" placeholder="40" /></td>
+                            <td><input type="text" class="textbox" id="roofAngle" name="roofAngle" value="40"
+                                    placeholder="40" /></td>
                             <td>Grad</td>
                         </tr>
                         <tr>
                             <td>Dachausrichtung</td>
-                            <td><input type="text" class="textbox" id="roofOrientation" name="roofOrientation" value="90" placeholder="90° - 270°" />
+                            <td><input type="text" class="textbox" id="roofOrientation" name="roofOrientation"
+                                    value="90" placeholder="90° - 270°" />
                             </td>
                             <td>Grad</td>
                             <td>
@@ -93,7 +97,8 @@ include('costs.php');
             <h4>viel Fläche steht auf Ihrem Dach für die Solaranlage zur Verfügung?</h4>
 
             <div class="inline">
-                Maximale Dachfläche: <input type="text" class="textbox" id="roofSurface" name="roofSurface" value="150" placeholder="150" /> m²
+                Maximale Dachfläche: <input type="text" class="textbox" id="roofSurface" name="roofSurface" value="150"
+                    placeholder="150" /> m²
             </div>
 
         </div>
@@ -111,8 +116,10 @@ include('costs.php');
             </p>
             <!-- Tab links -->
             <div class="stromtab">
-                <button class="tablinks" type="button" onclick="switchTab(event, 'monthly')" id="monthlyTabButton">monatlich</button>
-                <button class="tablinks" type="button" onclick="switchTab(event, 'yearly')">jährlich</button>
+                <button class="tablinks" type="button" onclick="switchTab(event, 'monthly')"
+                    id="btnMonthlyTab">monatlich</button>
+                <button class="tablinks" type="button" onclick="switchTab(event, 'yearly')"
+                    id="btnYearlyTab">jährlich</button>
             </div>
 
             <!-- Tab content -->
@@ -121,12 +128,14 @@ include('costs.php');
                 <table>
                     <tr>
                         <td>Januar</td>
-                        <td><input type="text" class="textbox" id="januaryConsumption" name="january" placeholder="317" /></td>
+                        <td><input type="text" class="textbox" id="januaryConsumption" name="january"
+                                placeholder="317" /></td>
                         <td>kWh</td>
                     </tr>
                     <tr>
                         <td>Februar</td>
-                        <td><input type="text" class="textbox" id="februaryConsumption" name="february" placeholder="269" /></td>
+                        <td><input type="text" class="textbox" id="februaryConsumption" name="february"
+                                placeholder="269" /></td>
                         <td>kWh</td>
                     </tr>
                     <tr>
@@ -167,22 +176,26 @@ include('costs.php');
                     </tr>
                     <tr>
                         <td>September</td>
-                        <td><input type="text" class="textbox" id="septemberConsumption" name="september" placeholder="220" /></td>
+                        <td><input type="text" class="textbox" id="septemberConsumption" name="september"
+                                placeholder="220" /></td>
                         <td>kWh</td>
                     </tr>
                     <tr>
                         <td>Oktober</td>
-                        <td><input type="text" class="textbox" id="octoberConsumption" name="october" placeholder="250" /></td>
+                        <td><input type="text" class="textbox" id="octoberConsumption" name="october"
+                                placeholder="250" /></td>
                         <td>kWh</td>
                     </tr>
                     <tr>
                         <td>November</td>
-                        <td><input type="text" class="textbox" id="novemberConsumption" name="november" placeholder="261" /></td>
+                        <td><input type="text" class="textbox" id="novemberConsumption" name="november"
+                                placeholder="261" /></td>
                         <td>kWh</td>
                     </tr>
                     <tr>
                         <td>Dezember</td>
-                        <td><input type="text" class="textbox" id="decemberConsumption" name="december" placeholder="289" /></td>
+                        <td><input type="text" class="textbox" id="decemberConsumption" name="december"
+                                placeholder="289" /></td>
                         <td>kWh</td>
                     </tr>
                 </table>
@@ -192,7 +205,8 @@ include('costs.php');
                 <table>
                     <tr>
                         <td>Jährlicher Stromverbrauch</td>
-                        <td><input type="text" class="textbox" id="yearlyConsumption" name="yearly" placeholder="3000" />
+                        <td><input type="text" class="textbox" id="yearlyConsumption" name="yearly" placeholder="3000"
+                                value="3000" />
                         </td>
                         <td>kWh</td>
                     </tr>
@@ -203,31 +217,39 @@ include('costs.php');
 
             <div>
                 <h4>Für wen wird die Solaranlage geplant?</h4>
-                <input type="radio" id="btnPrivateUsage" name="usage" value="Privathaushalt" checked="checked" group="consumptionType" onclick="radioButtonChecked(event, 'privateUsage');" />
+                <input type="radio" id="btnPrivateUsage" name="usage" value="Privathaushalt" checked="checked"
+                    group="consumptionType" onclick="radioButtonChecked(event, 'privateUsage');" />
                 <label for="btnPrivateUsage"> Privathaushalt</label>
                 <br>
-                <input type="radio" id="btnCommercialUsage" name="usage" value="Gewerblich" group="consumptionType" onclick="radioButtonChecked(event, 'commercialUsage');" />
+                <input type="radio" id="btnCommercialUsage" name="usage" value="Gewerblich" group="consumptionType"
+                    onclick="radioButtonChecked(event, 'commercialUsage');" />
                 <label for="btnCommercialUsage"> Gewerbe</label>
 
                 <h4>Wann verbrauchen Sie den meisten Strom?</h4>
                 <div id="privateUsage" class="radioGroup consumptionType" selectFirstInput="true">
-                    <input type="radio" id="privateDaytime" name="privateUsageDetail" value="privateDaytime" checked="checked" onclick="setDailyConsumptionPercentage(event);" />
+                    <input type="radio" id="privateDaytime" name="privateUsageDetail" value="privateDaytime"
+                        checked="checked" onclick="setDailyConsumptionPercentage(event);" />
                     <label for="privateDaytime"> Eher tagsüber (Home-Office)</label>
                     <br>
-                    <input type="radio" id="privateEvening" name="privateUsageDetail" value="privateEvening" onclick="setDailyConsumptionPercentage(event);" />
+                    <input type="radio" id="privateEvening" name="privateUsageDetail" value="privateEvening"
+                        onclick="setDailyConsumptionPercentage(event);" />
                     <label for="privateEvening"> Eher abends (Arbeit in Büro)</label>
                     <br>
-                    <input type="radio" id="privateSpreadOverDay" name="privateUsageDetail" value="privateSpreadOverDay" onclick="setDailyConsumptionPercentage(event);" />
+                    <input type="radio" id="privateSpreadOverDay" name="privateUsageDetail" value="privateSpreadOverDay"
+                        onclick="setDailyConsumptionPercentage(event);" />
                     <label for="privateSpreadOverDay"> Rund um die Uhr</label>
                 </div>
                 <div id="commercialUsage" class="radioGroup consumptionType" selectFirstInput="true">
-                    <input type="radio" id="commercialDaytime" name="commercialUsageDetail" value="commercialDaytime" checked="checked" onclick="setDailyConsumptionPercentage(event);" />
+                    <input type="radio" id="commercialDaytime" name="commercialUsageDetail" value="commercialDaytime"
+                        checked="checked" onclick="setDailyConsumptionPercentage(event);" />
                     <label for="commercialDaytime"> Eher tagsüber von 8 - 18 Uhr</label>
                     <br>
-                    <input type="radio" id="commercialEvening" name="commercialUsageDetail" value="commercialEvening" onclick="setDailyConsumptionPercentage(event);" />
+                    <input type="radio" id="commercialEvening" name="commercialUsageDetail" value="commercialEvening"
+                        onclick="setDailyConsumptionPercentage(event);" />
                     <label for="commercialEvening"> Eher abends (Restaurant, Bar)</label>
                     <br>
-                    <input type="radio" id="commercialSpreadOverDay" name="commercialUsageDetail" value="commercialSpreadOverDay" onclick="setDailyConsumptionPercentage(event);" />
+                    <input type="radio" id="commercialSpreadOverDay" name="commercialUsageDetail"
+                        value="commercialSpreadOverDay" onclick="setDailyConsumptionPercentage(event);" />
                     <label for="commercialSpreadOverDay"> Rund um die Uhr (Schichtbetrieb)</label>
                 </div>
             </div>
@@ -242,13 +264,15 @@ include('costs.php');
             </p>
             <div style="display: table;">
                 <div style="display: table-cell;">Tagesstromverbrauch: </div>
-                <div style="display: table-cell;"><input type="text" class="textbox consumptionInput" id="dailyConsumption" name="dailyConsumption" placeholder="50" size="1%" /></div>
+                <div style="display: table-cell;"><input type="text" class="textbox consumptionInput"
+                        id="dailyConsumption" name="dailyConsumption" placeholder="50" size="1%" /></div>
                 <div style="display: table-cell;"> %</div>
             </div>
             <p>
                 <i>
                     Der Tagesstromverbrauch wird automatisch durch die von Ihnen zuvor getroffene Auswahl gesetzt. Falls
-                    Sie diesen Wert allerdings nicht als passend erachten oder Sie ein außergewöhnliches Verbrauchsprofil
+                    Sie diesen Wert allerdings nicht als passend erachten oder Sie ein außergewöhnliches
+                    Verbrauchsprofil
                     haben, so können Sie den Tagesstromverbrauch über das entsprechende Feld noch anpassen.
                 </i>
             </p>
@@ -260,39 +284,63 @@ include('costs.php');
         <!-- ############# ##### ############# -->
 
         <div class="tab">
-            <h4>Kosteninformationen</h4>
+            <h3>Kosteninformationen</h3>
             <p>
-
+                Zum Abschluss werden noch Informationen zu den Kosten benötigt. Bitte geben Sie die aktuell geltene
+                EEG-Umlage an. Zudem tragen Sie bitte in das Feld 'Stromkosten' den in Ihrem Stromvertrag vereinbarten
+                Preis pro kWh ein.
             </p>
 
             <table>
                 <tr>
                     <td>EEG Umlage</td>
-                    <td><input type="text" class="textbox" id="eegCostShare" name="eegCostShare" placeholder="6,5" value="<?php echo getValue('eeg'); ?>" />
+                    <td><input type="text" class="textbox" id="eegCostShare" name="eegCostShare" placeholder="6.5"
+                            value="<?php echo getValue('eeg'); ?>" />
                     </td>
                     <td>ct / kWh</td>
                 </tr>
                 <tr>
                     <td>Stromkosten</td>
-                    <td><input type="text" class="textbox" id="electricityCosts" name="electricityCosts" placeholder="27,5" value="<?php echo getValue('electricityCosts'); ?>" /></td>
+                    <td><input type="text" class="textbox" id="electricityCosts" name="electricityCosts"
+                            placeholder="27.5" value="<?php echo getValue('electricityCosts'); ?>" /></td>
                     <td>ct / kWh</td>
                 </tr>
-                <tr>
-                    <td>
-                        <h4>Gesamtkosten</h4>
-                    </td>
-                </tr>
+            </table>
+
+            <h4>Kosten der Solarmodule</h4>
+            <p>
+                Die Preise von Solarmodulen kann variieren. Die Amortisationszeit (die Zeit, nach der die
+                Anschaffungskosten wieder 'reingeholt' wurden) wird sowohl für den minimalen als auch für den
+                maximalen angegebenen Preis pro Solarmodul berechnet.
+            </p>
+
+            <table>
                 <tr>
                     <td>Minimum</td>
-                    <td><input type="text" class="textbox" id="minimumCostsTotal" name="minimumCostsTotal" placeholder="250" value="<?php echo getValue('minModuleCosts'); ?>" /></td>
+                    <td><input type="text" class="textbox" id="minimumCostsTotal" name="minimumCostsTotal"
+                            placeholder="250" value="<?php echo getValue('minModuleCosts'); ?>" /></td>
                     <td>EUR / m²</td>
                 </tr>
                 <tr>
                     <td>Maximum</td>
-                    <td><input type="text" class="textbox" id="maximumCostsTotal" name="maximumCostsTotal" placeholder="450" value="<?php echo getValue('maxModuleCosts'); ?>" /></td>
+                    <td><input type="text" class="textbox" id="maximumCostsTotal" name="maximumCostsTotal"
+                            placeholder="450" value="<?php echo getValue('maxModuleCosts'); ?>" /></td>
                     <td>EUR / m²</td>
                 </tr>
             </table>
+
+            <h4>Hinweise zu eventuellen Kosten</h4>
+            <p>Montagekosten:
+                <i>Bei der Montage können neben den eigentlichen Installationskosten auch noch Kosten für ein Gerüst
+                    anfallen. Bitte informieren Sie sich über die Montagekosten bei einem örtlichen
+                    Montageunternehmen.</i>
+            </p>
+            <p>Erneuerung der Gebäudeelektrik:
+                <i>Für die Nutzung des PV-Stroms im eigenen Haushalt muss die Gebäudeelektrik den Strom aufnehmen
+                    können. Bei einer vor 1985 installierten Elektrik raten Fachleute zu einer Erneuerung. Die Kosten
+                    einer Erneuerung liegen zwischen 500 und 1.200 €. Diese Kosten sind nicht in den Gesamtpreis der
+                    Anlage einbezogen.</i>
+            </p>
         </div>
 
 
@@ -301,33 +349,12 @@ include('costs.php');
         <!-- ############# ##### ############# -->
 
         <div class="tab">
-            <table>
-                <tr>
-                    <td>
-                        <h4>Zusammenfassung</h4>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Kosten Minimum</td>
-                    <td><input type="text" class="textbox" name="eeg" placeholder="6,1" /></td>
-                    <td>Amortisationszeit</td>
-                </tr>
-                <tr>
-                    <td>Stromkosten</td>
-                    <td><input type="text" class="textbox" name="stromkosten" placeholder="27,5" /></td>
-                    <td>ct / kWh</td>
-                </tr>
-                <tr>
-                    <td>Minimum</td>
-                    <td><input type="text" class="textbox" name="minimum" placeholder="250" /></td>
-                    <td>EUR / m²</td>
-                </tr>
-                <tr>
-                    <td>Maximum</td>
-                    <td><input type="text" class="textbox" name="maximum" placeholder="450" /></td>
-                    <td>EUR / m²</td>
-                </tr>
-            </table>
+            <tr>
+                <td>
+                    <h4>Zusammenfassung</h4>
+                </td>
+            </tr>
+
         </div>
 
         <!-- ############# ######## ############# -->
@@ -355,7 +382,8 @@ include('costs.php');
     <script type="text/javascript" src="tabcontrol.js"></script>
     <script>
         document.getElementById("btnPitchedRoof").click(); // open monthly electricity consumption
-        document.getElementById("monthlyTabButton").click(); // open monthly electricity consumption
+        //document.getElementById("btnMonthlyTab").click(); // open monthly electricity consumption
+        document.getElementById("btnYearlyTab").click(); // open monthly electricity consumption
         document.getElementById("btnPrivateUsage").click(); // select private usage radio button
     </script>
 </body>
