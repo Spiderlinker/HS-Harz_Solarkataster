@@ -18,7 +18,7 @@
 </head>
 
 <?php
-    include('costs.php');
+    include('utils.php');
 ?>
 
 <body>
@@ -343,18 +343,15 @@
             </p>
         </div>
 
-
         <!-- ############# ##### ############# -->
         <!-- ############# TAB 4 ############# -->
         <!-- ############# ##### ############# -->
 
         <div class="tab">
-            <tr>
-                <td>
-                    <h4>Zusammenfassung</h4>
-                </td>
-            </tr>
-
+            <h4>Zusammenfassung</h4>
+            <p>
+                Auf dieser Seite werden noch einmal alle Ihre angegebenen Informationen aufbereitet.
+            </p>
         </div>
 
         <!-- ############# ######## ############# -->
