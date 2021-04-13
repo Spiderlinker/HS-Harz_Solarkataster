@@ -48,7 +48,7 @@ values that need to be calculated
 var pvEfficiencyPerModule;
 var neededAmountOfModules;
 var neededRoofAreaTotal;
-var savedelectricityCostsTotal;
+var savedElectricityCostsTotal;
 var eegCostsTotal;
 var revenueTotal; 
 var amortizationMin;
@@ -89,7 +89,7 @@ function calculateWithYearlyValues(n){
     var electricityProduced = irradiation*areaFactor*((peakEfficiency*neededAmountOfModules)/1000)*(1-(degreeOfEffectiveness/100));
     var dailyConsumption = n*(dailyElectricityConsumption/100);
     //electricityCostsTotal
-    savedelectricityCostsTotal = calculateSavedElectricityCosts(electricityProduced, dailyConsumption);
+    savedElectricityCostsTotal = calculateSavedElectricityCosts(electricityProduced, dailyConsumption);
     //eeg
     eegCostsTotal = calculateEEGCosts(electricityProduced,dailyConsumption);
     //revenue
@@ -139,7 +139,7 @@ function calculateEEGCosts(pvEffiency, dailyConsumption){
 function getIndexRoofOrientation(){
     //TODO round roof angle
     var indexRoofOrientation;
-    switch(roofAngle){
+    switch(roofOrientation){
         case 0:
             indexRoofOrientation = 0;
             break;
