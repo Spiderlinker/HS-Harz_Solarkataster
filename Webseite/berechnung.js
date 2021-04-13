@@ -2,6 +2,7 @@
 input values from website
 */
 var roofAngle = document.getElementById("roofAngle").value;
+roundRoofAngle();
 var roofOrientation = document.getElementById("roofOrientation").value;
 var roofSurface = document.getElementById("roofSurface").value;
 
@@ -135,6 +136,29 @@ function calculateEEGCosts(pvEffiency, dailyConsumption){
     }
 }
 
+//rounds the roof angle according to the factor table
+function roundRoofAngle(){
+    if(roofAngle < 5)
+        roofAngle = 0;
+    else if(roofAngle >= 5 && roofAngle < 15)
+        roofAngle = 10;
+    else if(roofAngle >= 15 && roofAngle < 25)
+        roofAngle = 20;
+    else if(roofAngle >= 25 && roofAngle < 35)
+        roofAngle = 30;
+    else if(roofAngle >= 35 && roofAngle < 45)
+        roofAngle = 40;
+    else if(roofAngle >= 45 && roofAngle < 55)
+        roofAngle = 50;
+    else if(roofAngle >= 55 && roofAngle < 65)
+        roofAngle = 60;
+    else if(roofAngle >= 65 && roofAngle < 75)
+        roofAngle = 70;
+    else if(roofAngle >= 75 && roofAngle < 85)
+        roofAngle = 80;
+    else if(roofAngle >= 85)
+        roofAngle = 90;
+}
 //returns the index of the roof orientation for the area factor table
 function getIndexRoofOrientation(){
     //TODO round roof angle
