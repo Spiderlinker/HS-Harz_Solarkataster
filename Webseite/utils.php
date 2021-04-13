@@ -6,3 +6,5 @@ function getValue($key){
 
     return $defaultValuesJson[$key];
 }
+
+?>
