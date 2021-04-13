@@ -4,6 +4,7 @@ input values from website
 var roofAngle = document.getElementById("roofAngle").value;
 roundRoofAngle();
 var roofOrientation = document.getElementById("roofOrientation").value;
+roundRoofOrientation();
 var roofSurface = document.getElementById("roofSurface").value;
 
 readElectricityConsumption(document.getElementsByClassName("tabcontent"));
@@ -159,6 +160,61 @@ function roundRoofAngle(){
     else if(roofAngle >= 85)
         roofAngle = 90;
 }
+
+//rounds the roof orientation according to the factor table
+function roundRoofOrientation(){
+    if(roofOrientation < 8)
+        roofOrientation = 0;
+    else if(roofOrientation >= 8 && roofOrientation < 23)
+        roofOrientation = 15;
+    else if(roofOrientation >= 23 && roofOrientation < 38)
+        roofOrientation = 30;
+    else if(roofOrientation >= 38 && roofOrientation < 53)
+        roofOrientation = 45;
+    else if(roofOrientation >= 53 && roofOrientation < 68)
+        roofOrientation = 60;
+    else if(roofOrientation >= 68 && roofOrientation < 83)
+        roofOrientation = 75;
+    else if(roofOrientation >= 83 && roofOrientation < 98)
+        roofOrientation = 90;
+    else if(roofOrientation >= 98 && roofOrientation < 113)
+        roofOrientation = 105;
+    else if(roofOrientation >= 113 && roofOrientation < 128)
+        roofOrientation = 120;
+    else if(roofOrientation >= 128 && roofOrientation < 143)
+        roofOrientation = 135;
+    else if(roofOrientation >= 143 && roofOrientation < 158)
+        roofOrientation = 150;
+    else if(roofOrientation >= 158 && roofOrientation < 173)
+        roofOrientation = 165;
+    else if(roofOrientation >= 173 && roofOrientation < 188)
+        roofOrientation = 180;
+    else if(roofOrientation >= 188 && roofOrientation < 203)
+        roofOrientation = 195;
+    else if(roofOrientation >= 203 && roofOrientation < 218)
+        roofOrientation = 210;
+    else if(roofOrientation >= 218 && roofOrientation < 233)
+        roofOrientation = 225;
+    else if(roofOrientation >= 233 && roofOrientation < 248)
+        roofOrientation = 240;
+    else if(roofOrientation >= 248 && roofOrientation < 263)
+        roofOrientation = 255;
+    else if(roofOrientation >= 263 && roofOrientation < 278)
+        roofOrientation = 270;
+    else if(roofOrientation >= 278 && roofOrientation < 293)
+        roofOrientation = 285;
+    else if(roofOrientation >= 293 && roofOrientation < 308)
+        roofOrientation = 300;
+    else if(roofOrientation >= 308 && roofOrientation < 323)
+        roofOrientation = 315;
+    else if(roofOrientation >= 323 && roofOrientation < 338)
+        roofOrientation = 330;
+    else if(roofOrientation >= 338 && roofOrientation < 353)
+        roofOrientation = 345;
+    else if(roofOrientation >= 353)
+        roofOrientation = 360;
+}
+
 //returns the index of the roof orientation for the area factor table
 function getIndexRoofOrientation(){
     //TODO round roof angle
