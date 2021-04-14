@@ -13,8 +13,11 @@
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="radioButton.js"></script>
     <script type="text/javascript" src="pvgis.js"></script>
+
     <!--<script type="text/javascript" src="berechnung.js"></script>-->
     <!-- tabControl.js ist weiter unten hinzugefügt (Ende <body>) -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js"></script>
 </head>
 
 <?php
@@ -30,6 +33,19 @@
         <!-- ############# ##### ############# -->
         <!-- ############# TAB 1 ############# -->
         <!-- ############# ##### ############# -->
+
+        <div class="tab">
+            <h3>Willkommen zum Solarkataster Wernigerode</h3>
+            <p>
+                Hier erfahren Sie, ob sich eine Anschaffung einer Photovoltaikanlage für Ihr Dach und Ihr
+                Verbrauchsprofil lohnt.
+                Dafür werden Sie durch verschiedene Fragen geführt, um Ihnen anschließend eine Einschätzung
+                zur Wirtschaftlichkeit einer Solaranlage geben zu können.
+                <p>
+                    Um zu beginnen, klicken Sie bitte auf die Schaltfläche 'Weiter'.
+
+                </p>
+        </div>
 
         <div class="tab">
             <h3>Informationen über das Dach</h3>
@@ -94,7 +110,7 @@
             </div>
 
             <br>
-            <h4>viel Fläche steht auf Ihrem Dach für die Solaranlage zur Verfügung?</h4>
+            <h4>Wie viel Fläche steht auf Ihrem Dach für die Solaranlage zur Verfügung?</h4>
 
             <div class="inline">
                 Maximale Dachfläche: <input type="text" class="textbox" id="roofSurface" name="roofSurface" value="150"
@@ -352,6 +368,59 @@
             <p>
                 Auf dieser Seite werden noch einmal alle Ihre angegebenen Informationen aufbereitet.
             </p>
+
+            <div id="dayNight">
+                <canvas id="myChart" width="587" height="293"
+                    style="display: block; box-sizing: border-box; height: 293px; width: 587px;"></canvas>
+
+                <script>
+                    const labels = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September",
+                        "Oktober", "November", "Dezember"
+                    ];
+                    const data = {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Nachtverbrauch',
+                            data: [65, 59, 80, 81, 56, 55, 40],
+                            backgroundColor: "red",
+                        },
+                        {
+                            label: 'Nachtverbrauch',
+                            data: [65, 59, 80, 81, 56, 55, 40],
+                            backgroundColor: "blue",
+                        },
+                    ]
+                    };
+
+                    const config = {
+                        type: 'bar',
+                        data: data,
+                        options: {
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Chart.js Bar Chart - Stacked'
+                                },
+                            },
+                            responsive: true,
+                            scales: {
+                                x: {
+                                    stacked: true,
+                                },
+                                y: {
+                                    stacked: true
+                                }
+                            }
+                        }
+                    };
+
+                    var myChart = new Chart(
+                        document.getElementById('myChart'),
+                        config
+                    );
+                </script>
+            </div>
+
         </div>
 
         <!-- ############# ######## ############# -->
@@ -367,6 +436,7 @@
         </div>
         <!-- Circles which indicates the steps of the form: -->
         <div style="text-align:center;margin-top:40px;">
+            <span class="step"></span>
             <span class="step"></span>
             <span class="step"></span>
             <span class="step"></span>

@@ -1,9 +1,10 @@
 var currentTab = 0; // Current tab is set to be the first tab (0)
 
-var TAB_ROOF = 0;
-var TAB_COMSUMPTION = 1;
-var TAB_COSTS = 2;
-var TAB_SUMMARY = 3;
+var TAB_INFO = 0;
+var TAB_ROOF = TAB_INFO + 1;
+var TAB_COMSUMPTION = TAB_ROOF + 1;
+var TAB_COSTS = TAB_COMSUMPTION + 1;
+var TAB_SUMMARY = TAB_COSTS + 1;
 
 showTab(currentTab); // Display the current tab
 
