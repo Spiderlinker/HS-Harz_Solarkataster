@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <title> Beispiel 1 </title>
+    <meta name="author" content="Administrator" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="page1.css" title="style1" />
+</head>
+
+
+<script type="text/javascript" src="javascript.js"></script>
+
+<body>
+    <form>
+        <h3>Informationen über das Dach</h3>
+
+        <table>
+            <tr>
+                <td>Dachwinkel</td>
+                <td><input type="text" class="textbox" name="dachwinkel" placeholder="40°" required></td>
+            </tr>
+            <tr>
+                <td>Dachausrichtung</td>
+                <td><input type="text" class="textbox" name="dachausrichtung" placeholder="90° - 270°" required></td>
+                <td>
+                    <a class="tooltip" href="">
+                        Hilfe
+                        <span><img src="img/dachausrichtung.png" width="300">
+                            Die Gradzahl wird anhand der Ausrichtung des Daches bestimmt.
+                        </span>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>Maximale Dachfläche</td>
+                <td><input type="text" class="textbox" name="dachflaeche" placeholder="150m²" required></td>
+            </tr>
+        </table>
+
+        <br>
+
+        <div style="text-align: right;">
+            <button class="next-button" type="submit" action="javascript:;" onSubmit="submit2()"
+                enctype="multipart/form-data">Weiter</button>
+        </div>
+    </form>
+</body>
+
+</html>

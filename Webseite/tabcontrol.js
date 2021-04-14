@@ -1,14 +1,15 @@
 var currentTab = 0; // Current tab is set to be the first tab (0)
 
-var TAB_ROOF = 0;
-var TAB_COMSUMPTION = 1;
-var TAB_COSTS = 2;
-var TAB_SUMMARY = 3;
+var TAB_INFO = 0;
+var TAB_ROOF = TAB_INFO + 1;
+var TAB_COMSUMPTION = TAB_ROOF + 1;
+var TAB_COSTS = TAB_COMSUMPTION + 1;
+var TAB_SUMMARY = TAB_COSTS + 1;
 
 showTab(currentTab); // Display the current tab
-document.getElementById("monthlyTabButton").click(); // open monthly electricity consumption
 
 function showTab(n) {
+  console.log("showTab")
   // This function will display the specified tab of the form...
   var tabs = document.getElementsByClassName("tab");
   tabs[n].style.display = "block";
@@ -28,6 +29,7 @@ function showTab(n) {
 }
 
 function nextPrev(n) {
+  console.log("nextPrev: " + n)
   // This function will figure out which tab to display
   var tabs = document.getElementsByClassName("tab");
   // Exit the function if any field in the current tab is invalid:
@@ -47,6 +49,7 @@ function nextPrev(n) {
 }
 
 function validateForm() {
+  console.log("validate form")
   // This function deals with validation of the form fields
   var tabs = document.getElementsByClassName("tab");
   var inputFields = tabs[currentTab].getElementsByTagName("input");
@@ -56,43 +59,50 @@ function validateForm() {
   // Hier ist die Form gültig, wenn
   // ENTWEDER alle monatlichen Verbrauchsdaten
   // ODER der jährliche Stromverbrauch eingetragen ist
-  if(currentTab == TAB_COMSUMPTION){
-    // Ist monatlich oder jährlicher Stromverbrauch ausgewählt?
-    var monthlyComsumption = document.getElementById("monthlyTabButton");
-    var tabToCheck;
-    if(monthlyComsumption.className.includes("active")){
-      // monatlicher Stromverbrauch aktiviert
-      tabToCheck = document.getElementById("monthly");
-    }
-    else {
-      // monatlicher Stromverbrauch ist nicht angewählt,
-      // dann muss der jährliche Verbrauch aktiv sein.
-      tabToCheck = document.getElementById("yearly");
-    }
-
-    inputFields = tabToCheck.getElementsByTagName("input");
-    // A loop that checks every input field in the current tab:
-    for (var i = 0; i < inputFields.length; i++) {
-      // If a field is empty...
-      if (inputFields[i].value == "") {
-        // add an "invalid" class to the field:
-        inputFields[i].className += " invalid";
-        // and set the current valid status to false
-        valid = false;
-      }
-    }
-    
-    // auch noch das letzte Eingabefeld prüfen
-    var consumptionField = document.getElementById("consumption");
-    if(consumptionField.value == ""){
-        // add an "invalid" class to the field:
-        consumptionField.className += " invalid";
-        // and set the current valid status to false
-        valid = false;
-    }
+  if (currentTab == TAB_COMSUMPTION) {
+    console.log("consumption tab validation")
+    valid = isConsumptionTabValid();
+    finishStep(valid);
     return valid;
   }
 
+  // A loop that checks every input field in the current tab:
+  for (var i = 0; i < inputFields.length; i++) {
+    // If a field is empty...
+    if (inputFields[i].value == "") {
+      console.log("invalid form: " + inputFields[i])
+      // add an "invalid" class to the field:
+      inputFields[i].className += " invalid";
+      // and set the current valid status to false
+      valid = false;
+    }
+  }
+  console.log("finish step " + valid)
+  finishStep(valid);
+  return valid; // return the valid status
+}
+
+function isConsumptionTabValid() {
+  var valid = true;
+  var inputFields;
+
+  // ++++ Check TabPane ++++
+  // +++++++++++++++++++++++
+
+  // Ist monatlich oder jährlicher Stromverbrauch ausgewählt?
+  var monthlyComsumption = document.getElementById("btnMonthlyTab");
+  var tabToCheck;
+  if (monthlyComsumption.className.includes("active")) {
+    // monatlicher Stromverbrauch aktiviert
+    tabToCheck = document.getElementById("monthly");
+  }
+  else {
+    // monatlicher Stromverbrauch ist nicht angewählt,
+    // dann muss der jährliche Verbrauch aktiv sein.
+    tabToCheck = document.getElementById("yearly");
+  }
+
+  inputFields = tabToCheck.getElementsByTagName("input");
   // A loop that checks every input field in the current tab:
   for (var i = 0; i < inputFields.length; i++) {
     // If a field is empty...
@@ -103,11 +113,19 @@ function validateForm() {
       valid = false;
     }
   }
-  // If the valid status is true, mark the step as finished and valid:
-  if (valid) {
-    document.getElementsByClassName("step")[currentTab].className += " finish";
+
+  // ++++ Check Last InputField ++++
+  // +++++++++++++++++++++++++++++++
+
+  // auch noch das letzte Eingabefeld prüfen
+  var consumptionField = document.getElementById("dailyConsumption");
+  if (consumptionField.value == "") {
+    // add an "invalid" class to the field:
+    consumptionField.className += " invalid";
+    // and set the current valid status to false
+    valid = false;
   }
-  return valid; // return the valid status
+  return valid;
 }
 
 function fixStepIndicator(n) {
@@ -120,6 +138,12 @@ function fixStepIndicator(n) {
   x[n].className += " active";
 }
 
+function finishStep(valid) {
+  // If the valid status is true, mark the step as finished and valid:
+  if (valid) {
+    document.getElementsByClassName("step")[currentTab].className += " finish";
+  }
+}
 
 function switchTab(evt, tabName) {
   // Declare all variables
@@ -140,4 +164,5 @@ function switchTab(evt, tabName) {
   // Show the current tab, and add an "active" class to the button that opened the tab
   document.getElementById(tabName).style.display = "block";
   evt.currentTarget.className += " active";
-} 
+}
+

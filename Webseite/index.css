@@ -6,6 +6,11 @@ body {
 	background-color: #f1f1f1;
 }
 
+hr {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
 #regForm {
 	background-color: #ffffff;
 	margin: 100px auto;
@@ -20,11 +25,16 @@ h1 {
 }
 
 input {
+	text-align: right;
+
+	margin-left: 5px;
+	margin-right: 5px;
 	padding: 10px;
-	width: 100%;
+
 	font-size: 17px;
 	font-family: Raleway;
 	border: 1px solid #aaaaaa;
+	display: inline-block;
 }
 
 /* Mark input boxes that gets an error on validation: */
@@ -81,7 +91,9 @@ button:hover {
 }
 
 /* =========================================== */
+
 /* ======== TOOLTIP - Dachausrichtung ======== */
+
 /* =========================================== */
 
 .tooltip {
@@ -117,20 +129,23 @@ button:hover {
 	padding: 8px;
 }
 
-
 /* =========================================== */
+
 /* =========== Monatlich / Jährlich ========== */
+
 /* =========================================== */
 
- /* Style the tab */
- .stromtab {
+/* Style the tab */
+
+.stromtab {
 	overflow: hidden;
 	border: 1px solid #ccc;
 	background-color: #f1f1f1;
-  }
-  
-  /* Style the buttons that are used to open the tab content */
-  .stromtab button {
+}
+
+/* Style the buttons that are used to open the tab content */
+
+.stromtab button {
 	background-color: inherit;
 	float: left;
 	border: none;
@@ -139,22 +154,40 @@ button:hover {
 	padding: 14px 16px;
 	transition: 0.3s;
 	color: black;
-  }
-  
-  /* Change background color of buttons on hover */
-  .stromtab button:hover {
+}
+
+/* Change background color of buttons on hover */
+
+.stromtab button:hover {
 	background-color: #ddd;
-  }
-  
-  /* Create an active/current tablink class */
-  .stromtab button.active {
+}
+
+/* Create an active/current tablink class */
+
+.stromtab button.active {
 	background-color: #ccc;
-  }
-  
-  /* Style the tab content */
-  .tabcontent {
+}
+
+/* Style the tab content */
+
+.tabcontent {
 	display: none;
 	padding: 6px 12px;
 	border: 1px solid #ccc;
 	border-top: none;
-  } 
+}
+
+input[type="radio"] {
+	clear: none;
+	width: auto;
+	padding: 0;
+}
+
+.radioGroup {
+	display: none;
+}
+
+
+.inline input {
+	width: calc(30% - 10px);
+}
