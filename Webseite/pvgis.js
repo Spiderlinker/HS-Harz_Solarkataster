@@ -27,7 +27,7 @@ function getAverageIrradiationPerMonth(latitude, longitude, callback) {
 
 function extractMonthlyAverageIrradiationFromJSON(json) {
     // Relevante Daten sind im JSON unter json -> outputs -> monthly
-    var rawMonthlyIrradiation = response.outputs.monthly;
+    var rawMonthlyIrradiation = json.outputs.monthly;
 
     // Array erstellen für monatliche durschnittliche Einstrahlung
     // Jede Array-Zelle repräsentiert dabei ein Monat
