@@ -8,6 +8,7 @@ var roofSurface = document.getElementById("roofSurface").value;
 // var electricityConsumption = readElectricityConsumption(document.getElementsByClassName("tabcontent"));
 var electricityConsumption = readElectricityConsumption(document.getElementById("monthlyTabButton"));
 
+//%
 var dailyElectricityConsumption = document.getElementById("dailyConsumption");
 
 var eegCosts = document.getElementById("eegCostShare").value;
@@ -27,6 +28,9 @@ default values (for now)
 */
 var lat = 51.844;
 var lon = 10.806;
+
+var portionOfYearlyConsumption = [10.53, 8.93, 9.33, 8.31, 7.83, 7.02, 6.95, 7.14, 7.33, 8.33, 8.69, 9.61];
+var monthlyIrradiation = [10.30, 37.25, 77.22, 122.39, 148.76, 157.27, 159.68, 132.39, 95.39, 56.17, 25.42, 17.19];
 
 var neededRoofAreaPerModule = 1.6;
 //irradiation (Einstrahlung)
@@ -55,10 +59,17 @@ var maxCostPerModule = 450;
 /*
 values that need to be calculated
 */
+var monthlyConsumption;
+var monthlyDailyConsumption;
+var monthlyNightlyConsumption;
+var dailyConsumptionTotal;
+var electricityRevenueTotal;
+var monthlyElectricityRevenue;
 var pvEfficiencyPerModule;
 var neededAmountOfModules;
 var neededRoofAreaTotal;
-var savedelectricityCostsTotal;
+var savedElectricityCostsTotal;
+var monthlySavedElectricityCosts;
 var eegCostsTotal;
 var revenueTotal;
 var amortizationMin;
@@ -98,37 +109,76 @@ function calculate(){
         irradiation = response;
 
         // Do not calculate until irradiation was queried
+
+//        if(electricityConsumption["type"] == MONTHLY){
+//            calculateWithMonthlyValues(electricityConsumption["data"]);
+//       }else {
+//            calculateWithYearlyValues(electricityConsumption["data"]);
+//        }
+        //monthly consumption available
         if(electricityConsumption["type"] == MONTHLY){
-            calculateWithMonthlyValues(electricityConsumption["data"]);
-        }else {
+            monthlyConsumption = electricityConsumption["data"];
+            for(let i = 0; i < 12; i++){
+                monthlyDailyConsumption[i] = monthlyConsumption[i]*(dailyConsumption/100);
+                dailyConsumptionTotal += monthlyDailyConsumption[i];
+            }
+            for(let i = 0; i < 12; i++){
+                monthlyNightlyConsumption[i] = monthlyConsumption[i] - monthlyDailyConsumption[i];
+            }
+            //calculate yearly consumption
+            for(let i = 0; i < 12; i++){
+                yearlyConsumption += monthlyConsumption[i];
+            }
+            calculateWithYearlyValues(yearlyConsumption);
+        }
+        //yearly consumption available
+        else if(electricityConsumption["type"] == YEARLY){
+            for(let i = 0; i < 12; i++){
+                monthlyConsumption[i] = electricityConsumption["data"] * (portionOfYearlyConsumption[i]/100);
+            }
+            for(let i = 0; i < 12; i++){
+                monthlyDailyConsumption = monthlyConsumption[i]*(dailyConsumption/100);
+            }
+            for(let i = 0; i < 12; i++){
+                monthlyNightlyConsumption = monthlyConsumption[i] - monthlyDailyConsumption[i];
+            }
+            dailyConsumptionTotal = yearlyConsumption * (dailyElectricityConsumption / 100);
             calculateWithYearlyValues(electricityConsumption["data"]);
         }
-    });
+        });
 }
 
 //calculate all needed values with monthly consumption values
 function calculateWithMonthlyValues(n) {
     //TODO
-
 }
 
 //calculate all needed values with a yearly consumption value
-function calculateWithYearlyValues(yearlyConsumption) {
+function calculateWithYearlyValues(n) {
     calculatePVEfficiency();
     calculateNeededModules(yearlyConsumption);
 
-    //electricity revenue
-    var electricityProduced = irradiation * areaFactor * ((peakEfficiency * neededAmountOfModules) / 1000) * (1 - (degreeOfEffectiveness / 100));
-    var dailyConsumption = yearlyConsumption * (dailyElectricityConsumption / 100);
-    //electricityCostsTotal
-    savedelectricityCostsTotal = calculateSavedElectricityCosts(electricityProduced, dailyConsumption);
+    //electricity revenue without irradiation
+    var electricityRevenueFactor = areaFactor * ((peakEfficiency * neededAmountOfModules) / 1000) * (1 - (degreeOfEffectiveness / 100));
+    calculateElectricityRevenue(electricityRevenueFactor);
+    
+    //saved electricity costs
+    calculateAllSavedElectricityCosts();
+    
     //eeg
-    eegCostsTotal = calculateEEGCosts(electricityProduced, dailyConsumption);
+    eegCostsTotal = calculateEEGCosts(electricityRevenueTotal, dailyConsumptionTotal);
     //revenue
-    revenueTotal = electricityProduced - dailyConsumption;
+    revenueTotal = electricityRevenueTotal - dailyConsumptionTotal;
     //min and max amortization
     amortizationMin = calculateAmortization(minCostPerModule);
     amortizationMax = calculateAmortization(maxCostPerModule);
+}
+
+function calculateElectricityRevenue(electricityRevenueFactor){
+    electricityRevenueTotal = irradiation * electricityRevenueFactor;
+    for(let i = 0; i < 12; i++){
+        monthlyElectricityRevenue[i] = monthlyIrradiation[i] * electricityRevenueFactor;
+    }
 }
 
 function calculateAmortization(moduleCosts) {
@@ -149,12 +199,19 @@ function calculateNeededModules(yearlyConsumption) {
     neededRoofAreaTotal = neededAmountOfModules * neededRoofAreaPerModule;
 }
 
-function calculateSavedElectricityCosts(pvEffiency, dailyConsumption) {
-    if (pvEffiency - dailyConsumption >= 0) {
+function calculateAllSavedElectricityCosts() {
+    savedElectricityCostsTotal = calculateSavedElectricityCosts(electricityRevenueTotal, dailyConsumptionTotal);
+    for(let i = 0; i < 12; i++){
+        monthlySavedElectricityCosts[i] = calculateSavedElectricityCosts(monthlyElectricityRevenue[i], monthlyDailyConsumption[i]);
+    }
+}
+
+function calculateSavedElectricityCosts(electricityRevenue, dailyConsumption){
+    if (electricityRevenue - dailyConsumption >= 0) {
         return dailyConsumption * electricityCosts;
     }
     else {
-        return pvEffiency * electricityCosts;
+        return electricityRevenue * electricityCosts;
     }
 }
 
