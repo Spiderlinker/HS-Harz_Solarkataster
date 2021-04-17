@@ -229,6 +229,7 @@ function calculateNeededModules(yearlyConsumption) {
     neededRoofAreaTotal = neededAmountOfModules * neededRoofAreaPerModule;
 }
 
+//calculate saved electricity costs for each month and the whole year
 function calculateAllSavedElectricityCosts() {
     savedElectricityCostsTotal = calculateSavedElectricityCosts(electricityRevenueTotal, dailyConsumptionTotal);
     for(let i = 0; i < 12; i++){
@@ -236,6 +237,8 @@ function calculateAllSavedElectricityCosts() {
     }
 }
 
+//calculate saved electricity costs
+//parameter electricityRevenue and dailyConsumption
 function calculateSavedElectricityCosts(electricityRevenue, dailyConsumption){
     if (electricityRevenue - dailyConsumption >= 0) {
         return dailyConsumption * electricityCosts;
