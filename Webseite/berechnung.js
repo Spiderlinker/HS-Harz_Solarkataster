@@ -8,8 +8,8 @@ var roofSurface = document.getElementById("roofSurface").value;
 // var electricityConsumption = readElectricityConsumption(document.getElementsByClassName("tabcontent"));
 var electricityConsumption = readElectricityConsumption(document.getElementById("monthlyTabButton"));
 
-//%
-var dailyElectricityConsumption = document.getElementById("dailyConsumption");
+//daily consumption profile (Tagesverbrauchsprofil)
+var dailyConsumptionProfile = document.getElementById("dailyConsumption");
 
 var eegCosts = document.getElementById("eegCostShare").value;
 var electricityCosts = document.getElementById("electricityCosts").value;
@@ -29,12 +29,13 @@ default values (for now)
 var lat = 51.844;
 var lon = 10.806;
 
+//monthly portion of yearly consumption
 var portionOfYearlyConsumption = [10.53, 8.93, 9.33, 8.31, 7.83, 7.02, 6.95, 7.14, 7.33, 8.33, 8.69, 9.61];
-var monthlyIrradiation = [10.30, 37.25, 77.22, 122.39, 148.76, 157.27, 159.68, 132.39, 95.39, 56.17, 25.42, 17.19];
 
 var neededRoofAreaPerModule = 1.6;
 //irradiation (Einstrahlung)
 var irradiation;
+var monthlyIrradiation = [10.30, 37.25, 77.22, 122.39, 148.76, 157.27, 159.68, 132.39, 95.39, 56.17, 25.42, 17.19];
 //peak efficiency (Peakleistung)
 var peakEfficiency = 200;
 //degree of effectiveness (Wirkungsgrad)
@@ -60,20 +61,28 @@ var maxCostPerModule = 450;
 values that need to be calculated
 */
 var monthlyConsumption;
-var monthlyDailyConsumption;
-var monthlyNightlyConsumption;
+//Tagesverbrauch
 var dailyConsumptionTotal;
+var dailyConsumptionMonthly = [];
+//Nachtverbrauch
+var nightlyConsumptionMonthly = [];
+//PV-Ertrag
 var electricityRevenueTotal;
-var monthlyElectricityRevenue;
+var electricityRevenueMonthly = [];
+
 var pvEfficiencyPerModule;
 var neededAmountOfModules;
 var neededRoofAreaTotal;
-var savedElectricityCostsTotal;
-var monthlySavedElectricityCosts;
+//eingesparte Strombezugskosten
+var savedElectricityCostsTotal; 
+var savedElectricityCostsMonthly = [];
+//EEG Umlage
 var eegCostsTotal;
-var eegCostsMonthly;
+var eegCostsMonthly = [];
+//Euro
 var revenueEuroTotal;
-var revenueEuroMonthly;
+var revenueEuroMonthly = [];
+//Amortization
 var amortizationMin;
 var amortizationMax;
 
@@ -122,11 +131,11 @@ function calculate(){
             var yearlyConsumption = 0;
             monthlyConsumption = electricityConsumption["data"];
             for(let i = 0; i < 12; i++){
-                monthlyDailyConsumption[i] = monthlyConsumption[i]*(dailyConsumption/100);
-                dailyConsumptionTotal += monthlyDailyConsumption[i];
+                dailyConsumptionMonthly[i] = monthlyConsumption[i]*(dailyConsumptionProfile/100);
+                dailyConsumptionTotal += dailyConsumptionMonthly[i];
             }
             for(let i = 0; i < 12; i++){
-                monthlyNightlyConsumption[i] = monthlyConsumption[i] - monthlyDailyConsumption[i];
+                nightlyConsumptionMonthly[i] = monthlyConsumption[i] - dailyConsumptionMonthly[i];
             }
             //calculate yearly consumption
             for(let i = 0; i < 12; i++){
@@ -140,12 +149,12 @@ function calculate(){
                 monthlyConsumption[i] = electricityConsumption["data"] * (portionOfYearlyConsumption[i]/100);
             }
             for(let i = 0; i < 12; i++){
-                monthlyDailyConsumption = monthlyConsumption[i]*(dailyConsumption/100);
+                dailyConsumptionMonthly = monthlyConsumption[i]*(dailyConsumption/100);
             }
             for(let i = 0; i < 12; i++){
-                monthlyNightlyConsumption = monthlyConsumption[i] - monthlyDailyConsumption[i];
+                nightlyConsumptionMonthly = monthlyConsumption[i] - dailyConsumptionMonthly[i];
             }
-            dailyConsumptionTotal = electricityConsumption["data"] * (dailyElectricityConsumption / 100);
+            dailyConsumptionTotal = electricityConsumption["data"] * (dailyConsumptionProfile / 100);
             calculateWithYearlyValues(electricityConsumption["data"]);
         }
         });
@@ -167,7 +176,7 @@ function calculateWithYearlyValues(yearlyConsumption) {
     calculateAllEEGCosts();
     //revenue euro
     calculateRevenueEuro();
-    
+
     //min and max amortization
     amortizationMin = calculateAmortization(minCostPerModule);
     amortizationMax = calculateAmortization(maxCostPerModule);
@@ -176,14 +185,14 @@ function calculateWithYearlyValues(yearlyConsumption) {
 function calculateRevenueEuro(){
     revenueEuroTotal = electricityRevenueTotal - dailyConsumptionTotal;
     for(let i = 0; i < 12; i++){
-        revenueEuroMonthly[i] = monthlyElectricityRevenue[i] - monthlyDailyConsumption[i];
+        revenueEuroMonthly[i] = electricityRevenueMonthly[i] - dailyConsumptionMonthly[i];
     }
 }
 
 function calculateAllEEGCosts(){
     eegCostsTotal = calculateEEGCosts(electricityRevenueTotal, dailyConsumptionTotal);
     for(let i = 0; i < 12; i++){
-        eegCostsMonthly[i] = calculateEEGCosts(monthlyElectricityRevenue[i], monthlyDailyConsumption[i]);
+        eegCostsMonthly[i] = calculateEEGCosts(electricityRevenueMonthly[i], dailyConsumptionMonthly[i]);
     }
 }
 function calculateEEGCosts(pvRevenue, dailyConsumption) {
@@ -198,7 +207,7 @@ function calculateEEGCosts(pvRevenue, dailyConsumption) {
 function calculateElectricityRevenue(electricityRevenueFactor){
     electricityRevenueTotal = irradiation * electricityRevenueFactor;
     for(let i = 0; i < 12; i++){
-        monthlyElectricityRevenue[i] = monthlyIrradiation[i] * electricityRevenueFactor;
+        electricityRevenueMonthly[i] = monthlyIrradiation[i] * electricityRevenueFactor;
     }
 }
 
@@ -223,7 +232,7 @@ function calculateNeededModules(yearlyConsumption) {
 function calculateAllSavedElectricityCosts() {
     savedElectricityCostsTotal = calculateSavedElectricityCosts(electricityRevenueTotal, dailyConsumptionTotal);
     for(let i = 0; i < 12; i++){
-        monthlySavedElectricityCosts[i] = calculateSavedElectricityCosts(monthlyElectricityRevenue[i], monthlyDailyConsumption[i]);
+        savedElectricityCostsMonthly[i] = calculateSavedElectricityCosts(electricityRevenueMonthly[i], dailyConsumptionMonthly[i]);
     }
 }
 
