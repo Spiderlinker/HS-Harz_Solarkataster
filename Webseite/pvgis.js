@@ -1,3 +1,5 @@
+"use strict"
+
 // Name der PHP-Datei, die die Abfrage vom PVGIS durchführt
 const PVGIS_PHP_REQUEST_FILE = "pvgis.php";
 const NUMBER_OF_MONTH = 12;

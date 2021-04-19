@@ -1,3 +1,4 @@
+"use strict"
 
 // Optimale Werte für Dächer. Werte können bei Flachdächern verwendet werden
 const OPTIMAL_ROOF_ANGLE = 30;

@@ -1,3 +1,5 @@
+"use strict"
+
 let currentTab = 0; // Current tab is set to be the first tab (0)
 
 const TAB_INFO = 0;
