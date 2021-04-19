@@ -7,7 +7,7 @@ const OPTIMAL_ROOF_ORIENTATION = 180;
  * Prozentwerte für den Strom, der tagsüber verbraucht wird.
  * Werte sind über ein Key-Value-Prinzip in dieser Variable hinterlegt
  */
-var dailyConsumptionPercentageMap = {
+const dailyConsumptionPercentageMap = {
   privateDaytime: 50,
   privateEvening: 35,
   privateSpreadOverDay: 25,
@@ -27,16 +27,16 @@ var dailyConsumptionPercentageMap = {
  */
 function radioButtonChecked(evt, radioGroup) {
   // Get all elements with class="radioGroup" and hide them
-  var tabcontent = document.getElementsByClassName(evt.currentTarget.getAttribute("group"));
-  for (var i = 0; i < tabcontent.length; i++) {
+  let tabcontent = document.getElementsByClassName(evt.currentTarget.getAttribute("group"));
+  for (let i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
   }
-  var radioGroupToActivate = document.getElementById(radioGroup);
+  let radioGroupToActivate = document.getElementById(radioGroup);
   radioGroupToActivate.style.display = "block"; // show radio group
 
   if (radioGroupToActivate.getAttribute("selectFirstInput")) {
     // select first element in radio group (if exists)
-    var childElements = radioGroupToActivate.getElementsByTagName("input");
+    let childElements = radioGroupToActivate.getElementsByTagName("input");
     if (childElements.length > 0) {
       childElements[0].click();
     }

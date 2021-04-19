@@ -1,20 +1,20 @@
 /*
 input values from website
 */
-var roofAngle = document.getElementById("roofAngle").value;
-var roofOrientation = document.getElementById("roofOrientation").value;
-var roofSurface = document.getElementById("roofSurface").value;
+let roofAngle = document.getElementById("roofAngle").value;
+let roofOrientation = document.getElementById("roofOrientation").value;
+let roofSurface = document.getElementById("roofSurface").value;
 
-// var electricityConsumption = readElectricityConsumption(document.getElementsByClassName("tabcontent"));
-var electricityConsumption = readElectricityConsumption(document.getElementById("monthlyTabButton"));
+// let electricityConsumption = readElectricityConsumption(document.getElementsByClassName("tabcontent"));
+let electricityConsumption = readElectricityConsumption(document.getElementById("monthlyTabButton"));
 
-var dailyElectricityConsumption = document.getElementById("dailyConsumption");
+let dailyElectricityConsumption = document.getElementById("dailyConsumption");
 
-var eegCosts = document.getElementById("eegCostShare").value;
-var electricityCosts = document.getElementById("electricityCosts").value;
+let eegCosts = document.getElementById("eegCostShare").value;
+let electricityCosts = document.getElementById("electricityCosts").value;
 
-var minimumCostsTotal = document.getElementById("minimumCostsTotal").value;
-var maximumCostsTotal = document.getElementById("maximumCostsTotal").value;
+let minimumCostsTotal = document.getElementById("minimumCostsTotal").value;
+let maximumCostsTotal = document.getElementById("maximumCostsTotal").value;
 
 /*
     Constants
@@ -25,18 +25,18 @@ const YEARLY = "yearly";
 /*
 default values (for now)
 */
-var lat = 51.844;
-var lon = 10.806;
+let lat = 51.844;
+let lon = 10.806;
 
-var neededRoofAreaPerModule = 1.6;
+let neededRoofAreaPerModule = 1.6;
 //irradiation (Einstrahlung)
-var irradiation;
+let irradiation;
 //peak efficiency (Peakleistung)
-var peakEfficiency = 200;
+let peakEfficiency = 200;
 //degree of effectiveness (Wirkungsgrad)
-var degreeOfEffectiveness = 20;
+let degreeOfEffectiveness = 20;
 //area factor table (Flächenfaktor)
-var areaFactorTable = [
+let areaFactorTable = [
     [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
     [90, 91, 92, 93, 94, 95, 100, 102, 104, 105, 107, 108, 108, 108, 107, 105, 104, 102, 100, 95, 94, 93, 92, 91, 90],
     [79, 80, 82, 85, 89, 94, 97, 102, 106, 109, 112, 113, 113, 113, 112, 109, 106, 102, 97, 94, 89, 85, 82, 80, 79],
@@ -49,25 +49,25 @@ var areaFactorTable = [
     [33, 34, 37, 43, 48, 54, 61, 67, 74, 78, 83, 84, 85, 84, 83, 78, 74, 67, 61, 54, 48, 43, 37, 34, 33]
 ];
 //amortization
-var minCostPerModule = 250;
-var maxCostPerModule = 450;
+let minCostPerModule = 250;
+let maxCostPerModule = 450;
 
 /*
 values that need to be calculated
 */
-var pvEfficiencyPerModule;
-var neededAmountOfModules;
-var neededRoofAreaTotal;
-var savedelectricityCostsTotal;
-var eegCostsTotal;
-var revenueTotal;
-var amortizationMin;
-var amortizationMax;
+let pvEfficiencyPerModule;
+let neededAmountOfModules;
+let neededRoofAreaTotal;
+let savedelectricityCostsTotal;
+let eegCostsTotal;
+let revenueTotal;
+let amortizationMin;
+let amortizationMax;
 
-function readElectricityConsumption(n) {
-    var consumption = [];
+function readElectricityConsumption(tabElement) {
+    let consumption = [];
 
-    if (n.className.includes("active") == "monthly") {
+    if (tabElement.className.includes("active") == "monthly") {
         consumption["type"] = MONTHLY;
         consumption["data"] = [
             document.getElementById("januaryConsumption").value,
@@ -94,7 +94,7 @@ function readElectricityConsumption(n) {
 }
 
 function calculate(){
-    getAverageIrradiation(lat, lon, function(response){
+    getAverageIrradiation(lat, lon, response => {
         irradiation = response;
 
         // Do not calculate until irradiation was queried
@@ -118,8 +118,8 @@ function calculateWithYearlyValues(yearlyConsumption) {
     calculateNeededModules(yearlyConsumption);
 
     //electricity revenue
-    var electricityProduced = irradiation * areaFactor * ((peakEfficiency * neededAmountOfModules) / 1000) * (1 - (degreeOfEffectiveness / 100));
-    var dailyConsumption = yearlyConsumption * (dailyElectricityConsumption / 100);
+    const electricityProduced = irradiation * areaFactor * ((peakEfficiency * neededAmountOfModules) / 1000) * (1 - (degreeOfEffectiveness / 100));
+    const dailyConsumption = yearlyConsumption * (dailyElectricityConsumption / 100);
     //electricityCostsTotal
     savedelectricityCostsTotal = calculateSavedElectricityCosts(electricityProduced, dailyConsumption);
     //eeg
@@ -139,7 +139,7 @@ function calculateAmortization(moduleCosts) {
 
 function calculatePVEfficiency() {
     //Calculate pv efficiency per module
-    var areaFactor = areaFactorTable[getIndexRoofAngle()][getIndexRoofOrientation()] / 100;
+    const areaFactor = areaFactorTable[getIndexRoofAngle()][getIndexRoofOrientation()] / 100;
     pvEfficiencyPerModule = irradiation * areaFactor * (peakEfficiency / 1000) * (1 - (degreeOfEffectiveness / 100));
 }
 
