@@ -9,12 +9,12 @@ Um die Berechnungen durchführen zu können, wurden zunächst die folgenden Wert
 
 # Formeln
 
-PV Leistung je Modul = Einstrahlung * Flächenfaktor * (Peakleistung/1000) * (1-(Wirkungsgrad/100))
--> berechnet in der Funktion "calculatePVEffiency"
+PV Leistung je Modul = Einstrahlung * Flächenfaktor * (Peakleistung/1000) * (1-(Wirkungsgrad/100))\
+-> berechnet in der Funktion "calculatePVEffiency"\
 
-Anzahl benötigter Module = Jahresverbrauch / PV Leistung je Modul
-Benötigte Dachfläche = Anzahl benötigter Module * Fläche eines Moduls
--> berechnet in der Funktion "calculateNeededModules"
+Anzahl benötigter Module = Jahresverbrauch / PV Leistung je Modul\
+Benötigte Dachfläche = Anzahl benötigter Module * Fläche eines Moduls\
+-> berechnet in der Funktion "calculateNeededModules"\
 
 Ertragsfaktor = Flächenfaktor * ((Peakleistung * Anzahl benötigter Module) / 1000) * (1 - (Wirkungsgrad/100))
 -> berechnet in der Funktion "calculateNeededValues"
