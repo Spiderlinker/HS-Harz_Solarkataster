@@ -122,12 +122,12 @@ function calculate(){
 
         // Do not calculate until irradiation was queried
 
-        calculateWithYearlyValues(electricityConsumption);
+        calculateNeededValues(electricityConsumption);
     });
 }
 
 //calculate all needed values with a yearly consumption value
-function calculateWithYearlyValues(electricityConsumption) {
+function calculateNeededValues(electricityConsumption) {
     calculateMonthlyAndYearlyConsumptionValues(electricityConsumption);
     calculatePVEfficiency();
     calculateNeededModules(yearlyConsumption);
