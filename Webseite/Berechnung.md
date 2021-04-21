@@ -45,6 +45,16 @@ Bsp.:
 - Berechnung von PV-Ertrag: Einstrahlung ist davon abhängig, ob es sich um die Berechnung für das ganze Jahr handelt, oder um die Berechnung für einen Monat. Die Einstrahlung ist von Monat zu Monat verschieden.
 - Berechnung von Ertrag in Euro: Tagesverbrauch kann der monatliche oder der jährliche Tagesverbrauch sein.
 
+## Werte für die Diagramme
+Hier wird aufgelistet, welche Variablen bzw. Werte für das Darstellen welchen Diagramms benötigt wird.\
+**Jahresverbrauch nach Monaten**
+- nightlyConsumptionMonthly
+- dailyConsumptionMonthly
+
+**Ertrags- /Verbrauchsdiagramm**
+- dailyConsumptionMonthly
+- electricityRevenueMonthly
+
 ## Glossar
 Tagesverbrauchsprofil = daily consumption profile\
 Tagesverbrauch = daily consumption\
