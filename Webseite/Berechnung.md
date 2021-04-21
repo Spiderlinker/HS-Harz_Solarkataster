@@ -33,8 +33,8 @@ Um die Berechnungen durchführen zu können, wurden zunächst die folgenden Wert
 -> berechnet in der Funktion "calculateElectricityRevenue"
 
 **eingesparte Strombezugskosten** =\
-if(PV-Ertrag - Tagesverbrauch >= 0) Tagesverbrauch * Stromkosten
-else PV-Ertrag * Stromkosten
+if(PV-Ertrag - Tagesverbrauch >= 0) Tagesverbrauch * Stromkosten\
+else PV-Ertrag * Stromkosten\
 -> berechnet in der Funktion "calculateSavedElectricityCosts"
 
 **EEG Umlage** =\
