@@ -61,6 +61,7 @@ var maxCostPerModule = 450;
     values that need to be calculated
 */
 var monthlyConsumption;
+var yearlyConsumption;
 //Tagesverbrauch
 var dailyConsumptionTotal;
 var dailyConsumptionMonthly = [];
@@ -121,70 +122,63 @@ function calculate(){
 
         // Do not calculate until irradiation was queried
 
-//        if(electricityConsumption["type"] == MONTHLY){
-//            calculateWithMonthlyValues(electricityConsumption["data"]);
-//       }else {
-//            calculateWithYearlyValues(electricityConsumption["data"]);
-//        }
-        //monthly consumption available
-        if(electricityConsumption["type"] == MONTHLY){
-            var yearlyConsumption = 0;
-            monthlyConsumption = electricityConsumption["data"];
-            for(let i = 0; i < 12; i++){
-                dailyConsumptionMonthly[i] = monthlyConsumption[i]*(dailyConsumptionProfile/100);
-                dailyConsumptionTotal += dailyConsumptionMonthly[i];
-            }
-            for(let i = 0; i < 12; i++){
-                nightlyConsumptionMonthly[i] = monthlyConsumption[i] - dailyConsumptionMonthly[i];
-            }
-            //calculate yearly consumption
-            for(let i = 0; i < 12; i++){
-                yearlyConsumption += monthlyConsumption[i];
-            }
-            calculateWithYearlyValues(electricityConsumption);
-        }
-        //yearly consumption available
-        else if(electricityConsumption["type"] == YEARLY){
-            for(let i = 0; i < 12; i++){
-                monthlyConsumption[i] = electricityConsumption["data"] * (portionOfYearlyConsumption[i]/100);
-            }
-            for(let i = 0; i < 12; i++){
-                dailyConsumptionMonthly = monthlyConsumption[i]*(dailyConsumption/100);
-            }
-            for(let i = 0; i < 12; i++){
-                nightlyConsumptionMonthly = monthlyConsumption[i] - dailyConsumptionMonthly[i];
-            }
-            dailyConsumptionTotal = electricityConsumption["data"] * (dailyConsumptionProfile / 100);
-            calculateWithYearlyValues(electricityConsumption);
-        }
-        });
+        calculateWithYearlyValues(electricityConsumption);
+    });
 }
 
 //calculate all needed values with a yearly consumption value
 function calculateWithYearlyValues(electricityConsumption) {
+    calculateMonthlyAndYearlyConsumptionValues(electricityConsumption);
     calculatePVEfficiency();
-    if(electricityConsumption["type"] == MONTHLY){
-        calculateNeededModules(yearlyConsumption);
-    }
-    else{
-        calculateNeededModules(electricityConsumption["data"]);
-    }
+    calculateNeededModules(yearlyConsumption);
 
     //electricity revenue without irradiation
     var electricityRevenueFactor = areaFactor * ((peakEfficiency * neededAmountOfModules) / 1000) * (1 - (degreeOfEffectiveness / 100));
-    calculateElectricityRevenue(electricityRevenueFactor, electricityConsumption["type"]);
+    calculateElectricityRevenue(electricityRevenueFactor);
     
     //saved electricity costs
-    calculateAllSavedElectricityCosts(electricityConsumption["type"]);
+    calculateAllSavedElectricityCosts();
 
     //eeg
-    calculateAllEEGCosts(electricityConsumption["type"]);
+    calculateAllEEGCosts();
     //revenue euro
-    calculateRevenueEuro(electricityConsumption["type"]);
+    calculateRevenueEuro();
 
     //min and max amortization
     amortizationMin = calculateAmortization(minCostPerModule);
     amortizationMax = calculateAmortization(maxCostPerModule);
+}
+
+function calculateMonthlyAndYearlyConsumptionValues(electricityConsumption){
+    //monthly consumption available
+    if(electricityConsumption["type"] == MONTHLY){
+        monthlyConsumption = electricityConsumption["data"];
+        for(let i = 0; i < 12; i++){
+            dailyConsumptionMonthly[i] = monthlyConsumption[i]*(dailyConsumptionProfile/100);
+            dailyConsumptionTotal += dailyConsumptionMonthly[i];
+        }
+        for(let i = 0; i < 12; i++){
+            nightlyConsumptionMonthly[i] = monthlyConsumption[i] - dailyConsumptionMonthly[i];
+        }
+        //calculate yearly consumption
+        for(let i = 0; i < 12; i++){
+            yearlyConsumption += monthlyConsumption[i];
+        }
+    }
+    //yearly consumption available
+    else if(electricityConsumption["type"] == YEARLY){
+        for(let i = 0; i < 12; i++){
+            monthlyConsumption[i] = electricityConsumption["data"] * (portionOfYearlyConsumption[i]/100);
+        }
+        for(let i = 0; i < 12; i++){
+            dailyConsumptionMonthly = monthlyConsumption[i]*(dailyConsumption/100);
+        }
+        for(let i = 0; i < 12; i++){
+            nightlyConsumptionMonthly = monthlyConsumption[i] - dailyConsumptionMonthly[i];
+        }
+        dailyConsumptionTotal = electricityConsumption["data"] * (dailyConsumptionProfile / 100);
+        yearlyConsumption = electricityConsumption["data"];
+    }
 }
 
 function calculatePVEfficiency() {
@@ -199,22 +193,18 @@ function calculateNeededModules(yearlyConsumption) {
     neededRoofAreaTotal = neededAmountOfModules * neededRoofAreaPerModule;
 }
 
-function calculateElectricityRevenue(electricityRevenueFactor, type){
+function calculateElectricityRevenue(electricityRevenueFactor){
     electricityRevenueTotal = irradiation * electricityRevenueFactor;
-    if(type == MONTHLY){
-        for(let i = 0; i < 12; i++){
-            electricityRevenueMonthly[i] = monthlyIrradiation[i] * electricityRevenueFactor;
-        }
+    for(let i = 0; i < 12; i++){
+        electricityRevenueMonthly[i] = monthlyIrradiation[i] * electricityRevenueFactor;
     }
 }
 
 //calculate saved electricity costs for each month and the whole year
-function calculateAllSavedElectricityCosts(type) {
+function calculateAllSavedElectricityCosts() {
     savedElectricityCostsTotal = calculateSavedElectricityCosts(electricityRevenueTotal, dailyConsumptionTotal);
-    if(type == MONTHLY){
-        for(let i = 0; i < 12; i++){
-            savedElectricityCostsMonthly[i] = calculateSavedElectricityCosts(electricityRevenueMonthly[i], dailyConsumptionMonthly[i]);
-        }
+    for(let i = 0; i < 12; i++){
+        savedElectricityCostsMonthly[i] = calculateSavedElectricityCosts(electricityRevenueMonthly[i], dailyConsumptionMonthly[i]);
     }
 }
 
@@ -229,12 +219,10 @@ function calculateSavedElectricityCosts(electricityRevenue, dailyConsumption){
     }
 }
 
-function calculateAllEEGCosts(type){
+function calculateAllEEGCosts(){
     eegCostsTotal = calculateEEGCosts(electricityRevenueTotal, dailyConsumptionTotal);
-    if(type == MONTHLY){
-        for(let i = 0; i < 12; i++){
-            eegCostsMonthly[i] = calculateEEGCosts(electricityRevenueMonthly[i], dailyConsumptionMonthly[i]);
-        }
+    for(let i = 0; i < 12; i++){
+        eegCostsMonthly[i] = calculateEEGCosts(electricityRevenueMonthly[i], dailyConsumptionMonthly[i]);
     }
 }
 
@@ -247,12 +235,10 @@ function calculateEEGCosts(pvRevenue, dailyConsumption) {
     }
 }
 
-function calculateRevenueEuro(type){
+function calculateRevenueEuro(){
     revenueEuroTotal = electricityRevenueTotal - dailyConsumptionTotal;
-    if(type == MONTHLY){
-        for(let i = 0; i < 12; i++){
-            revenueEuroMonthly[i] = electricityRevenueMonthly[i] - dailyConsumptionMonthly[i];
-        }
+    for(let i = 0; i < 12; i++){
+        revenueEuroMonthly[i] = electricityRevenueMonthly[i] - dailyConsumptionMonthly[i];
     }
 }
 
