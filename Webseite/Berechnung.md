@@ -7,6 +7,16 @@ Um die Berechnungen durchführen zu können, wurden zunächst die folgenden Wert
 - Jährlicher Gesamtverbrauch
 - Jährlicher Tagesverbrauch
 
+## Default Values
+- latitute and longitude
+- Verbrauchsdaten Monatsanteil in %
+- Fläche eines Moduls
+- monatliche Einstrahlung
+- Peakleistung
+- Wirkungsgrad
+- Flächenfaktor Tabelle
+- min. und max. Kosten eines Moduls
+
 ## Formeln
 
 **PV Leistung je Modul** = Einstrahlung * Flächenfaktor * (Peakleistung/1000) * (1-(Wirkungsgrad/100))\
