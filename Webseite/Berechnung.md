@@ -40,8 +40,8 @@ Amortization Jahr 1 = Amortization Jahr 0 - Jahresertrag in Euro + (0.01 * Amort
 Amortizationszeit = Amortization Jahr 0 / (Amortization Jahr 0 - Amortization Jahr 1)\
 -> berechnet in der Funktion "calculateAmortization"
 
-Einige dieser Formeln werden sowohl für das ganze Jahr als auch für jeden Monat angewandt, sodass die Eingabewerte dem entsprechend angepasst werden müssen.\ 
-Bsp.: \
+Einige dieser Formeln werden sowohl für das ganze Jahr als auch für jeden Monat angewandt, sodass die Eingabewerte dem entsprechend angepasst werden müssen. 
+\Bsp.:
 - Berechnung von PV-Ertrag: Einstrahlung ist davon abhängig, ob es sich um die Berechnung für das ganze Jahr handelt, oder um die Berechnung für einen Monat. Die Einstrahlung ist von Monat zu Monat verschieden.
 - Berechnung von Ertrag in Euro: Tagesverbrauch kann der monatliche oder der jährliche Tagesverbrauch sein.
 
