@@ -77,11 +77,15 @@ Einstrahlung = irradiation
 
 
 ## Formeln als Bild
+PV-Leistung:
 ![pv](http://www.sciweavers.org/tex2img.php?eq=PVLeistung%2FModul%20%3D%20Einstrahlung%20%5Ccdot%20Flaechenfaktor%20%5Ccdot%20%5Cleft%20%28%20%5Cfrac%7BPeakleistung%7D%7B1000%7D%20%5Cright%20%29%20%5Ccdot%20%5Cleft%20%28%201%20-%20%5Cleft%20%28%20%5Cfrac%7BWirkungsgrad%7D%7B100%7D%20%5Cright%20%29%20%5Cright%20%29&bc=White&fc=Black&im=jpg&fs=18&ff=arev&edit=0)
 
-
+Anzahl benötigter Module:
 ![anzahl](http://www.sciweavers.org/tex2img.php?eq=A_%7BnzahlBenoetigterModule%7D%20%3D%20%20%5Cfrac%7BJ_%7Bahresverbrauch%7D%20%7D%7BPV_%7BLeistungJeModul%7D%7D&bc=White&fc=Black&im=jpg&fs=18&ff=arev&edit=0)
 
+Benötigte Dachfläche:
 ![dachflaeche](http://www.sciweavers.org/tex2img.php?eq=B_%7BenoetigteDachflaeche%7D%20%3D%20A_%7BnzahlBenoetigterModule%7D%20%5Ccdot%20F_%7BlaecheEinesModuls%7D&bc=White&fc=Black&im=jpg&fs=18&ff=arev&edit=0)
 
+Ertragsfaktor: 
 ![ertragsfaktor](http://www.sciweavers.org/tex2img.php?eq=E_%7Brtragsfaktor%7D%20%3D%20F_%7Blaechenfaktor%7D%20%5Ccdot%20%20%5Cbig%28%20%5Cfrac%7B%20P_%7Beakleistung%7D%20%5Ccdot%20A_%7BnzahlBenoetigterModule%7D%7D%7B1000%7D%20%5Cbig%29%20%5Ccdot%20%5Cbig%28%201%20-%20%5Cfrac%7BW_%7Birkungsgrad%7D%7D%7B100%7D%20%5Cbig%29&bc=White&fc=Black&im=jpg&fs=18&ff=arev&edit=0)
+
