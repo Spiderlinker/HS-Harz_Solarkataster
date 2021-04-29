@@ -14,7 +14,7 @@
     <script type="text/javascript" src="radioButton.js"></script>
     <script type="text/javascript" src="pvgis.js"></script>
 
-    <!--<script type="text/javascript" src="berechnung.js"></script>-->
+    <script type="text/javascript" src="berechnung.js"></script>
     <!-- tabControl.js ist weiter unten hinzugefügt (Ende <body>) -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js"></script>
@@ -25,7 +25,7 @@
 ?>
 
 <body>
-    <form id="regForm" action="/summary.php">
+    <form id="regForm" action="#">
         <h1>Solarkataster</h1>
 
         <!-- One "tab" for each step in the form: -->
@@ -333,13 +333,13 @@
             <table>
                 <tr>
                     <td>Minimum</td>
-                    <td><input type="text" class="textbox" id="minimumCostsTotal" name="minimumCostsTotal"
+                    <td><input type="text" class="textbox" id="minCostPerModule" name="minimumCostsTotal"
                             placeholder="250" value="<?php echo getValue('minModuleCosts'); ?>" /></td>
                     <td>EUR / m²</td>
                 </tr>
                 <tr>
                     <td>Maximum</td>
-                    <td><input type="text" class="textbox" id="maximumCostsTotal" name="maximumCostsTotal"
+                    <td><input type="text" class="textbox" id="maxCostPerModule" name="maximumCostsTotal"
                             placeholder="450" value="<?php echo getValue('maxModuleCosts'); ?>" /></td>
                     <td>EUR / m²</td>
                 </tr>

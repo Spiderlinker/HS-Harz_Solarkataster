@@ -22,10 +22,18 @@ function showTab(n) {
     document.getElementById("prevBtn").style.display = "inline";
   }
   if (n == (tabs.length - 1)) {
-    document.getElementById("nextBtn").innerHTML = "Submit";
+    document.getElementById("nextBtn").innerHTML = "Fertig";
   } else {
     document.getElementById("nextBtn").innerHTML = "Weiter";
   }
+
+  console.log("Current tab: " + n);
+  if(n == TAB_SUMMARY){
+    console.log("calculate values");
+    calculate();
+  }
+
+
   //... and run a function that will display the correct step indicator:
   fixStepIndicator(n)
 }

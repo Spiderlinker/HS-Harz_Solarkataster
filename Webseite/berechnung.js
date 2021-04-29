@@ -3,22 +3,22 @@
 /*
     input values from website
 */
-let roofAngle = document.getElementById("roofAngle").value;
-let roofOrientation = document.getElementById("roofOrientation").value;
-let roofSurface = document.getElementById("roofSurface").value;
+let roofAngle = 0;
+let roofOrientation = 0;
+let roofSurface = 0;
 
 // let electricityConsumption = readElectricityConsumption(document.getElementsByClassName("tabcontent"));
-let electricityConsumption = readElectricityConsumption(document.getElementById("monthlyTabButton"));
+let electricityConsumption = null;
 
 //daily consumption profile (Tagesverbrauchsprofil)
-let dailyConsumptionProfile = document.getElementById("dailyConsumption");
+let dailyConsumptionProfile = 0;
 
-let eegPrice = document.getElementById("eegCostShare").value;
+let eegPrice = 0;
 
-let electricityCosts = document.getElementById("electricityCosts").value;
+let electricityCosts = 0;
 
-let minimumCostsTotal = document.getElementById("minimumCostsTotal").value;
-let maximumCostsTotal = document.getElementById("maximumCostsTotal").value;
+let minimumCostsTotal = 0;
+let maximumCostsTotal = 0;
 
 /*
     Constants
@@ -57,6 +57,7 @@ let areaFactorTable = [
     [36, 37, 41, 46, 52, 60, 67, 75, 81, 87, 92, 94, 95, 94, 92, 87, 81, 75, 67, 60, 52, 46, 41, 37, 36],
     [33, 34, 37, 43, 48, 54, 61, 67, 74, 78, 83, 84, 85, 84, 83, 78, 74, 67, 61, 54, 48, 43, 37, 34, 33]
 ];
+let areaFactor = 0;
 //amortization
 let minCostPerModule = 250;
 let maxCostPerModule = 450;
@@ -64,32 +65,78 @@ let maxCostPerModule = 450;
 /*
     values that need to be calculated
 */
-let monthlyConsumption;
-let yearlyConsumption;
+let monthlyConsumption = [];
+let yearlyConsumption = 0;
 //Tagesverbrauch
-let dailyConsumptionTotal;
+let dailyConsumptionTotal = 0;
 let dailyConsumptionMonthly = [];
 //Nachtverbrauch
 let nightlyConsumptionMonthly = [];
 //PV-Ertrag
-let electricityRevenueTotal;
+let electricityRevenueTotal = 0;
 let electricityRevenueMonthly = [];
 
-let pvEfficiencyPerModule;
-let neededAmountOfModules;
-let neededRoofAreaTotal;
+let pvEfficiencyPerModule = 0;
+let neededAmountOfModules = 0;
+let neededRoofAreaTotal = 0;
 //eingesparte Strombezugskosten
-let savedElectricityCostsTotal; 
+let savedElectricityCostsTotal = 0;
 let savedElectricityCostsMonthly = [];
 //EEG Umlage
-let eegCostsTotal;
+let eegCostsTotal = 0;
 let eegCostsMonthly = [];
 //Euro
-let revenueEuroTotal;
+let revenueEuroTotal = 0;
 let revenueEuroMonthly = [];
 //Amortization
-let amortizationMin;
-let amortizationMax;
+let amortizationMin = 0;
+let amortizationMax = 0;
+
+function calculate() {
+    readInputValues();
+    getAverageIrradiation(lat, lon, response => {
+        irradiation = response;
+
+        // Do not calculate until irradiation was queried
+
+        console.log("electricityConsumption.type " + electricityConsumption.type)
+        console.log("electricityConsumption.data " + electricityConsumption.data)
+        calculateNeededValues(electricityConsumption);
+
+        console.log("Irradiation:")
+        console.log(irradiation);
+
+        console.log("AmortisationMin: " + amortizationMin);
+        console.log("AmortisationMax: " + amortizationMax);
+
+        
+        console.log("eegCostsTotal: " + eegCostsTotal);
+        console.log("revenueEuroTotal: " + revenueEuroTotal);
+        console.log("savedElectricityCostsTotal: " + savedElectricityCostsTotal);
+
+    });
+}
+
+function readInputValues() {
+    roofAngle = document.getElementById("roofAngle").value;
+    roofOrientation = document.getElementById("roofOrientation").value;
+    roofSurface = document.getElementById("roofSurface").value;
+
+    // let electricityConsumption = readElectricityConsumption(document.getElementsByClassName("tabcontent"));
+    electricityConsumption = readElectricityConsumption(document.getElementById("btnMonthlyTab"));
+
+    // daily consumption profile (Tagesverbrauchsprofil)
+    dailyConsumptionProfile = document.getElementById("dailyConsumption").value;
+
+    eegPrice = document.getElementById("eegCostShare").value;
+    electricityCosts = document.getElementById("electricityCosts").value;
+
+    minCostPerModule = document.getElementById("minCostPerModule").value;
+    maxCostPerModule = document.getElementById("maxCostPerModule").value;
+
+    // minimumCostsTotal = document.getElementById("minimumCostsTotal").value;
+    // maximumCostsTotal = document.getElementById("maximumCostsTotal").value;
+}
 
 function readElectricityConsumption(tabElement) {
     let consumption = [];
@@ -116,19 +163,11 @@ function readElectricityConsumption(tabElement) {
         consumption["data"] = document.getElementById("yearlyConsumption").value;
         //calculateWithYearlyValues(yearlyConsumption);
     }
-
+    console.log("readElectricityConsumption: " + consumption.type);
+    console.log("readElectricityConsumption: " + consumption.data);
     return consumption;
 }
 
-function calculate(){
-    getAverageIrradiation(lat, lon, response => {
-        irradiation = response;
-
-        // Do not calculate until irradiation was queried
-
-        calculateNeededValues(electricityConsumption);
-    });
-}
 
 //calculate all needed values
 function calculateNeededValues(electricityConsumption) {
@@ -139,7 +178,7 @@ function calculateNeededValues(electricityConsumption) {
     //electricity revenue without irradiation
     const electricityRevenueFactor = areaFactor * ((peakEfficiency * neededAmountOfModules) / 1000) * (1 - (degreeOfEffectiveness / 100));
     calculateElectricityRevenue(electricityRevenueFactor);
-    
+
     //saved electricity costs
     calculateAllSavedElectricityCosts();
 
@@ -158,40 +197,52 @@ calculate all monthly and yearly consumption values needed for further calculati
 calculates: monthlyConsumption, dailyConsumptionMonthly, dailyConsumptionTotal, 
             nightlyConsumptionMonthly, yearlyConsumption
 */
-function calculateMonthlyAndYearlyConsumptionValues(electricityConsumption){
+function calculateMonthlyAndYearlyConsumptionValues(electricityConsumption) {
+    console.log("===================")
+    console.log("electricityConsumption >" + electricityConsumption + "<");
+    console.log("dailyConsumptionProfile " + dailyConsumptionProfile);
     //monthly consumption available
-    if(electricityConsumption["type"] == MONTHLY){
+    if (electricityConsumption["type"] == MONTHLY) {
+        console.log("Calculate MONTHLY");
         monthlyConsumption = electricityConsumption["data"];
-        for(let i = 0; i < 12; i++){
-            dailyConsumptionMonthly[i] = monthlyConsumption[i]*(dailyConsumptionProfile/100);
+        for (let i = 0; i < 12; i++) {
+            dailyConsumptionMonthly[i] = monthlyConsumption[i] * (dailyConsumptionProfile / 100);
             dailyConsumptionTotal += dailyConsumptionMonthly[i];
         }
         //calculate yearly consumption
-        for(let i = 0; i < 12; i++){
+        for (let i = 0; i < 12; i++) {
             yearlyConsumption += monthlyConsumption[i];
         }
     }
     //yearly consumption available
-    else if(electricityConsumption["type"] == YEARLY){
-        for(let i = 0; i < 12; i++){
-            monthlyConsumption[i] = electricityConsumption["data"] * (portionOfYearlyConsumption[i]/100);
+    else if (electricityConsumption["type"] == YEARLY) {
+        console.log("Calculate YEARLY");
+        console.log("monthlyConsumption" + monthlyConsumption);
+        console.log("electricityConsumption.data" + electricityConsumption.data);
+        console.log("portionOfYearlyConsumption" + portionOfYearlyConsumption);
+        console.log("dailyConsumptionMonthly" + dailyConsumptionMonthly);
+        console.log("dailyConsumptionProfile" + dailyConsumptionProfile);
+
+        for (let i = 0; i < 12; i++) {
+            monthlyConsumption[i] = electricityConsumption["data"] * (portionOfYearlyConsumption[i] / 100);
         }
-        for(let i = 0; i < 12; i++){
-            dailyConsumptionMonthly = monthlyConsumption[i]*(dailyConsumption/100);
+        for (let i = 0; i < 12; i++) {
+            dailyConsumptionMonthly[i] = monthlyConsumption[i] * (dailyConsumptionProfile / 100);
         }
         dailyConsumptionTotal = electricityConsumption["data"] * (dailyConsumptionProfile / 100);
         yearlyConsumption = electricityConsumption["data"];
     }
-    for(let i = 0; i < 12; i++){
+    for (let i = 0; i < 12; i++) {
         nightlyConsumptionMonthly[i] = monthlyConsumption[i] - dailyConsumptionMonthly[i];
     }
+
 }
 
 /*
 calculate the pv efficiency per module
 */
 function calculatePVEfficiency() {
-    const areaFactor = areaFactorTable[getIndexRoofAngle()][getIndexRoofOrientation()] / 100;
+    areaFactor = areaFactorTable[getIndexRoofAngle()][getIndexRoofOrientation()] / 100;
     pvEfficiencyPerModule = irradiation * areaFactor * (peakEfficiency / 1000) * (1 - (degreeOfEffectiveness / 100));
 }
 
@@ -206,9 +257,9 @@ function calculateNeededModules(yearlyConsumption) {
 /*
 calculate electricity revenue 
 */
-function calculateElectricityRevenue(electricityRevenueFactor){
+function calculateElectricityRevenue(electricityRevenueFactor) {
     electricityRevenueTotal = irradiation * electricityRevenueFactor;
-    for(let i = 0; i < 12; i++){
+    for (let i = 0; i < 12; i++) {
         electricityRevenueMonthly[i] = monthlyIrradiation[i] * electricityRevenueFactor;
     }
 }
@@ -218,7 +269,7 @@ calculate saved electricity costs for each month and the whole year
 */
 function calculateAllSavedElectricityCosts() {
     savedElectricityCostsTotal = calculateSavedElectricityCosts(electricityRevenueTotal, dailyConsumptionTotal);
-    for(let i = 0; i < 12; i++){
+    for (let i = 0; i < 12; i++) {
         savedElectricityCostsMonthly[i] = calculateSavedElectricityCosts(electricityRevenueMonthly[i], dailyConsumptionMonthly[i]);
     }
 }
@@ -227,7 +278,7 @@ function calculateAllSavedElectricityCosts() {
 calculate saved electricity costs
 parameter electricityRevenue and dailyConsumption
 */
-function calculateSavedElectricityCosts(electricityRevenue, dailyConsumption){
+function calculateSavedElectricityCosts(electricityRevenue, dailyConsumption) {
     if (electricityRevenue - dailyConsumption >= 0) {
         return dailyConsumption * electricityCosts;
     }
@@ -239,9 +290,9 @@ function calculateSavedElectricityCosts(electricityRevenue, dailyConsumption){
 /*
 calculate eeg costs for each month and the whole year
 */
-function calculateAllEEGCosts(){
+function calculateAllEEGCosts() {
     eegCostsTotal = calculateEEGCosts(electricityRevenueTotal, dailyConsumptionTotal);
-    for(let i = 0; i < 12; i++){
+    for (let i = 0; i < 12; i++) {
         eegCostsMonthly[i] = calculateEEGCosts(electricityRevenueMonthly[i], dailyConsumptionMonthly[i]);
     }
 }
@@ -262,9 +313,16 @@ function calculateEEGCosts(pvRevenue, dailyConsumption) {
 /*
 calculate revenue in euro for each month and the whole year
 */
-function calculateRevenueEuro(){
+function calculateRevenueEuro() {
+
+    console.log("electricityRevenueTotal " + electricityRevenueTotal);
+    console.log("dailyConsumptionTotal " + dailyConsumptionTotal);
+    console.log("revenueEuroMonthly " + revenueEuroMonthly);
+    console.log("electricityRevenueMonthly " + electricityRevenueMonthly);
+    console.log("dailyConsumptionMonthly " + dailyConsumptionMonthly);
+
     revenueEuroTotal = electricityRevenueTotal - dailyConsumptionTotal;
-    for(let i = 0; i < 12; i++){
+    for (let i = 0; i < 12; i++) {
         revenueEuroMonthly[i] = electricityRevenueMonthly[i] - dailyConsumptionMonthly[i];
     }
 }
@@ -274,21 +332,24 @@ calculate amortization time
 parameter module cost
 */
 function calculateAmortization(moduleCosts) {
-    amortizationYear0 = moduleCosts * neededAmountOfModules;
-    amortizationYear1 = amortizationYear0 - revenueEuroTotal + (0, 01 * amortizationYear0);
+    console.log("ModuleCosts " + moduleCosts);
+    console.log("neededAmountOfModules " + neededAmountOfModules);
+    console.log("revenueEuroTotal " + revenueEuroTotal);
+    let amortizationYear0 = moduleCosts * neededAmountOfModules;
+    let amortizationYear1 = amortizationYear0 - revenueEuroTotal + (0.01 * amortizationYear0);
     return amortizationYear0 / (amortizationYear0 - amortizationYear1);
 }
 
 //returns the index of the roof orientation for the area factor table
-function getIndexRoofOrientation() {    
+function getIndexRoofOrientation() {
     // * 15 not needed, it already returns the correct index
     // * 15 would round the value to the nearest 15-step value
-    return round(roofOrientation / 15)/* * 15 */; 
+    return Math.round(roofOrientation / 15)/* * 15 */;
 }
 
 //returns the index of the roof angle for the area factor table
 function getIndexRoofAngle() {
     // * 10 not needed, it already returns the correct index
     // * 10 would round the value to the nearest 10-step value
-    return round(roofAngle / 10)/* * 10 */; 
+    return Math.round(roofAngle / 10)/* * 10 */;
 }

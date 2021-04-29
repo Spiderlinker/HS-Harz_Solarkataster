@@ -5,7 +5,7 @@ const PVGIS_PHP_REQUEST_FILE = "pvgis.php";
 const NUMBER_OF_MONTH = 12;
 
 function getAverageIrradiation(latitude, longitude, callback){
-    getAverageIrradiation(latitude, longitude, response => callback(sumArray(response)));
+    getAverageIrradiationPerMonth(latitude, longitude, response => callback(sumArray(response)));
 }
 
 function getAverageIrradiationPerMonth(latitude, longitude, callback) {
@@ -42,7 +42,7 @@ function extractMonthlyAverageIrradiationFromJSON(json) {
 
     // monatliche durschnittliche Einstrahlung errechnen
     // Durch die Anzahl der ausgelesenen monatlichen Werte teilen
-    for (i = 0; i < averageMonthlyIrradiation.length; i++) {
+    for (let i = 0; i < averageMonthlyIrradiation.length; i++) {
         // Anzahl der Jahre = Anzahl aller verarbeiteten Monate (rawMonthlyIrradiation.length) 
         // geteilt durch die Anzahl der Monate (12)
         averageMonthlyIrradiation[i] /= rawMonthlyIrradiation.length / NUMBER_OF_MONTH;
