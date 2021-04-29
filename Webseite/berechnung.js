@@ -37,9 +37,9 @@ let lon = 10.806;
 let portionOfYearlyConsumption = [10.53, 8.93, 9.33, 8.31, 7.83, 7.02, 6.95, 7.14, 7.33, 8.33, 8.69, 9.61];
 
 let neededRoofAreaPerModule = 1.6;
-//irradiation (Einstrahlung)
-let irradiation;
-let monthlyIrradiation = [10.30, 37.25, 77.22, 122.39, 148.76, 157.27, 159.68, 132.39, 95.39, 56.17, 25.42, 17.19];
+// Irradiation (Einstrahlung)
+let totalIrradiation; // durchschnittliche Einstrahlung pro Jahr
+let monthlyIrradiation; // durchschnittliche Einstrahlung pro Monat
 
 //peak efficiency (Peakleistung)
 let peakEfficiency = 200;
@@ -95,12 +95,17 @@ let amortizationMax = 0;
 
 function calculate() {
     readInputValues();
-    getAverageIrradiation(lat, lon, response => {
-        irradiation = response;
+    getAverageIrradiationPerMonth(lat, lon, response => {
+        monthlyIrradiation = response;
+        totalIrradiation = sumArray(monthlyIrradiation);
 
         // Do not calculate until irradiation was queried
 
         calculateNeededValues(electricityConsumption);
+
+        myChart.update();
+        myChartPv.update();
+
     });
 }
 
@@ -212,7 +217,7 @@ calculate the pv efficiency per module
 */
 function calculatePVEfficiency() {
     areaFactor = areaFactorTable[getIndexRoofAngle()][getIndexRoofOrientation()] / 100;
-    pvEfficiencyPerModule = irradiation * areaFactor * (peakEfficiency / 1000) * (1 - (degreeOfEffectiveness / 100));
+    pvEfficiencyPerModule = totalIrradiation * areaFactor * (peakEfficiency / 1000) * (1 - (degreeOfEffectiveness / 100));
 }
 
 /*
