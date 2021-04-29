@@ -14,6 +14,7 @@ let electricityConsumption = readElectricityConsumption(document.getElementById(
 let dailyConsumptionProfile = document.getElementById("dailyConsumption");
 
 let eegPrice = document.getElementById("eegCostShare").value;
+
 let electricityCosts = document.getElementById("electricityCosts").value;
 
 let minimumCostsTotal = document.getElementById("minimumCostsTotal").value;
@@ -38,6 +39,7 @@ let neededRoofAreaPerModule = 1.6;
 //irradiation (Einstrahlung)
 let irradiation;
 let monthlyIrradiation = [10.30, 37.25, 77.22, 122.39, 148.76, 157.27, 159.68, 132.39, 95.39, 56.17, 25.42, 17.19];
+
 //peak efficiency (Peakleistung)
 let peakEfficiency = 200;
 //degree of effectiveness (Wirkungsgrad)

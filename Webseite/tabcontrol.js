@@ -1,17 +1,19 @@
-var currentTab = 0; // Current tab is set to be the first tab (0)
+"use strict"
 
-var TAB_INFO = 0;
-var TAB_ROOF = TAB_INFO + 1;
-var TAB_COMSUMPTION = TAB_ROOF + 1;
-var TAB_COSTS = TAB_COMSUMPTION + 1;
-var TAB_SUMMARY = TAB_COSTS + 1;
+let currentTab = 0; // Current tab is set to be the first tab (0)
+
+const TAB_INFO = 0;
+const TAB_ROOF = TAB_INFO + 1;
+const TAB_COMSUMPTION = TAB_ROOF + 1;
+const TAB_COSTS = TAB_COMSUMPTION + 1;
+const TAB_SUMMARY = TAB_COSTS + 1;
 
 showTab(currentTab); // Display the current tab
 
 function showTab(n) {
   console.log("showTab")
   // This function will display the specified tab of the form...
-  var tabs = document.getElementsByClassName("tab");
+  let tabs = document.getElementsByClassName("tab");
   tabs[n].style.display = "block";
   //... and fix the Previous/Next buttons:
   if (n == 0) {
@@ -31,7 +33,7 @@ function showTab(n) {
 function nextPrev(n) {
   console.log("nextPrev: " + n)
   // This function will figure out which tab to display
-  var tabs = document.getElementsByClassName("tab");
+  let tabs = document.getElementsByClassName("tab");
   // Exit the function if any field in the current tab is invalid:
   if (n == 1 && !validateForm()) return false;
   // Hide the current tab:
@@ -51,9 +53,9 @@ function nextPrev(n) {
 function validateForm() {
   console.log("validate form")
   // This function deals with validation of the form fields
-  var tabs = document.getElementsByClassName("tab");
-  var inputFields = tabs[currentTab].getElementsByTagName("input");
-  var valid = true;
+  let tabs = document.getElementsByClassName("tab");
+  let inputFields = tabs[currentTab].getElementsByTagName("input");
+  let valid = true;
 
   // Sonderfall bei dem Verbrauchstab
   // Hier ist die Form gültig, wenn
@@ -67,7 +69,7 @@ function validateForm() {
   }
 
   // A loop that checks every input field in the current tab:
-  for (var i = 0; i < inputFields.length; i++) {
+  for (let i = 0; i < inputFields.length; i++) {
     // If a field is empty...
     if (inputFields[i].value == "") {
       console.log("invalid form: " + inputFields[i])
@@ -83,15 +85,15 @@ function validateForm() {
 }
 
 function isConsumptionTabValid() {
-  var valid = true;
-  var inputFields;
+  let valid = true;
+  let inputFields;
 
   // ++++ Check TabPane ++++
   // +++++++++++++++++++++++
 
   // Ist monatlich oder jährlicher Stromverbrauch ausgewählt?
-  var monthlyComsumption = document.getElementById("btnMonthlyTab");
-  var tabToCheck;
+  let monthlyComsumption = document.getElementById("btnMonthlyTab");
+  let tabToCheck;
   if (monthlyComsumption.className.includes("active")) {
     // monatlicher Stromverbrauch aktiviert
     tabToCheck = document.getElementById("monthly");
@@ -104,7 +106,7 @@ function isConsumptionTabValid() {
 
   inputFields = tabToCheck.getElementsByTagName("input");
   // A loop that checks every input field in the current tab:
-  for (var i = 0; i < inputFields.length; i++) {
+  for (let i = 0; i < inputFields.length; i++) {
     // If a field is empty...
     if (inputFields[i].value == "") {
       // add an "invalid" class to the field:
@@ -118,7 +120,7 @@ function isConsumptionTabValid() {
   // +++++++++++++++++++++++++++++++
 
   // auch noch das letzte Eingabefeld prüfen
-  var consumptionField = document.getElementById("dailyConsumption");
+  let consumptionField = document.getElementById("dailyConsumption");
   if (consumptionField.value == "") {
     // add an "invalid" class to the field:
     consumptionField.className += " invalid";
@@ -130,8 +132,8 @@ function isConsumptionTabValid() {
 
 function fixStepIndicator(n) {
   // This function removes the "active" class of all steps...
-  var x = document.getElementsByClassName("step");
-  for (var i = 0; i < x.length; i++) {
+  let x = document.getElementsByClassName("step");
+  for (let i = 0; i < x.length; i++) {
     x[i].className = x[i].className.replace(" active", "");
   }
   //... and adds the "active" class on the current step:
@@ -147,7 +149,7 @@ function finishStep(valid) {
 
 function switchTab(evt, tabName) {
   // Declare all variables
-  var i, tabcontent, tablinks;
+  let i, tabcontent, tablinks;
 
   // Get all elements with class="tabcontent" and hide them
   tabcontent = document.getElementsByClassName("tabcontent");

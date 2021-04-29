@@ -10,3 +10,4 @@ Benutzer kann auf Karte sein Haus auswählen. Die lat und lng des Punktes könne
 - Beispiel: https://re.jrc.ec.europa.eu/api/MRcalc?lat=51.837635&lon=10.783489&horirrad=1&outputformat=json
 
 Falls der Service nicht verfügbar ist (25 calls / s), wird der Default-Wert aus der Excel-Tabelle der WINGs verwendet
+

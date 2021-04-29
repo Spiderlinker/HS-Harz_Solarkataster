@@ -1,11 +1,11 @@
+"use strict"
+
 // Name der PHP-Datei, die die Abfrage vom PVGIS durchführt
-var PVGIS_PHP_REQUEST_FILE = "pvgis.php";
-var NUMBER_OF_MONTH = 12;
+const PVGIS_PHP_REQUEST_FILE = "pvgis.php";
+const NUMBER_OF_MONTH = 12;
 
 function getAverageIrradiation(latitude, longitude, callback){
-    getAverageIrradiation(latitude, longitude, function(response){
-        callback(sumArray(response));
-    });
+    getAverageIrradiation(latitude, longitude, response => callback(sumArray(response)));
 }
 
 function getAverageIrradiationPerMonth(latitude, longitude, callback) {
@@ -19,24 +19,24 @@ function getAverageIrradiationPerMonth(latitude, longitude, callback) {
         // Parameter für PHP-Datei übergeben
         data: { lat: latitude, lon: longitude }
         // Antwort von Methode parsen lassen
-    }).done(function(response) {
-        var processedResponse = extractMonthlyAverageIrradiationFromJSON(response.data);
+    }).done(response => {
+        const processedResponse = extractMonthlyAverageIrradiationFromJSON(response.data);
         callback(processedResponse);
     });
 }
 
 function extractMonthlyAverageIrradiationFromJSON(json) {
     // Relevante Daten sind im JSON unter json -> outputs -> monthly
-    var rawMonthlyIrradiation = response.outputs.monthly;
+    const rawMonthlyIrradiation = json.outputs.monthly;
 
     // Array erstellen für monatliche durschnittliche Einstrahlung
     // Jede Array-Zelle repräsentiert dabei ein Monat
     // beginnend bei 0 = Januar und 11 = Dezember
-    var averageMonthlyIrradiation = Array(NUMBER_OF_MONTH).fill(0);
+    const averageMonthlyIrradiation = Array(NUMBER_OF_MONTH).fill(0);
 
     // Einstrahlung nach Monaten sortieren und erst einmal monatlich aufsummieren
-    for (var i = 0; i < rawMonthlyIrradiation.length; i++) {
-        var currentIrradiation = rawMonthlyIrradiation[i];
+    for (let i = 0; i < rawMonthlyIrradiation.length; i++) {
+        let currentIrradiation = rawMonthlyIrradiation[i];
         averageMonthlyIrradiation[currentIrradiation.month - 1] += currentIrradiation['H(h)_m'];
     }
 
