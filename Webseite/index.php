@@ -341,8 +341,11 @@ include('utils.php');
             <p>
                 Auf dieser Seite werden noch einmal alle Ihre angegebenen Informationen aufbereitet.
             </p>
+            
+            <h3>Tages- und Nachverbrauch pro Monat in kWh</h3>
+            <hr>
 
-            <div id="dayNight">
+            <div id="dayNight" class="chartCanvas">
                 <canvas id="myChart"></canvas>
 
                 <script>
@@ -394,7 +397,10 @@ include('utils.php');
                 </script>
             </div>
 
-            <div id="pv">
+            <h3>Ertrags- und Verbrauchsdarstellung</h3>
+            <hr>
+
+            <div id="pv" class="chartCanvas">
                 <canvas id="myChart2"></canvas>
 
                 <script>
@@ -435,7 +441,10 @@ include('utils.php');
                 </script>
             </div>
 
-            <div id="a">
+            <h3>Amortisationszeit</h3>
+            <hr>
+
+            <div id="a" class="chartCanvas">
                 <canvas id="myChartA"></canvas>
 
                 <script>
