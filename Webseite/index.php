@@ -380,16 +380,16 @@
                     const data = {
                         labels: labels,
                         datasets: [{
-                            label: 'Nachtverbrauch',
-                            data: [65, 59, 80, 81, 56, 55, 40],
-                            backgroundColor: "red",
-                        },
-                        {
-                            label: 'Nachtverbrauch',
-                            data: [65, 59, 80, 81, 56, 55, 40],
-                            backgroundColor: "blue",
-                        },
-                    ]
+                                label: 'Nachtverbrauch',
+                                data: nightlyConsumptionMonthly,
+                                backgroundColor: "rgb(91, 155, 213)",
+                            },
+                            {
+                                label: 'Tagesverbrauch',
+                                data: dailyConsumptionMonthly,
+                                backgroundColor: "rgb(237, 125, 49)",
+                            },
+                        ]
                     };
 
                     const config = {
@@ -399,7 +399,7 @@
                             plugins: {
                                 title: {
                                     display: true,
-                                    text: 'Chart.js Bar Chart - Stacked'
+                                    text: 'Tages- und Nachtverbrauch pro Monat in kWh'
                                 },
                             },
                             responsive: true,
@@ -420,6 +420,165 @@
                     );
                 </script>
             </div>
+
+            <div id="pv">
+                <canvas id="myChart2" width="200" height="100"></canvas>
+
+                <script>
+                    const dataPv = {
+                        labels: labels,
+                        datasets: [{
+                                label: 'Tagesverbrauch',
+                                data: dailyConsumptionMonthly,
+                                backgroundColor: "rgb(237, 125, 49)",
+                            },
+                            {
+                                label: 'PV-Ertrag',
+                                data: electricityRevenueMonthly,
+                                backgroundColor: "rgb(255, 192, 0)",
+                            },
+                        ]
+                    };
+
+                    const configPv = {
+                        type: 'bar',
+                        data: dataPv,
+                        options: {
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Ertrags-/ Verbrauchsdiagramm'
+                                },
+                            },
+                            responsive: true,
+                        }
+                    };
+
+                    var myChartPv = new Chart(
+                        document.getElementById('myChart2'),
+                        configPv
+                    );
+                </script>
+            </div>
+
+            <div id="a">
+                <canvas id="myChartA" width="587" height="293"></canvas>
+
+                <script>
+                    const labelsA = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
+                        "16", "17", "18", "19", "20"
+                    ];
+
+
+                    const dataA = {
+                        labels: labelsA,
+                        datasets: [{
+                                label: 'Tagesverbrauch',
+                                data: [
+                                    38000,
+                                    33334.01,
+                                    28668.02,
+                                    24002.03,
+                                    19336.04,
+                                    14670.05,
+                                    10004.06,
+                                    5338.07,
+                                    672.08,
+                                    -3993.91,
+                                    -8659.9,
+                                    -13325.89,
+                                    -17991.88,
+                                    -22657.87,
+                                    -27323.86,
+                                    -31989.85,
+                                    -36655.84,
+                                    -41321.83,
+                                    -45987.82,
+                                    -50653.81,
+                                    -55319.8,
+
+                                ],
+                                backgroundColor: "rgb(237, 125, 49)",
+                            },
+                            {
+                                label: 'PV-Ertrag',
+                                data: [
+                                    68400,
+                                    64038.01,
+                                    59676.02,
+                                    55314.03,
+                                    50952.04,
+                                    46590.05,
+                                    42228.06,
+                                    37866.07,
+                                    33504.08,
+                                    29142.09,
+                                    24780.1,
+                                    20418.11,
+                                    16056.12,
+                                    11694.13,
+                                    7332.14,
+                                    2970.15,
+                                    -1391.84,
+                                    -5753.83,
+                                    -10115.82,
+                                    -14477.81,
+                                    -18839.8,
+
+                                ],
+                                backgroundColor: "rgb(255, 192, 0)",
+                            },
+                        ]
+                    };
+
+                    const configA = {
+                        type: 'line',
+                        data: dataA,
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Amortisationszeit'
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    display: true,
+                                    drawBorder: true,
+                                    drawOnChartArea: true,
+                                    drawTicks: true,
+                                }
+                            },
+                            y: {
+                                grid: {
+                                    drawBorder: false,
+                                    color: function (context) {
+                                        if (context.tick.value > 0) {
+                                            return "red";
+                                        } else if (context.tick.value < 0) {
+                                            return "green";
+                                        }
+
+                                        return '#000000';
+                                    },
+                                },
+                            }
+                        }
+                    };
+
+                    var myChartA = new Chart(
+                        document.getElementById('myChartA'),
+                        configA
+                    );
+                </script>
+            </div>
+
 
         </div>
 
