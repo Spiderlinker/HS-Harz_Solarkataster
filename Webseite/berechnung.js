@@ -25,6 +25,7 @@ let maximumCostsTotal = 0;
 */
 const MONTHLY = "monthly";
 const YEARLY = "yearly";
+const NUMBER_OF_MONTHS = 12;
 
 /*
     default values (for now)
@@ -182,7 +183,7 @@ function calculateMonthlyAndYearlyConsumptionValues(electricityConsumption) {
     //monthly consumption available
     if (electricityConsumption["type"] == MONTHLY) {
         monthlyConsumption = electricityConsumption["data"];
-        for (let i = 0; i < 12; i++) {
+        for (let i = 0; i < NUMBER_OF_MONTHS; i++) {
             dailyConsumptionMonthly[i] = monthlyConsumption[i] * (dailyConsumptionProfile / 100);
             dailyConsumptionTotal += dailyConsumptionMonthly[i];
         }
@@ -191,16 +192,16 @@ function calculateMonthlyAndYearlyConsumptionValues(electricityConsumption) {
     }
     //yearly consumption available
     else if (electricityConsumption["type"] == YEARLY) {
-        for (let i = 0; i < 12; i++) {
+        for (let i = 0; i < NUMBER_OF_MONTHS; i++) {
             monthlyConsumption[i] = electricityConsumption["data"] * (portionOfYearlyConsumption[i] / 100);
         }
-        for (let i = 0; i < 12; i++) {
+        for (let i = 0; i < NUMBER_OF_MONTHS; i++) {
             dailyConsumptionMonthly[i] = monthlyConsumption[i] * (dailyConsumptionProfile / 100);
         }
         dailyConsumptionTotal = electricityConsumption["data"] * (dailyConsumptionProfile / 100);
         yearlyConsumption = electricityConsumption["data"];
     }
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < NUMBER_OF_MONTHS; i++) {
         nightlyConsumptionMonthly[i] = monthlyConsumption[i] - dailyConsumptionMonthly[i];
     }
 
@@ -227,7 +228,7 @@ function calculateNeededModules(yearlyConsumption) {
 calculate electricity revenue 
 */
 function calculateElectricityRevenue(electricityRevenueFactor) {
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < NUMBER_OF_MONTHS; i++) {
         electricityRevenueMonthly[i] = monthlyIrradiation[i] * electricityRevenueFactor;
     }
     electricityRevenueTotal = sumArray(electricityRevenueMonthly);
@@ -237,7 +238,7 @@ function calculateElectricityRevenue(electricityRevenueFactor) {
 calculate saved electricity costs for each month and the whole year
 */
 function calculateAllSavedElectricityCosts() {
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < NUMBER_OF_MONTHS; i++) {
         savedElectricityCostsMonthly[i] = calculateSavedElectricityCosts(electricityRevenueMonthly[i], dailyConsumptionMonthly[i]);
     }
     savedElectricityCostsTotal = sumArray(savedElectricityCostsMonthly);
@@ -260,7 +261,7 @@ function calculateSavedElectricityCosts(electricityRevenue, dailyConsumption) {
 calculate eeg costs for each month and the whole year
 */
 function calculateAllEEGCosts() {
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < NUMBER_OF_MONTHS; i++) {
         eegCostsMonthly[i] = calculateEEGCosts(electricityRevenueMonthly[i], dailyConsumptionMonthly[i]);
     }
     eegCostsTotal = sumArray(eegCostsMonthly);
@@ -284,7 +285,7 @@ calculate revenue in euro for each month and the whole year
 */
 function calculateRevenueEuro() {
     revenueEuroTotal = savedElectricityCostsTotal + eegCostsTotal;
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < NUMBER_OF_MONTHS; i++) {
         revenueEuroMonthly[i] = electricityRevenueMonthly[i] - dailyConsumptionMonthly[i];
     }
 }
