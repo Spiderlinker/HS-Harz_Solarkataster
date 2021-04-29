@@ -25,6 +25,7 @@ let maximumCostsTotal = 0;
 */
 const MONTHLY = "monthly";
 const YEARLY = "yearly";
+const NUMBER_OF_MONTHS = 12;
 
 /*
     default values (for now)
@@ -36,9 +37,9 @@ let lon = 10.806;
 let portionOfYearlyConsumption = [10.53, 8.93, 9.33, 8.31, 7.83, 7.02, 6.95, 7.14, 7.33, 8.33, 8.69, 9.61];
 
 let neededRoofAreaPerModule = 1.6;
-//irradiation (Einstrahlung)
-let irradiation;
-let monthlyIrradiation = [10.30, 37.25, 77.22, 122.39, 148.76, 157.27, 159.68, 132.39, 95.39, 56.17, 25.42, 17.19];
+// Irradiation (Einstrahlung)
+let totalIrradiation; // durchschnittliche Einstrahlung pro Jahr
+let monthlyIrradiation; // durchschnittliche Einstrahlung pro Monat
 
 //peak efficiency (Peakleistung)
 let peakEfficiency = 200;
@@ -92,14 +93,22 @@ let revenueEuroMonthly = [];
 let amortizationMin = 0;
 let amortizationMax = 0;
 
+let amortizationMinYearlyCosts = [];
+let amortizationMaxYearlyCosts = [];
+
+
 function calculate() {
     readInputValues();
-    getAverageIrradiation(lat, lon, response => {
-        irradiation = response;
+    getAverageIrradiationPerMonth(lat, lon, response => {
+        monthlyIrradiation = response;
+        totalIrradiation = sumArray(monthlyIrradiation);
 
         // Do not calculate until irradiation was queried
 
         calculateNeededValues(electricityConsumption);
+
+        calculateAmortizationYearlyCosts();
+        updateCharts();
     });
 }
 
@@ -182,7 +191,7 @@ function calculateMonthlyAndYearlyConsumptionValues(electricityConsumption) {
     //monthly consumption available
     if (electricityConsumption["type"] == MONTHLY) {
         monthlyConsumption = electricityConsumption["data"];
-        for (let i = 0; i < 12; i++) {
+        for (let i = 0; i < NUMBER_OF_MONTHS; i++) {
             dailyConsumptionMonthly[i] = monthlyConsumption[i] * (dailyConsumptionProfile / 100);
             dailyConsumptionTotal += dailyConsumptionMonthly[i];
         }
@@ -191,16 +200,16 @@ function calculateMonthlyAndYearlyConsumptionValues(electricityConsumption) {
     }
     //yearly consumption available
     else if (electricityConsumption["type"] == YEARLY) {
-        for (let i = 0; i < 12; i++) {
+        for (let i = 0; i < NUMBER_OF_MONTHS; i++) {
             monthlyConsumption[i] = electricityConsumption["data"] * (portionOfYearlyConsumption[i] / 100);
         }
-        for (let i = 0; i < 12; i++) {
+        for (let i = 0; i < NUMBER_OF_MONTHS; i++) {
             dailyConsumptionMonthly[i] = monthlyConsumption[i] * (dailyConsumptionProfile / 100);
         }
         dailyConsumptionTotal = electricityConsumption["data"] * (dailyConsumptionProfile / 100);
         yearlyConsumption = electricityConsumption["data"];
     }
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < NUMBER_OF_MONTHS; i++) {
         nightlyConsumptionMonthly[i] = monthlyConsumption[i] - dailyConsumptionMonthly[i];
     }
 
@@ -211,7 +220,7 @@ calculate the pv efficiency per module
 */
 function calculatePVEfficiency() {
     areaFactor = areaFactorTable[getIndexRoofAngle()][getIndexRoofOrientation()] / 100;
-    pvEfficiencyPerModule = irradiation * areaFactor * (peakEfficiency / 1000) * (1 - (degreeOfEffectiveness / 100));
+    pvEfficiencyPerModule = totalIrradiation * areaFactor * (peakEfficiency / 1000) * (1 - (degreeOfEffectiveness / 100));
 }
 
 /*
@@ -227,7 +236,7 @@ function calculateNeededModules(yearlyConsumption) {
 calculate electricity revenue 
 */
 function calculateElectricityRevenue(electricityRevenueFactor) {
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < NUMBER_OF_MONTHS; i++) {
         electricityRevenueMonthly[i] = monthlyIrradiation[i] * electricityRevenueFactor;
     }
     electricityRevenueTotal = sumArray(electricityRevenueMonthly);
@@ -237,7 +246,7 @@ function calculateElectricityRevenue(electricityRevenueFactor) {
 calculate saved electricity costs for each month and the whole year
 */
 function calculateAllSavedElectricityCosts() {
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < NUMBER_OF_MONTHS; i++) {
         savedElectricityCostsMonthly[i] = calculateSavedElectricityCosts(electricityRevenueMonthly[i], dailyConsumptionMonthly[i]);
     }
     savedElectricityCostsTotal = sumArray(savedElectricityCostsMonthly);
@@ -260,7 +269,7 @@ function calculateSavedElectricityCosts(electricityRevenue, dailyConsumption) {
 calculate eeg costs for each month and the whole year
 */
 function calculateAllEEGCosts() {
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < NUMBER_OF_MONTHS; i++) {
         eegCostsMonthly[i] = calculateEEGCosts(electricityRevenueMonthly[i], dailyConsumptionMonthly[i]);
     }
     eegCostsTotal = sumArray(eegCostsMonthly);
@@ -284,7 +293,7 @@ calculate revenue in euro for each month and the whole year
 */
 function calculateRevenueEuro() {
     revenueEuroTotal = savedElectricityCostsTotal + eegCostsTotal;
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < NUMBER_OF_MONTHS; i++) {
         revenueEuroMonthly[i] = electricityRevenueMonthly[i] - dailyConsumptionMonthly[i];
     }
 }
@@ -311,4 +320,22 @@ function getIndexRoofAngle() {
     // * 10 not needed, it already returns the correct index
     // * 10 would round the value to the nearest 10-step value
     return Math.round(roofAngle / 10)/* * 10 */;
+}
+
+function calculateAmortizationYearlyCosts(){
+    amortizationMinYearlyCosts[0] = minCostPerModule * neededAmountOfModules;
+    for(let i = 1; i < 20; i++){
+        amortizationMinYearlyCosts[i] = amortizationMinYearlyCosts[i - 1] - revenueEuroTotal + 0.01 * amortizationMinYearlyCosts[0];
+    }
+
+    amortizationMaxYearlyCosts[0] = maxCostPerModule * neededAmountOfModules;
+    for(let i = 1; i < 20; i++){
+        amortizationMaxYearlyCosts[i] = amortizationMaxYearlyCosts[i - 1] - revenueEuroTotal + 0.01 * amortizationMaxYearlyCosts[0];
+    }
+}
+
+function updateCharts(){
+    myChart.update();
+    myChartPv.update();
+    myChartA.update();
 }

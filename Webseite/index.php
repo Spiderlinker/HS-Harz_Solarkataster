@@ -21,7 +21,7 @@
 </head>
 
 <?php
-    include('utils.php');
+include('utils.php');
 ?>
 
 <body>
@@ -41,10 +41,10 @@
                 Verbrauchsprofil lohnt.
                 Dafür werden Sie durch verschiedene Fragen geführt, um Ihnen anschließend eine Einschätzung
                 zur Wirtschaftlichkeit einer Solaranlage geben zu können.
-                <p>
-                    Um zu beginnen, klicken Sie bitte auf die Schaltfläche 'Weiter'.
+            <p>
+                Um zu beginnen, klicken Sie bitte auf die Schaltfläche 'Weiter'.
 
-                </p>
+            </p>
         </div>
 
         <div class="tab">
@@ -58,12 +58,10 @@
 
             <div>
                 <h4>Wie ist Ihre Dachform?</h4>
-                <input type="radio" id="btnPitchedRoof" name="roofType" value="pitchedRoof" group="roofType"
-                    checked="checked" onclick="radioButtonChecked(event, 'pitchedRoof');" />
+                <input type="radio" id="btnPitchedRoof" name="roofType" value="pitchedRoof" group="roofType" checked="checked" onclick="radioButtonChecked(event, 'pitchedRoof');" />
                 <label for="btnPitchedRoof"> Schrägdach</label>
                 <br />
-                <input type="radio" id="btnFlatRoof" name="roofType" value="flatRoof" group="roofType"
-                    onclick="radioButtonChecked(event, 'flatRoof'); setDefaultRoofValues();" />
+                <input type="radio" id="btnFlatRoof" name="roofType" value="flatRoof" group="roofType" onclick="radioButtonChecked(event, 'flatRoof'); setDefaultRoofValues();" />
                 <label for="btnFlatRoof"> Flachdach</label>
 
 
@@ -78,14 +76,12 @@
                     <table>
                         <tr>
                             <td>Dachwinkel</td>
-                            <td><input type="text" class="textbox" id="roofAngle" name="roofAngle" value="40"
-                                    placeholder="40" /></td>
+                            <td><input type="text" class="textbox" id="roofAngle" name="roofAngle" value="40" placeholder="40" /></td>
                             <td>Grad</td>
                         </tr>
                         <tr>
                             <td>Dachausrichtung</td>
-                            <td><input type="text" class="textbox" id="roofOrientation" name="roofOrientation"
-                                    value="90" placeholder="90° - 270°" />
+                            <td><input type="text" class="textbox" id="roofOrientation" name="roofOrientation" value="90" placeholder="90° - 270°" />
                             </td>
                             <td>Grad</td>
                             <td>
@@ -113,8 +109,7 @@
             <h4>Wie viel Fläche steht auf Ihrem Dach für die Solaranlage zur Verfügung?</h4>
 
             <div class="inline">
-                Maximale Dachfläche: <input type="text" class="textbox" id="roofSurface" name="roofSurface" value="150"
-                    placeholder="150" /> m²
+                Maximale Dachfläche: <input type="text" class="textbox" id="roofSurface" name="roofSurface" value="150" placeholder="150" /> m²
             </div>
 
         </div>
@@ -132,10 +127,8 @@
             </p>
             <!-- Tab links -->
             <div class="stromtab">
-                <button class="tablinks" type="button" onclick="switchTab(event, 'monthly')"
-                    id="btnMonthlyTab">monatlich</button>
-                <button class="tablinks" type="button" onclick="switchTab(event, 'yearly')"
-                    id="btnYearlyTab">jährlich</button>
+                <button class="tablinks" type="button" onclick="switchTab(event, 'monthly')" id="btnMonthlyTab">monatlich</button>
+                <button class="tablinks" type="button" onclick="switchTab(event, 'yearly')" id="btnYearlyTab">jährlich</button>
             </div>
 
             <!-- Tab content -->
@@ -144,14 +137,12 @@
                 <table>
                     <tr>
                         <td>Januar</td>
-                        <td><input type="text" class="textbox" id="januaryConsumption" name="january"
-                                placeholder="317" /></td>
+                        <td><input type="text" class="textbox" id="januaryConsumption" name="january" placeholder="317" /></td>
                         <td>kWh</td>
                     </tr>
                     <tr>
                         <td>Februar</td>
-                        <td><input type="text" class="textbox" id="februaryConsumption" name="february"
-                                placeholder="269" /></td>
+                        <td><input type="text" class="textbox" id="februaryConsumption" name="february" placeholder="269" /></td>
                         <td>kWh</td>
                     </tr>
                     <tr>
@@ -192,26 +183,22 @@
                     </tr>
                     <tr>
                         <td>September</td>
-                        <td><input type="text" class="textbox" id="septemberConsumption" name="september"
-                                placeholder="220" /></td>
+                        <td><input type="text" class="textbox" id="septemberConsumption" name="september" placeholder="220" /></td>
                         <td>kWh</td>
                     </tr>
                     <tr>
                         <td>Oktober</td>
-                        <td><input type="text" class="textbox" id="octoberConsumption" name="october"
-                                placeholder="250" /></td>
+                        <td><input type="text" class="textbox" id="octoberConsumption" name="october" placeholder="250" /></td>
                         <td>kWh</td>
                     </tr>
                     <tr>
                         <td>November</td>
-                        <td><input type="text" class="textbox" id="novemberConsumption" name="november"
-                                placeholder="261" /></td>
+                        <td><input type="text" class="textbox" id="novemberConsumption" name="november" placeholder="261" /></td>
                         <td>kWh</td>
                     </tr>
                     <tr>
                         <td>Dezember</td>
-                        <td><input type="text" class="textbox" id="decemberConsumption" name="december"
-                                placeholder="289" /></td>
+                        <td><input type="text" class="textbox" id="decemberConsumption" name="december" placeholder="289" /></td>
                         <td>kWh</td>
                     </tr>
                 </table>
@@ -221,8 +208,7 @@
                 <table>
                     <tr>
                         <td>Jährlicher Stromverbrauch</td>
-                        <td><input type="text" class="textbox" id="yearlyConsumption" name="yearly" placeholder="3000"
-                                value="3000" />
+                        <td><input type="text" class="textbox" id="yearlyConsumption" name="yearly" placeholder="3000" value="3000" />
                         </td>
                         <td>kWh</td>
                     </tr>
@@ -233,39 +219,31 @@
 
             <div>
                 <h4>Für wen wird die Solaranlage geplant?</h4>
-                <input type="radio" id="btnPrivateUsage" name="usage" value="Privathaushalt" checked="checked"
-                    group="consumptionType" onclick="radioButtonChecked(event, 'privateUsage');" />
+                <input type="radio" id="btnPrivateUsage" name="usage" value="Privathaushalt" checked="checked" group="consumptionType" onclick="radioButtonChecked(event, 'privateUsage');" />
                 <label for="btnPrivateUsage"> Privathaushalt</label>
                 <br>
-                <input type="radio" id="btnCommercialUsage" name="usage" value="Gewerblich" group="consumptionType"
-                    onclick="radioButtonChecked(event, 'commercialUsage');" />
+                <input type="radio" id="btnCommercialUsage" name="usage" value="Gewerblich" group="consumptionType" onclick="radioButtonChecked(event, 'commercialUsage');" />
                 <label for="btnCommercialUsage"> Gewerbe</label>
 
                 <h4>Wann verbrauchen Sie den meisten Strom?</h4>
                 <div id="privateUsage" class="radioGroup consumptionType" selectFirstInput="true">
-                    <input type="radio" id="privateDaytime" name="privateUsageDetail" value="privateDaytime"
-                        checked="checked" onclick="setDailyConsumptionPercentage(event);" />
+                    <input type="radio" id="privateDaytime" name="privateUsageDetail" value="privateDaytime" checked="checked" onclick="setDailyConsumptionPercentage(event);" />
                     <label for="privateDaytime"> Eher tagsüber (Home-Office)</label>
                     <br>
-                    <input type="radio" id="privateEvening" name="privateUsageDetail" value="privateEvening"
-                        onclick="setDailyConsumptionPercentage(event);" />
+                    <input type="radio" id="privateEvening" name="privateUsageDetail" value="privateEvening" onclick="setDailyConsumptionPercentage(event);" />
                     <label for="privateEvening"> Eher abends (Arbeit in Büro)</label>
                     <br>
-                    <input type="radio" id="privateSpreadOverDay" name="privateUsageDetail" value="privateSpreadOverDay"
-                        onclick="setDailyConsumptionPercentage(event);" />
+                    <input type="radio" id="privateSpreadOverDay" name="privateUsageDetail" value="privateSpreadOverDay" onclick="setDailyConsumptionPercentage(event);" />
                     <label for="privateSpreadOverDay"> Rund um die Uhr</label>
                 </div>
                 <div id="commercialUsage" class="radioGroup consumptionType" selectFirstInput="true">
-                    <input type="radio" id="commercialDaytime" name="commercialUsageDetail" value="commercialDaytime"
-                        checked="checked" onclick="setDailyConsumptionPercentage(event);" />
+                    <input type="radio" id="commercialDaytime" name="commercialUsageDetail" value="commercialDaytime" checked="checked" onclick="setDailyConsumptionPercentage(event);" />
                     <label for="commercialDaytime"> Eher tagsüber von 8 - 18 Uhr</label>
                     <br>
-                    <input type="radio" id="commercialEvening" name="commercialUsageDetail" value="commercialEvening"
-                        onclick="setDailyConsumptionPercentage(event);" />
+                    <input type="radio" id="commercialEvening" name="commercialUsageDetail" value="commercialEvening" onclick="setDailyConsumptionPercentage(event);" />
                     <label for="commercialEvening"> Eher abends (Restaurant, Bar)</label>
                     <br>
-                    <input type="radio" id="commercialSpreadOverDay" name="commercialUsageDetail"
-                        value="commercialSpreadOverDay" onclick="setDailyConsumptionPercentage(event);" />
+                    <input type="radio" id="commercialSpreadOverDay" name="commercialUsageDetail" value="commercialSpreadOverDay" onclick="setDailyConsumptionPercentage(event);" />
                     <label for="commercialSpreadOverDay"> Rund um die Uhr (Schichtbetrieb)</label>
                 </div>
             </div>
@@ -280,8 +258,7 @@
             </p>
             <div style="display: table;">
                 <div style="display: table-cell;">Tagesstromverbrauch: </div>
-                <div style="display: table-cell;"><input type="text" class="textbox consumptionInput"
-                        id="dailyConsumption" name="dailyConsumption" placeholder="50" size="1%" /></div>
+                <div style="display: table-cell;"><input type="text" class="textbox consumptionInput" id="dailyConsumption" name="dailyConsumption" placeholder="50" size="1%" /></div>
                 <div style="display: table-cell;"> %</div>
             </div>
             <p>
@@ -310,15 +287,13 @@
             <table>
                 <tr>
                     <td>EEG Umlage</td>
-                    <td><input type="text" class="textbox" id="eegCostShare" name="eegCostShare" placeholder="6.5"
-                            value="<?php echo getValue('eeg'); ?>" />
+                    <td><input type="text" class="textbox" id="eegCostShare" name="eegCostShare" placeholder="6.5" value="<?php echo getValue('eeg'); ?>" />
                     </td>
                     <td>ct / kWh</td>
                 </tr>
                 <tr>
                     <td>Stromkosten</td>
-                    <td><input type="text" class="textbox" id="electricityCosts" name="electricityCosts"
-                            placeholder="27.5" value="<?php echo getValue('electricityCosts'); ?>" /></td>
+                    <td><input type="text" class="textbox" id="electricityCosts" name="electricityCosts" placeholder="27.5" value="<?php echo getValue('electricityCosts'); ?>" /></td>
                     <td>ct / kWh</td>
                 </tr>
             </table>
@@ -333,14 +308,12 @@
             <table>
                 <tr>
                     <td>Minimum</td>
-                    <td><input type="text" class="textbox" id="minCostPerModule" name="minimumCostsTotal"
-                            placeholder="250" value="<?php echo getValue('minModuleCosts'); ?>" /></td>
+                    <td><input type="text" class="textbox" id="minCostPerModule" name="minimumCostsTotal" placeholder="250" value="<?php echo getValue('minModuleCosts'); ?>" /></td>
                     <td>EUR / m²</td>
                 </tr>
                 <tr>
                     <td>Maximum</td>
-                    <td><input type="text" class="textbox" id="maxCostPerModule" name="maximumCostsTotal"
-                            placeholder="450" value="<?php echo getValue('maxModuleCosts'); ?>" /></td>
+                    <td><input type="text" class="textbox" id="maxCostPerModule" name="maximumCostsTotal" placeholder="450" value="<?php echo getValue('maxModuleCosts'); ?>" /></td>
                     <td>EUR / m²</td>
                 </tr>
             </table>
@@ -368,10 +341,12 @@
             <p>
                 Auf dieser Seite werden noch einmal alle Ihre angegebenen Informationen aufbereitet.
             </p>
+            
+            <h3>Tages- und Nachverbrauch pro Monat in kWh</h3>
+            <hr>
 
-            <div id="dayNight">
-                <canvas id="myChart" width="587" height="293"
-                    style="display: block; box-sizing: border-box; height: 293px; width: 587px;"></canvas>
+            <div id="dayNight" class="chartCanvas">
+                <canvas id="myChart"></canvas>
 
                 <script>
                     const labels = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September",
@@ -380,16 +355,16 @@
                     const data = {
                         labels: labels,
                         datasets: [{
-                            label: 'Nachtverbrauch',
-                            data: [65, 59, 80, 81, 56, 55, 40],
-                            backgroundColor: "red",
-                        },
-                        {
-                            label: 'Nachtverbrauch',
-                            data: [65, 59, 80, 81, 56, 55, 40],
-                            backgroundColor: "blue",
-                        },
-                    ]
+                                label: 'Nachtverbrauch',
+                                data: nightlyConsumptionMonthly,
+                                backgroundColor: "rgb(91, 155, 213)",
+                            },
+                            {
+                                label: 'Tagesverbrauch',
+                                data: dailyConsumptionMonthly,
+                                backgroundColor: "rgb(237, 125, 49)",
+                            },
+                        ]
                     };
 
                     const config = {
@@ -399,10 +374,11 @@
                             plugins: {
                                 title: {
                                     display: true,
-                                    text: 'Chart.js Bar Chart - Stacked'
+                                    text: 'Tages- und Nachtverbrauch pro Monat in kWh'
                                 },
                             },
                             responsive: true,
+                            maintainAspectRatio: false,
                             scales: {
                                 x: {
                                     stacked: true,
@@ -420,6 +396,135 @@
                     );
                 </script>
             </div>
+
+            <h3>Ertrags- und Verbrauchsdarstellung</h3>
+            <hr>
+
+            <div id="pv" class="chartCanvas">
+                <canvas id="myChart2"></canvas>
+
+                <script>
+                    const dataPv = {
+                        labels: labels,
+                        datasets: [{
+                                label: 'Tagesverbrauch',
+                                data: dailyConsumptionMonthly,
+                                backgroundColor: "rgb(237, 125, 49)",
+                            },
+                            {
+                                label: 'PV-Ertrag',
+                                data: electricityRevenueMonthly,
+                                backgroundColor: "rgb(255, 192, 0)",
+                            },
+                        ]
+                    };
+
+                    const configPv = {
+                        type: 'bar',
+                        data: dataPv,
+                        options: {
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Ertrags-/ Verbrauchsdiagramm'
+                                },
+                            },
+                            responsive: true,
+                            maintainAspectRatio: false,
+                        }
+                    };
+
+                    var myChartPv = new Chart(
+                        document.getElementById('myChart2'),
+                        configPv
+                    );
+                </script>
+            </div>
+
+            <h3>Amortisationszeit</h3>
+            <hr>
+
+            <div id="a" class="chartCanvas">
+                <canvas id="myChartA"></canvas>
+
+                <script>
+ 
+
+                    // Change these settings to change the display for different parts of the X axis
+                    // grid configuiration
+                    const DISPLAY = true;
+                    const BORDER = true;
+                    const CHART_AREA = true;
+                    const TICKS = true;
+
+
+
+                    const DATA_COUNT = 7;
+                    const dataAmortization = {
+                        labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"],
+                        datasets: [{
+                                label: 'Minimale Modulkosten: ' + minCostPerModule + '€',
+                                data: amortizationMinYearlyCosts,
+                                fill: {above: 'rgba(255, 0, 0, 0.2)', below: 'rgba(0, 255, 0, 0.2)', target: {value:0}},
+                                borderColor: 'rgba(156, 195, 229, 0.8)',
+                                backgroundColor: 'rgba(156, 195, 229, 0.8)',
+                            },
+                            {
+                                label: 'Maximale Modulkosten: ' + maxCostPerModule + '€',
+                                data: amortizationMaxYearlyCosts,
+                                fill: false,
+                                borderColor: 'rgba(244, 177, 131, 0.8)',
+                                backgroundColor: 'rgba(244, 177, 131, 0.8)',
+                            }
+                        ]
+                    };
+
+                    const configAmortization = {
+                        type: 'line',
+                        data: dataAmortization,
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Grid Line Settings'
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    grid: {
+                                        display: DISPLAY,
+                                        drawBorder: BORDER,
+                                        drawOnChartArea: CHART_AREA,
+                                        drawTicks: TICKS,
+                                    }
+                                },
+                                y: {
+                                    grid: {
+                                        drawBorder: false,
+                                        lineWidth: (context) => {
+                                            if(context.tick.value == 0){
+                                                return 3;
+                                            }
+                                            return 1;
+                                        },
+                                        color: (context) => {
+                                            return context.tick.value == 0 ? "#ffffff" : "#f3f3f3";
+                                        }
+                                    },
+                                }
+                            }
+                        },
+                    };
+
+                    var myChartA = new Chart(
+                        document.getElementById('myChartA'),
+                        configAmortization
+                    );
+
+                </script>
+            </div>
+
 
         </div>
 

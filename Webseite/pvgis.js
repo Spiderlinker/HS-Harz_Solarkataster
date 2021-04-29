@@ -4,7 +4,7 @@
 const PVGIS_PHP_REQUEST_FILE = "pvgis.php";
 const NUMBER_OF_MONTH = 12;
 
-function getAverageIrradiation(latitude, longitude, callback){
+function getTotalAverageIrradiation(latitude, longitude, callback){
     getAverageIrradiationPerMonth(latitude, longitude, response => callback(sumArray(response)));
 }
 

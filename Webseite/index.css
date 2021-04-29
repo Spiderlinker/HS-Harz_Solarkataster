@@ -191,3 +191,9 @@ input[type="radio"] {
 .inline input {
 	width: calc(30% - 10px);
 }
+
+
+.chartCanvas {
+	width: 60%;
+	margin: auto;
+}
