@@ -93,6 +93,10 @@ let revenueEuroMonthly = [];
 let amortizationMin = 0;
 let amortizationMax = 0;
 
+let amortizationMinYearlyCosts = [];
+let amortizationMaxYearlyCosts = [];
+
+
 function calculate() {
     readInputValues();
     getAverageIrradiationPerMonth(lat, lon, response => {
@@ -103,9 +107,8 @@ function calculate() {
 
         calculateNeededValues(electricityConsumption);
 
-        myChart.update();
-        myChartPv.update();
-
+        calculateAmortizationYearlyCosts();
+        updateCharts();
     });
 }
 
@@ -317,4 +320,22 @@ function getIndexRoofAngle() {
     // * 10 not needed, it already returns the correct index
     // * 10 would round the value to the nearest 10-step value
     return Math.round(roofAngle / 10)/* * 10 */;
+}
+
+function calculateAmortizationYearlyCosts(){
+    amortizationMinYearlyCosts[0] = minCostPerModule * neededAmountOfModules;
+    for(let i = 1; i < 20; i++){
+        amortizationMinYearlyCosts[i] = amortizationMinYearlyCosts[i - 1] - revenueEuroTotal + 0.01 * amortizationMinYearlyCosts[0];
+    }
+
+    amortizationMaxYearlyCosts[0] = maxCostPerModule * neededAmountOfModules;
+    for(let i = 1; i < 20; i++){
+        amortizationMaxYearlyCosts[i] = amortizationMaxYearlyCosts[i - 1] - revenueEuroTotal + 0.01 * amortizationMaxYearlyCosts[0];
+    }
+}
+
+function updateCharts(){
+    myChart.update();
+    myChartPv.update();
+    myChartA.update();
 }
