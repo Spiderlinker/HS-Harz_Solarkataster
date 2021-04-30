@@ -192,8 +192,22 @@ input[type="radio"] {
 	width: calc(30% - 10px);
 }
 
-
 .chartCanvas {
 	width: 60%;
+	height: 60%;
 	margin: auto;
+}
+
+.box {
+	float: left;
+	width: 32.5%;
+	margin-right: 2.5%;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+.box:last-child {
+	width: 62.5%;
+	margin-left: 2.5%;
+	margin-right: 0%;
 }

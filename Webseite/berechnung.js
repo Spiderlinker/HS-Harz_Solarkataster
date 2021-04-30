@@ -335,7 +335,11 @@ function calculateAmortizationYearlyCosts(){
 }
 
 function updateCharts(){
-    myChart.update();
-    myChartPv.update();
-    myChartA.update();
+    chartConsumptionPerMonth.update();
+    chartPvYieldAndConsumption.update();
+    chartAmortization.update();
+
+    document.getElementById("lblMinCostPerModule").textContent = minCostPerModule;
+    document.getElementById("lblMinAmortization").textContent = Math.round(amortizationMin);
+    
 }
