@@ -128,6 +128,9 @@ function readInputValues() {
 
     minCostPerModule = document.getElementById("minCostPerModule").value;
     maxCostPerModule = document.getElementById("maxCostPerModule").value;
+    
+    peakEfficiency = document.getElementById("peakPower").value;
+    degreeOfEffectiveness = document.getElementById("moduleEfficiency").value;
 }
 
 function readElectricityConsumption(tabElement) {

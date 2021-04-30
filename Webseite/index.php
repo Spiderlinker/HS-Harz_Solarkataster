@@ -41,10 +41,11 @@ include('utils.php');
                 Verbrauchsprofil lohnt.
                 Dafür werden Sie durch verschiedene Fragen geführt, um Ihnen anschließend eine Einschätzung
                 zur Wirtschaftlichkeit einer Solaranlage geben zu können.
+            </p>
             <p>
                 Um zu beginnen, klicken Sie bitte auf die Schaltfläche 'Weiter'.
-
             </p>
+            <a id="lat" hidden></a><a id="lng" hidden></a>
         </div>
 
         <div class="tab">
@@ -298,6 +299,8 @@ include('utils.php');
                 </tr>
             </table>
 
+            <br>
+
             <h4>Kosten der Solarmodule</h4>
             <p>
                 Die Preise von Solarmodulen kann variieren. Die Amortisationszeit (die Zeit, nach der die
@@ -318,7 +321,24 @@ include('utils.php');
                 </tr>
             </table>
 
-            <h4>Hinweise zu eventuellen Kosten</h4>
+            <h4>Angaben zu den Solarmodulen</h4>
+            <p></p>
+            <table>
+                <tr>
+                    <td>Peakleistung</td>
+                    <td><input type="text" class="textbox" id="peakPower" name="peakPower" placeholder="20" value="<?php echo getValue('peakPower'); ?>" /></td>
+                    <td>WP/m²</td>
+                </tr>
+                <tr>
+                    <td>Wirkungsgrad</td>
+                    <td><input type="text" class="textbox" id="moduleEfficiency" name="moduleEfficiency" placeholder="20" value="<?php echo getValue('moduleEfficiency'); ?>" /></td>
+                    <td>%</td>
+                </tr>
+            </table>
+
+            <br>
+
+            <h5>Hinweise zu eventuellen Kosten</h5>
             <p>Montagekosten:
                 <i>Bei der Montage können neben den eigentlichen Installationskosten auch noch Kosten für ein Gerüst
                     anfallen. Bitte informieren Sie sich über die Montagekosten bei einem örtlichen
@@ -330,6 +350,8 @@ include('utils.php');
                     einer Erneuerung liegen zwischen 500 und 1.200 €. Diese Kosten sind nicht in den Gesamtpreis der
                     Anlage einbezogen.</i>
             </p>
+
+
         </div>
 
         <!-- ############# ##### ############# -->
@@ -340,6 +362,16 @@ include('utils.php');
             <h4>Zusammenfassung</h4>
             <p>
                 Auf dieser Seite werden noch einmal alle Ihre angegebenen Informationen aufbereitet.
+            </p>
+
+            <p>e
+                Einige Kennwerte zu der für Sie berechnete Solaranlage:
+
+            <ul>
+                <li>Anzahl benötigter Module: <a id=""></a> Stk. </li>
+                <li>Verwendete Dachfläche: <a id=""> m² (/ max. <a id=""></a> m²)</a></li>
+                e
+            </ul>
             </p>
 
             <div>

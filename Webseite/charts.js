@@ -143,7 +143,7 @@ function createAmortizationChart() {
                             return 1;
                         },
                         color: (context) => {
-                            return context.tick.value == 0 ? "#ffffff" : "#f3f3f3";
+                            return context.tick.value == 0 ? "#000000" : "#f3f3f3";
                         }
                     },
                 }
