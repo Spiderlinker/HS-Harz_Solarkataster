@@ -329,12 +329,12 @@ function getIndexRoofAngle() {
 
 function calculateAmortizationYearlyCosts(){
     amortizationMinYearlyCosts[0] = minCostPerModule * neededAmountOfModules;
-    for(let i = 1; i < 20; i++){
+    for(let i = 1; i <= 20; i++){
         amortizationMinYearlyCosts[i] = amortizationMinYearlyCosts[i - 1] - revenueEuroTotal + 0.01 * amortizationMinYearlyCosts[0];
     }
 
     amortizationMaxYearlyCosts[0] = maxCostPerModule * neededAmountOfModules;
-    for(let i = 1; i < 20; i++){
+    for(let i = 1; i <= 20; i++){
         amortizationMaxYearlyCosts[i] = amortizationMaxYearlyCosts[i - 1] - revenueEuroTotal + 0.01 * amortizationMaxYearlyCosts[0];
     }
 }

@@ -26,7 +26,7 @@ include('utils.php');
 
 <body>
     <form id="regForm" action="#">
-        <h1>Solarkataster</h1>
+        <h1>Solarkataster Wernigerode</h1>
 
         <!-- One "tab" for each step in the form: -->
 
@@ -369,7 +369,7 @@ include('utils.php');
             <ul>
                 <li>Anzahl benötigter Module: <a id=""></a> Stk. </li>
                 <li>Verwendete Dachfläche: <a id=""> m² (/ max. <a id=""></a> m²)</a></li>
-                e
+                
             </ul>
             </p>
 
