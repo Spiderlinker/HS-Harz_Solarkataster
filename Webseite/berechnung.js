@@ -128,6 +128,9 @@ function readInputValues() {
 
     minCostPerModule = document.getElementById("minCostPerModule").value;
     maxCostPerModule = document.getElementById("maxCostPerModule").value;
+    
+    peakEfficiency = document.getElementById("peakPower").value;
+    degreeOfEffectiveness = document.getElementById("moduleEfficiency").value;
 }
 
 function readElectricityConsumption(tabElement) {
@@ -335,7 +338,11 @@ function calculateAmortizationYearlyCosts(){
 }
 
 function updateCharts(){
-    myChart.update();
-    myChartPv.update();
-    myChartA.update();
+    chartConsumptionPerMonth.update();
+    chartPvYieldAndConsumption.update();
+    chartAmortization.update();
+
+    document.getElementById("lblMinCostPerModule").textContent = minCostPerModule;
+    document.getElementById("lblMinAmortization").textContent = Math.round(amortizationMin);
+    
 }

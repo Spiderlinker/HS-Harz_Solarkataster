@@ -41,10 +41,11 @@ include('utils.php');
                 Verbrauchsprofil lohnt.
                 Dafür werden Sie durch verschiedene Fragen geführt, um Ihnen anschließend eine Einschätzung
                 zur Wirtschaftlichkeit einer Solaranlage geben zu können.
+            </p>
             <p>
                 Um zu beginnen, klicken Sie bitte auf die Schaltfläche 'Weiter'.
-
             </p>
+            <a id="lat" hidden></a><a id="lng" hidden></a>
         </div>
 
         <div class="tab">
@@ -298,6 +299,8 @@ include('utils.php');
                 </tr>
             </table>
 
+            <br>
+
             <h4>Kosten der Solarmodule</h4>
             <p>
                 Die Preise von Solarmodulen kann variieren. Die Amortisationszeit (die Zeit, nach der die
@@ -318,7 +321,24 @@ include('utils.php');
                 </tr>
             </table>
 
-            <h4>Hinweise zu eventuellen Kosten</h4>
+            <h4>Angaben zu den Solarmodulen</h4>
+            <p></p>
+            <table>
+                <tr>
+                    <td>Peakleistung</td>
+                    <td><input type="text" class="textbox" id="peakPower" name="peakPower" placeholder="20" value="<?php echo getValue('peakPower'); ?>" /></td>
+                    <td>WP/m²</td>
+                </tr>
+                <tr>
+                    <td>Wirkungsgrad</td>
+                    <td><input type="text" class="textbox" id="moduleEfficiency" name="moduleEfficiency" placeholder="20" value="<?php echo getValue('moduleEfficiency'); ?>" /></td>
+                    <td>%</td>
+                </tr>
+            </table>
+
+            <br>
+
+            <h5>Hinweise zu eventuellen Kosten</h5>
             <p>Montagekosten:
                 <i>Bei der Montage können neben den eigentlichen Installationskosten auch noch Kosten für ein Gerüst
                     anfallen. Bitte informieren Sie sich über die Montagekosten bei einem örtlichen
@@ -330,6 +350,8 @@ include('utils.php');
                     einer Erneuerung liegen zwischen 500 und 1.200 €. Diese Kosten sind nicht in den Gesamtpreis der
                     Anlage einbezogen.</i>
             </p>
+
+
         </div>
 
         <!-- ############# ##### ############# -->
@@ -341,190 +363,57 @@ include('utils.php');
             <p>
                 Auf dieser Seite werden noch einmal alle Ihre angegebenen Informationen aufbereitet.
             </p>
-            
-            <h3>Tages- und Nachverbrauch pro Monat in kWh</h3>
-            <hr>
 
-            <div id="dayNight" class="chartCanvas">
-                <canvas id="myChart"></canvas>
+            <p>e
+                Einige Kennwerte zu der für Sie berechnete Solaranlage:
 
-                <script>
-                    const labels = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September",
-                        "Oktober", "November", "Dezember"
-                    ];
-                    const data = {
-                        labels: labels,
-                        datasets: [{
-                                label: 'Nachtverbrauch',
-                                data: nightlyConsumptionMonthly,
-                                backgroundColor: "rgb(91, 155, 213)",
-                            },
-                            {
-                                label: 'Tagesverbrauch',
-                                data: dailyConsumptionMonthly,
-                                backgroundColor: "rgb(237, 125, 49)",
-                            },
-                        ]
-                    };
+            <ul>
+                <li>Anzahl benötigter Module: <a id=""></a> Stk. </li>
+                <li>Verwendete Dachfläche: <a id=""> m² (/ max. <a id=""></a> m²)</a></li>
+                e
+            </ul>
+            </p>
 
-                    const config = {
-                        type: 'bar',
-                        data: data,
-                        options: {
-                            plugins: {
-                                title: {
-                                    display: true,
-                                    text: 'Tages- und Nachtverbrauch pro Monat in kWh'
-                                },
-                            },
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            scales: {
-                                x: {
-                                    stacked: true,
-                                },
-                                y: {
-                                    stacked: true
-                                }
-                            }
-                        }
-                    };
+            <div>
+                <div class="box">
+                    <h3>Stromverbrauch pro Monat</h3>
+                    <hr>
+                    <p>Nebenstehend sehen Sie den errechneten Tages- und Nachtverbrauch pro Monat in kWh dargestellt.
+                        Dieser zeigt an, wie viel Strom Sie in einem Monat jeweils tagsüber oder in der Nacht
+                        (bzw. an den Zeiten verbrauchen, zu denen nicht mehr ausreichend Sonne scheint,
+                        sodass diese für den Strombedarf genutzt werden könnte) verbrauchen.</p>
+                </div>
 
-                    var myChart = new Chart(
-                        document.getElementById('myChart'),
-                        config
-                    );
-                </script>
+                <div class="box">
+                    <canvas id="chartConsumptionPerMonth"></canvas>
+                </div>
             </div>
 
-            <h3>Ertrags- und Verbrauchsdarstellung</h3>
-            <hr>
+            <div>
+                <div class="box">
+                    <h3>Ertrags- und Verbrauchsdarstellung</h3>
+                    <hr>
+                    <p></p>
+                </div>
 
-            <div id="pv" class="chartCanvas">
-                <canvas id="myChart2"></canvas>
-
-                <script>
-                    const dataPv = {
-                        labels: labels,
-                        datasets: [{
-                                label: 'Tagesverbrauch',
-                                data: dailyConsumptionMonthly,
-                                backgroundColor: "rgb(237, 125, 49)",
-                            },
-                            {
-                                label: 'PV-Ertrag',
-                                data: electricityRevenueMonthly,
-                                backgroundColor: "rgb(255, 192, 0)",
-                            },
-                        ]
-                    };
-
-                    const configPv = {
-                        type: 'bar',
-                        data: dataPv,
-                        options: {
-                            plugins: {
-                                title: {
-                                    display: true,
-                                    text: 'Ertrags-/ Verbrauchsdiagramm'
-                                },
-                            },
-                            responsive: true,
-                            maintainAspectRatio: false,
-                        }
-                    };
-
-                    var myChartPv = new Chart(
-                        document.getElementById('myChart2'),
-                        configPv
-                    );
-                </script>
+                <div class="box">
+                    <canvas id="chartPvYieldAndConsumption"></canvas>
+                </div>
             </div>
 
-            <h3>Amortisationszeit</h3>
-            <hr>
+            <div>
+                <div class="box">
+                    <h3>Amortisationszeit</h3>
+                    <hr>
+                    <p>Bei minimalen Modulkosten von <b><a id="lblMinCostPerModule"></a></b> € wurde eine Amortisationszeit von ca. <b><a id="lblMinAmortization"></a></b> Jahren errechnet.
+                        Bei maximalen Modulkosten von <b><a id="lblMaxCostPerModule"></a></b> € liegt die Amortisationszeit jedoch bei ca. <b><a id="lblMaxAmortization"></a></b> Jahren.
+                    </p>
+                </div>
 
-            <div id="a" class="chartCanvas">
-                <canvas id="myChartA"></canvas>
-
-                <script>
- 
-
-                    // Change these settings to change the display for different parts of the X axis
-                    // grid configuiration
-                    const DISPLAY = true;
-                    const BORDER = true;
-                    const CHART_AREA = true;
-                    const TICKS = true;
-
-
-
-                    const DATA_COUNT = 7;
-                    const dataAmortization = {
-                        labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"],
-                        datasets: [{
-                                label: 'Minimale Modulkosten: ' + minCostPerModule + '€',
-                                data: amortizationMinYearlyCosts,
-                                fill: {above: 'rgba(255, 0, 0, 0.2)', below: 'rgba(0, 255, 0, 0.2)', target: {value:0}},
-                                borderColor: 'rgba(156, 195, 229, 0.8)',
-                                backgroundColor: 'rgba(156, 195, 229, 0.8)',
-                            },
-                            {
-                                label: 'Maximale Modulkosten: ' + maxCostPerModule + '€',
-                                data: amortizationMaxYearlyCosts,
-                                fill: false,
-                                borderColor: 'rgba(244, 177, 131, 0.8)',
-                                backgroundColor: 'rgba(244, 177, 131, 0.8)',
-                            }
-                        ]
-                    };
-
-                    const configAmortization = {
-                        type: 'line',
-                        data: dataAmortization,
-                        options: {
-                            responsive: true,
-                            plugins: {
-                                title: {
-                                    display: true,
-                                    text: 'Grid Line Settings'
-                                }
-                            },
-                            scales: {
-                                x: {
-                                    grid: {
-                                        display: DISPLAY,
-                                        drawBorder: BORDER,
-                                        drawOnChartArea: CHART_AREA,
-                                        drawTicks: TICKS,
-                                    }
-                                },
-                                y: {
-                                    grid: {
-                                        drawBorder: false,
-                                        lineWidth: (context) => {
-                                            if(context.tick.value == 0){
-                                                return 3;
-                                            }
-                                            return 1;
-                                        },
-                                        color: (context) => {
-                                            return context.tick.value == 0 ? "#ffffff" : "#f3f3f3";
-                                        }
-                                    },
-                                }
-                            }
-                        },
-                    };
-
-                    var myChartA = new Chart(
-                        document.getElementById('myChartA'),
-                        configAmortization
-                    );
-
-                </script>
+                <div class="box">
+                    <canvas id="chartAmortization"></canvas>
+                </div>
             </div>
-
 
         </div>
 
@@ -552,6 +441,7 @@ include('utils.php');
     <!-- Muss am Ende stehen, da sonst das Stylesheet noch nicht geladen wurde 
          und das Script auf dieses zugreifen muss, siehe https://stackoverflow.com/a/42370248-->
     <script type="text/javascript" src="tabcontrol.js"></script>
+    <script type="text/javascript" src="charts.js"></script>
     <script>
         document.getElementById("btnPitchedRoof").click(); // open monthly electricity consumption
         //document.getElementById("btnMonthlyTab").click(); // open monthly electricity consumption
