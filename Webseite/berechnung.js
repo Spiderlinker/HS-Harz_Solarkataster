@@ -27,11 +27,13 @@ const MONTHLY = "monthly";
 const YEARLY = "yearly";
 const NUMBER_OF_MONTHS = 12;
 
+const URL_PARAMS = new URLSearchParams(window.location.search);
+
 /*
     default values (for now)
 */
-let lat = 51.844;
-let lon = 10.806;
+let lat = URL_PARAMS.get('lat');
+let lon = URL_PARAMS.get('lng');
 
 //monthly portion of yearly consumption
 let portionOfYearlyConsumption = [10.53, 8.93, 9.33, 8.31, 7.83, 7.02, 6.95, 7.14, 7.33, 8.33, 8.69, 9.61];
