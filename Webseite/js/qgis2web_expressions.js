@@ -16,6 +16,51 @@ function fnc_coalesce(values, context) {
 // Conversions
 
 // Custom
+var onSingleClick = function(evt) {
+    if (doHover) {
+        return;
+    }
+    var pixel = map.getEventPixel(evt.originalEvent);
+    var coord = evt.coordinate;
+    var popupField;
+    var popupText = '';
+    var currentFeature;
+    var currentFeatureKeys;
+    map.forEachFeatureAtPixel(pixel, function(feature, layer) {
+        currentFeature = feature;
+        currentFeatureKeys = currentFeature.getKeys();
+        var field = getPopupFields(layersList, layer);
+        if (field == NO_POPUP) {
+        } else {
+            popupText += '<h2>' + layer.get('title') + '</h2>';
+            if (field == ALL_FIELDS) {
+                popupText += '<table>';
+                for (var i=0; i<currentFeatureKeys.length; i++) {
+                    if (currentFeatureKeys[i] != 'geometry') {
+                        popupField = '<th>' + currentFeatureKeys[i] + ':</th><td>'
+                        popupField += (currentFeature.get(currentFeatureKeys[i]) != null ? Autolinker.link(String(currentFeature.get(currentFeatureKeys[i]))) + '</td>' : '');
+                        popupText += '<tr>' + popupField + '</tr>';
+                    }
+                }
+                popupText += '</table>';
+            } else {
+                var value = feature.get(field);
+                if (value) {
+                    popupText += '<strong>' + field + ':</strong> '+ value;
+                }  
+            }          
+        }
+    });
+    if (popupText) {
+        overlayPopup.setPosition(coord);
+        content.innerHTML = popupText;
+        container.style.display = 'block';        
+    } else {
+        container.style.display = 'none';
+        closer.blur();
+    }
+};
+
 
 // Date and Time
 
