@@ -45,7 +45,6 @@ include('utils.php');
             <p>
                 Um zu beginnen, klicken Sie bitte auf die Schaltfläche 'Weiter'.
             </p>
-            <a id="lat" hidden></a><a id="lng" hidden></a>
         </div>
 
         <div class="tab">
