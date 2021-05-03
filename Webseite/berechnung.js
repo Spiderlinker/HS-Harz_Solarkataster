@@ -346,5 +346,7 @@ function updateCharts(){
 
     document.getElementById("lblMinCostPerModule").textContent = minCostPerModule;
     document.getElementById("lblMinAmortization").textContent = Math.round(amortizationMin);
+    document.getElementById("lblMaxCostPerModule").textContent = maxCostPerModule;
+    document.getElementById("lblMaxAmortization").textContent = Math.round(amortizationMax);
     
 }
