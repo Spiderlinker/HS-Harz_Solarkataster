@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="index.css" title="style" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <!-- include JavaScript files -->
     <script type="text/javascript" src="jquery.js"></script>
@@ -363,7 +364,7 @@ include('utils.php');
                 Auf dieser Seite werden noch einmal alle Ihre angegebenen Informationen aufbereitet.
             </p>
 
-            <p>e
+            <p>
                 Einige Kennwerte zu der für Sie berechnete Solaranlage:
 
             <ul>
@@ -373,44 +374,50 @@ include('utils.php');
             </ul>
             </p>
 
-            <div>
-                <div class="box">
-                    <h3>Stromverbrauch pro Monat</h3>
-                    <hr>
-                    <p>Nebenstehend sehen Sie den errechneten Tages- und Nachtverbrauch pro Monat in kWh dargestellt.
-                        Dieser zeigt an, wie viel Strom Sie in einem Monat jeweils tagsüber oder in der Nacht
-                        (bzw. an den Zeiten verbrauchen, zu denen nicht mehr ausreichend Sonne scheint,
-                        sodass diese für den Strombedarf genutzt werden könnte) verbrauchen.</p>
-                </div>
+            <div class="w3-container">
+                <div class="w3-row-padding">
+                    <div class="w3-third">
+                        <h3>Stromverbrauch pro Monat</h3>
+                        <hr>
+                        <p>Nebenstehend sehen Sie den errechneten Tages- und Nachtverbrauch pro Monat in kWh dargestellt.
+                            Dieser zeigt an, wie viel Strom Sie in einem Monat jeweils tagsüber oder in der Nacht
+                            (bzw. an den Zeiten verbrauchen, zu denen nicht mehr ausreichend Sonne scheint,
+                            sodass diese für den Strombedarf genutzt werden könnte) verbrauchen.</p>
+                    </div>
 
-                <div class="box">
-                    <canvas id="chartConsumptionPerMonth"></canvas>
-                </div>
-            </div>
-
-            <div>
-                <div class="box">
-                    <h3>Ertrags- und Verbrauchsdarstellung</h3>
-                    <hr>
-                    <p></p>
-                </div>
-
-                <div class="box">
-                    <canvas id="chartPvYieldAndConsumption"></canvas>
+                    <div class="w3-twothird">
+                        <canvas id="chartConsumptionPerMonth"></canvas>
+                    </div>
                 </div>
             </div>
 
-            <div>
-                <div class="box">
-                    <h3>Amortisationszeit</h3>
-                    <hr>
-                    <p>Bei minimalen Modulkosten von <b><a id="lblMinCostPerModule"></a></b> € wurde eine Amortisationszeit von ca. <b><a id="lblMinAmortization"></a></b> Jahren errechnet.
-                        Bei maximalen Modulkosten von <b><a id="lblMaxCostPerModule"></a></b> € liegt die Amortisationszeit jedoch bei ca. <b><a id="lblMaxAmortization"></a></b> Jahren.
-                    </p>
-                </div>
+            <div class="w3-container">
+                <div class="w3-row-padding">
+                    <div class="w3-third">
+                        <h3>Ertrags- und Verbrauchsdarstellung</h3>
+                        <hr>
+                        <p></p>
+                    </div>
 
-                <div class="box">
-                    <canvas id="chartAmortization"></canvas>
+                    <div class="w3-twothird">
+                        <canvas id="chartPvYieldAndConsumption"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w3-container">
+                <div class="w3-row-padding">
+                    <div class="w3-third">
+                        <h3>Amortisationszeit</h3>
+                        <hr>
+                        <p>Bei minimalen Modulkosten von <b><a id="lblMinCostPerModule"></a></b> € wurde eine Amortisationszeit von ca. <b><a id="lblMinAmortization"></a></b> Jahren errechnet.
+                            Bei maximalen Modulkosten von <b><a id="lblMaxCostPerModule"></a></b> € liegt die Amortisationszeit jedoch bei ca. <b><a id="lblMaxAmortization"></a></b> Jahren.
+                        </p>
+                    </div>
+
+                    <div class="w3-twothird">
+                        <canvas id="chartAmortization"></canvas>
+                    </div>
                 </div>
             </div>
 
