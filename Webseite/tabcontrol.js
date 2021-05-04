@@ -16,23 +16,22 @@ function showTab(n) {
   let tabs = document.getElementsByClassName("tab");
   tabs[n].style.display = "block";
   //... and fix the Previous/Next buttons:
+  document.getElementById("nextBtn").style.display = "inline";
   if (n == 0) {
     document.getElementById("prevBtn").style.display = "none";
   } else {
     document.getElementById("prevBtn").style.display = "inline";
   }
-  if (n == (tabs.length - 1)) {
-    document.getElementById("nextBtn").innerHTML = "Fertig";
+  if (n == TAB_COSTS) {
+    document.getElementById("nextBtn").innerHTML = "Berechnen";
   } else {
     document.getElementById("nextBtn").innerHTML = "Weiter";
   }
 
-  console.log("Current tab: " + n);
   if(n == TAB_SUMMARY){
-    console.log("calculate values");
+    document.getElementById("nextBtn").style.display = "none";
     calculate();
   }
-
 
   //... and run a function that will display the correct step indicator:
   fixStepIndicator(n)

@@ -367,11 +367,13 @@ include('utils.php');
             <p>
                 Einige Kennwerte zu der für Sie berechnete Solaranlage:
 
-            <ul>
-                <li>Anzahl benötigter Module: <a id=""></a> Stk. </li>
-                <li>Verwendete Dachfläche: <a id=""> m² (/ max. <a id=""></a> m²)</a></li>
-                
-            </ul>
+                <ul>
+                    <li>Anzahl benötigter Module: <b><a id="lblNeededModules"></a></b> Stk. </li>
+                    <li>Verwendete Dachfläche: <b><a id="lblUsedRoofSurface"></a></b> m² (/ max. <b><a id="lblMaxRoofSurface"></a></b> m²)</a></li>
+                    <li>Dachausrichtung: <b><a id="lblRoofOrientation"></a></b> Grad </li>
+                    <li>Ausrichtung der Module: <b><a id="lblRoofAngle"></a></b> Grad</li>
+                    
+                </ul>
             </p>
 
             <div class="w3-container">

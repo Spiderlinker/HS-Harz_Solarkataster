@@ -344,6 +344,13 @@ function updateCharts(){
     chartPvYieldAndConsumption.update();
     chartAmortization.update();
 
+
+    document.getElementById("lblNeededModules").textContent = neededAmountOfModules;
+    document.getElementById("lblUsedRoofSurface").textContent = neededRoofAreaTotal;
+    document.getElementById("lblMaxRoofSurface").textContent = roofSurface;
+    document.getElementById("lblRoofOrientation").textContent = roofOrientation;
+    document.getElementById("lblRoofAngle").textContent = roofAngle;
+
     document.getElementById("lblMinCostPerModule").textContent = minCostPerModule;
     document.getElementById("lblMinAmortization").textContent = Math.round(amortizationMin);
     document.getElementById("lblMaxCostPerModule").textContent = maxCostPerModule;
