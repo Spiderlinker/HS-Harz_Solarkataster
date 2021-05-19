@@ -130,7 +130,7 @@ function readInputValues() {
 
     minCostPerModule = document.getElementById("minCostPerModule").value;
     maxCostPerModule = document.getElementById("maxCostPerModule").value;
-    
+
     peakEfficiency = document.getElementById("peakPower").value;
     degreeOfEffectiveness = document.getElementById("moduleEfficiency").value;
 }
@@ -327,26 +327,25 @@ function getIndexRoofAngle() {
     return Math.round(roofAngle / 10)/* * 10 */;
 }
 
-function calculateAmortizationYearlyCosts(){
+function calculateAmortizationYearlyCosts() {
     amortizationMinYearlyCosts[0] = minCostPerModule * neededAmountOfModules;
-    for(let i = 1; i <= 20; i++){
+    for (let i = 1; i <= 20; i++) {
         amortizationMinYearlyCosts[i] = amortizationMinYearlyCosts[i - 1] - revenueEuroTotal + 0.01 * amortizationMinYearlyCosts[0];
     }
 
     amortizationMaxYearlyCosts[0] = maxCostPerModule * neededAmountOfModules;
-    for(let i = 1; i <= 20; i++){
+    for (let i = 1; i <= 20; i++) {
         amortizationMaxYearlyCosts[i] = amortizationMaxYearlyCosts[i - 1] - revenueEuroTotal + 0.01 * amortizationMaxYearlyCosts[0];
     }
 }
 
-function updateCharts(){
+function updateCharts() {
     chartConsumptionPerMonth.update();
     chartPvYieldAndConsumption.update();
     chartAmortization.update();
 
-
     document.getElementById("lblNeededModules").textContent = neededAmountOfModules;
-    document.getElementById("lblUsedRoofSurface").textContent = neededRoofAreaTotal;
+    document.getElementById("lblUsedRoofSurface").textContent = Math.round(neededRoofAreaTotal);
     document.getElementById("lblMaxRoofSurface").textContent = roofSurface;
     document.getElementById("lblRoofOrientation").textContent = roofOrientation;
     document.getElementById("lblRoofAngle").textContent = roofAngle;
@@ -355,5 +354,4 @@ function updateCharts(){
     document.getElementById("lblMinAmortization").textContent = Math.round(amortizationMin);
     document.getElementById("lblMaxCostPerModule").textContent = maxCostPerModule;
     document.getElementById("lblMaxAmortization").textContent = Math.round(amortizationMax);
-    
 }

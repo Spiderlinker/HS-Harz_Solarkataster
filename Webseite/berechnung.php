@@ -367,13 +367,12 @@ include('utils.php');
             <p>
                 Einige Kennwerte zu der für Sie berechnete Solaranlage:
 
-                <ul>
-                    <li>Anzahl benötigter Module: <b><a id="lblNeededModules"></a></b> Stk. </li>
-                    <li>Verwendete Dachfläche: <b><a id="lblUsedRoofSurface"></a></b> m² (/ max. <b><a id="lblMaxRoofSurface"></a></b> m²)</a></li>
-                    <li>Dachausrichtung: <b><a id="lblRoofOrientation"></a></b> Grad </li>
-                    <li>Ausrichtung der Module: <b><a id="lblRoofAngle"></a></b> Grad</li>
-                    
-                </ul>
+            <ul>
+                <li>Anzahl benötigter Module: <b><a id="lblNeededModules"></a></b> Stk. </li>
+                <li>Verwendete Dachfläche: <b><a id="lblUsedRoofSurface"></a></b> m² (/ max. <b><a id="lblMaxRoofSurface"></a></b> m²)</a></li>
+                <li>Dachausrichtung: <b><a id="lblRoofOrientation"></a></b> Grad </li>
+                <li>Ausrichtung der Module: <b><a id="lblRoofAngle"></a></b> Grad</li>
+            </ul>
             </p>
 
             <div class="w3-container">
@@ -382,7 +381,7 @@ include('utils.php');
                         <h3>Stromverbrauch pro Monat</h3>
                         <hr>
                         <p>Nebenstehend sehen Sie den errechneten Tages- und Nachtverbrauch pro Monat in kWh dargestellt.
-                            Dieser zeigt an, wie viel Strom Sie in einem Monat jeweils tagsüber oder in der Nacht
+                            Dieser gibt an, wie viel Strom Sie in einem Monat jeweils tagsüber oder in der Nacht
                             (bzw. an den Zeiten verbrauchen, zu denen nicht mehr ausreichend Sonne scheint,
                             sodass diese für den Strombedarf genutzt werden könnte) verbrauchen.</p>
                     </div>
@@ -398,7 +397,9 @@ include('utils.php');
                     <div class="w3-third">
                         <h3>Ertrags- und Verbrauchsdarstellung</h3>
                         <hr>
-                        <p></p>
+                        <p>
+                            Dem nebenstehenden Diagramm können Sie Ihren monatlichen Stromverbrauch und die dazu berechneten potenziellen Stromerträge entnehmen. 
+                        </p>
                     </div>
 
                     <div class="w3-twothird">
