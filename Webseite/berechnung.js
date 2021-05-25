@@ -235,6 +235,9 @@ function calculateNeededModules(yearlyConsumption) {
     // Anzahl von Modulen aufrunden (ceil). Es git schließlich nur ganze Module ;)
     neededAmountOfModules = Math.ceil(yearlyConsumption / pvEfficiencyPerModule);
     neededRoofAreaTotal = neededAmountOfModules * neededRoofAreaPerModule;
+    if(neededRoofAreaTotal > roofSurface){
+        neededRoofAreaTotal = roofSurface;
+    }
 }
 
 /*
