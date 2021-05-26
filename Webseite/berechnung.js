@@ -237,7 +237,7 @@ function calculateNeededModules(yearlyConsumption) {
     neededRoofAreaTotal = neededAmountOfModules * neededRoofAreaPerModule;
     if(neededRoofAreaTotal > roofSurface){
         neededRoofAreaTotal = roofSurface;
-        neededAmountOfModules = Math.round(neededRoofAreaTotal / neededRoofAreaPerModule);
+        neededAmountOfModules = Math.floor(neededRoofAreaTotal / neededRoofAreaPerModule);
     }
 }
 
