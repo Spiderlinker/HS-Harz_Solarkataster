@@ -251,6 +251,7 @@ function calculateNeededModules(yearlyConsumption) {
     // Anzahl von Modulen aufrunden (ceil). Es git schließlich nur ganze Module ;)
     neededAmountOfModules = Math.ceil(yearlyConsumption / pvEfficiencyPerModule);
     neededRoofAreaTotal = neededAmountOfModules * neededRoofAreaPerModule;
+
     if (neededRoofAreaTotal > roofSurface) {
         // Die Dachfläche reicht nicht für die benötigten Module
         // Also soll die gesamte Dachfläche benutzt werden. 
@@ -258,6 +259,10 @@ function calculateNeededModules(yearlyConsumption) {
         // (abrunden, da nur ganze Module auf ein Dach passen und die 
         // maximale Dachfläche nicht überschritten werden darf)
         neededAmountOfModules = Math.floor(roofSurface / neededRoofAreaPerModule);
+        // neededRoofAreaTotal nicht auf die zur Verfügung stehende Fläche setzen,
+        // da die Module diese möglicherweise nicht komplett ausfüllen (es sind
+        // immer nur 'ganze' Module zu verwenden und es muss berechnet werden,
+        // wie viel Platz diese einnehmen, anstatt die komplette Dachfläche zu setzen)
         neededRoofAreaTotal = neededAmountOfModules * neededRoofAreaPerModule;
     }
 }
