@@ -58,7 +58,7 @@ function createPvYieldAndConsumptionChart() {
     const data = {
         labels: MONTH_LABELS,
         datasets: [{
-            label: 'Tagesverbrauch',
+            label: 'Stromverbrauch',
             data: dailyConsumptionMonthly,
             backgroundColor: "rgb(237, 125, 49)",
         },

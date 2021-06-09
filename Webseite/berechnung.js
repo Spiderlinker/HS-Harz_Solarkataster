@@ -103,6 +103,22 @@ function calculate() {
     readInputValues();
     getAverageIrradiationPerMonth(lat, lon, response => {
         monthlyIrradiation = response;
+
+        // Für Testzwecke zum Abgleich mit Berechnung aus Excel-Tabelle
+        // monthlyIrradiation = [
+        //     20.30,
+        //     37.25,
+        //     77.22,
+        //     122.39,
+        //     148.76,
+        //     157.27,
+        //     159.68,
+        //     132.39,
+        //     95.39,
+        //     56.17,
+        //     25.42,
+        //     17.19
+        // ]
         totalIrradiation = sumArray(monthlyIrradiation);
 
         // Do not calculate until irradiation was queried
@@ -125,8 +141,8 @@ function readInputValues() {
     // daily consumption profile (Tagesverbrauchsprofil)
     dailyConsumptionProfile = document.getElementById("dailyConsumption").value;
 
-    eegPrice = parseInt(document.getElementById("eegCostShare").value) / 100; // durch 100 dividiert, da Angabe in ct
-    electricityCosts = parseInt(document.getElementById("electricityCosts").value) / 100; // durch 100 dividiert, da Angabe in ct
+    eegPrice = parseFloat(document.getElementById("eegCostShare").value) / 100; // durch 100 dividiert, da Angabe in ct
+    electricityCosts = parseFloat(document.getElementById("electricityCosts").value) / 100; // durch 100 dividiert, da Angabe in ct
 
     minCostPerModule = document.getElementById("minCostPerModule").value;
     maxCostPerModule = document.getElementById("maxCostPerModule").value;
@@ -235,8 +251,14 @@ function calculateNeededModules(yearlyConsumption) {
     // Anzahl von Modulen aufrunden (ceil). Es git schließlich nur ganze Module ;)
     neededAmountOfModules = Math.ceil(yearlyConsumption / pvEfficiencyPerModule);
     neededRoofAreaTotal = neededAmountOfModules * neededRoofAreaPerModule;
-    if(neededRoofAreaTotal > roofSurface){
-        neededRoofAreaTotal = roofSurface;
+    if (neededRoofAreaTotal > roofSurface) {
+        // Die Dachfläche reicht nicht für die benötigten Module
+        // Also soll die gesamte Dachfläche benutzt werden. 
+        // > Berechnen, wie viele Module auf das Dach passen
+        // (abrunden, da nur ganze Module auf ein Dach passen und die 
+        // maximale Dachfläche nicht überschritten werden darf)
+        neededAmountOfModules = Math.floor(roofSurface / neededRoofAreaPerModule);
+        neededRoofAreaTotal = neededAmountOfModules * neededRoofAreaPerModule;
     }
 }
 
@@ -288,12 +310,7 @@ calculate eeg costs
 parameter pvRevenue and dailyConsumption
 */
 function calculateEEGCosts(pvRevenue, dailyConsumption) {
-    if (pvRevenue > dailyConsumption) {
-        return (pvRevenue - dailyConsumption) * eegPrice;
-    }
-    else {
-        return 0;
-    }
+    return pvRevenue > dailyConsumption ? (pvRevenue - dailyConsumption) * eegPrice : 0;
 }
 
 /*
@@ -354,7 +371,19 @@ function updateCharts() {
     document.getElementById("lblRoofAngle").textContent = roofAngle;
 
     document.getElementById("lblMinCostPerModule").textContent = minCostPerModule;
-    document.getElementById("lblMinAmortization").textContent = Math.round(amortizationMin);
+    document.getElementById("lblMinAmortization").textContent = amortizationMin.toPrecision(3);
     document.getElementById("lblMaxCostPerModule").textContent = maxCostPerModule;
-    document.getElementById("lblMaxAmortization").textContent = Math.round(amortizationMax);
+    document.getElementById("lblMaxAmortization").textContent = amortizationMax.toPrecision(3);
+
+    // TODO: Anzeigen von:?
+    // Ersparte Energiepreise
+    // EEG-Umlage Preise
+
+    let numberFormatter = new Intl.NumberFormat('de-DE', {
+        style: 'currency',
+        currency: 'EUR'
+    });
+
+    document.getElementById("lblMinCosts").textContent = numberFormatter.format(amortizationMinYearlyCosts[0]);
+    document.getElementById("lblMaxCosts").textContent = numberFormatter.format(amortizationMaxYearlyCosts[0]);
 }

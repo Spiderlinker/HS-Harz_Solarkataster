@@ -361,12 +361,11 @@ include('utils.php');
         <div class="tab">
             <h4>Zusammenfassung</h4>
             <p>
-                Auf dieser Seite werden noch einmal alle Ihre angegebenen Informationen aufbereitet.
+                Auf dieser Seite werden die wesentlichen Informationen für die geplante Solaranlage aufbereitet.
             </p>
 
             <p>
-                Einige Kennwerte zu der für Sie berechnete Solaranlage:
-
+                Einige Kennwerte zu der für Sie berechneten Solaranlage:
             <ul>
                 <li>Anzahl benötigter Module: <b><a id="lblNeededModules"></a></b> Stk. </li>
                 <li>Verwendete Dachfläche: <b><a id="lblUsedRoofSurface"></a></b> m² (/ max. <b><a id="lblMaxRoofSurface"></a></b> m²)</a></li>
@@ -413,8 +412,8 @@ include('utils.php');
                     <div class="w3-third">
                         <h3>Amortisationszeit</h3>
                         <hr>
-                        <p>Bei minimalen Modulkosten von <b><a id="lblMinCostPerModule"></a></b> € wurde eine Amortisationszeit von ca. <b><a id="lblMinAmortization"></a></b> Jahren errechnet.
-                            Bei maximalen Modulkosten von <b><a id="lblMaxCostPerModule"></a></b> € liegt die Amortisationszeit jedoch bei ca. <b><a id="lblMaxAmortization"></a></b> Jahren.
+                        <p>Bei minimalen Modulkosten von <b><a id="lblMinCostPerModule"></a></b> € wurde bei einem Gesamtpreis von <b><a id="lblMinCosts"></a></b> eine Amortisationszeit von ca. <b><a id="lblMinAmortization"></a></b> Jahren errechnet.
+                            Bei maximalen Modulkosten von <b><a id="lblMaxCostPerModule"></a></b> € liegt die Amortisationszeit bei einem Gesamtpreis von <b><a id="lblMaxCosts"></a></b> jedoch bei ca. <b><a id="lblMaxAmortization"></a></b> Jahren.
                         </p>
                     </div>
 
