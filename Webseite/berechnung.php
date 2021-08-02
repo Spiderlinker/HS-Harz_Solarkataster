@@ -43,6 +43,12 @@ include('utils.php');
                 Dafür werden Sie durch verschiedene Fragen geführt, um Ihnen anschließend eine Einschätzung
                 zur Wirtschaftlichkeit einer Solaranlage geben zu können.
             </p>
+			<hr>
+			<h5>Denkmalschutz beachtet?</h5>
+			Viele Häuser in Wernigerode sind denkmalgeschützt und sind für Photovoltaikanlagen nicht geeignet bzw. zugelassen (<a href="https://www.wernigerode.de/Wirtschaft-Stadtentwicklung/Stadtentwicklung-Bauen/%C3%96rtliche-Bauvorschriften/" target="_blank">Altstadtsatzung</a>).
+			<br>
+			<a href="https://lda.sachsen-anhalt.de/denkmalinformationssystem/" target="_blank">Finden Sie hier heraus</a>, ob auch Ihr Haus in einem denkmalgeschützten Bereich liegt.
+			<hr>
             <p>
                 Um zu beginnen, klicken Sie bitte auf die Schaltfläche 'Weiter'.
             </p>
@@ -422,6 +428,13 @@ include('utils.php');
                     </div>
                 </div>
             </div>
+			
+			<div>
+				<br>
+				<hr>
+				<h5>Weitere Informationen benötigt?</h5>
+				Viele weitere nützliche Informationen finden Sie bei der <a href="https://www.verbraucherzentrale.de/wissen/energie/erneuerbare-energien/photovoltaik-was-bei-der-planung-einer-solaranlage-wichtig-ist-5574" target="_blank">Verbraucherzentrale</a>.
+			</div>
 
         </div>
 
