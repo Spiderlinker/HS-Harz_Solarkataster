@@ -327,7 +327,7 @@ include('utils.php');
                 <tr>
                     <td>Peakleistung</td>
                     <td><input type="text" class="textbox" id="peakPower" name="peakPower" placeholder="20" value="<?php echo getValue('peakPower'); ?>" /></td>
-                    <td>WP/m²</td>
+                    <td>Wp/m²</td>
                 </tr>
                 <tr>
                     <td>Wirkungsgrad</td>
