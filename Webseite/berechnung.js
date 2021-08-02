@@ -370,7 +370,7 @@ function updateCharts() {
     chartAmortization.update();
 
     document.getElementById("lblNeededModules").textContent = neededAmountOfModules;
-    document.getElementById("lblUsedRoofSurface").textContent = Math.round(neededRoofAreaTotal);
+    document.getElementById("lblUsedRoofSurface").textContent = neededRoofAreaTotal;
     document.getElementById("lblMaxRoofSurface").textContent = roofSurface;
     document.getElementById("lblRoofOrientation").textContent = roofOrientation;
     document.getElementById("lblRoofAngle").textContent = roofAngle;
