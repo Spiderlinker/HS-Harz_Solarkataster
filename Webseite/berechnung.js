@@ -141,8 +141,10 @@ function readInputValues() {
     // daily consumption profile (Tagesverbrauchsprofil)
     dailyConsumptionProfile = document.getElementById("dailyConsumption").value;
 
-    eegPrice = parseFloat(document.getElementById("eegCostShare").value) / 100; // durch 100 dividiert, da Angabe in ct
-    electricityCosts = parseFloat(document.getElementById("electricityCosts").value) / 100; // durch 100 dividiert, da Angabe in ct
+	// parseFloat ignoriert alle Zahlen nach einem ','. Deshalb wird hier (da es sich nur um Zahlen bis 100€ handeln)
+	// das Komma durch einen Punkt ersetzt. Ansonsten würde man Gefahr laufen, dass eine Zahl wie '35.000,00' falsch interpretiert werden würde.
+    eegPrice = parseFloat(document.getElementById("eegCostShare").value.replace(',', '.')) / 100; // durch 100 dividiert, da Angabe in ct
+    electricityCosts = parseFloat(document.getElementById("electricityCosts").value.replace(',', '.')) / 100; // durch 100 dividiert, da Angabe in ct
 
     minCostPerModule = document.getElementById("minCostPerModule").value;
     maxCostPerModule = document.getElementById("maxCostPerModule").value;
