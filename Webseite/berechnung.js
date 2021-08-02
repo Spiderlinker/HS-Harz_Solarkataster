@@ -154,7 +154,7 @@ function readInputValues() {
 function readElectricityConsumption(tabElement) {
     let consumption = [];
 
-    if (tabElement.className.includes("active") == "monthly") {
+    if (tabElement.className.includes("active")) {
         consumption["type"] = MONTHLY;
         consumption["data"] = [
             document.getElementById("januaryConsumption").value,
