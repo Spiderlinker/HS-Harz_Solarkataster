@@ -141,8 +141,10 @@ function readInputValues() {
     // daily consumption profile (Tagesverbrauchsprofil)
     dailyConsumptionProfile = document.getElementById("dailyConsumption").value;
 
-    eegPrice = parseFloat(document.getElementById("eegCostShare").value) / 100; // durch 100 dividiert, da Angabe in ct
-    electricityCosts = parseFloat(document.getElementById("electricityCosts").value) / 100; // durch 100 dividiert, da Angabe in ct
+	// parseFloat ignoriert alle Zahlen nach einem ','. Deshalb wird hier (da es sich nur um Zahlen bis 100€ handeln)
+	// das Komma durch einen Punkt ersetzt. Ansonsten würde man Gefahr laufen, dass eine Zahl wie '35.000,00' falsch interpretiert werden würde.
+    eegPrice = parseFloat(document.getElementById("eegCostShare").value.replace(',', '.')) / 100; // durch 100 dividiert, da Angabe in ct
+    electricityCosts = parseFloat(document.getElementById("electricityCosts").value.replace(',', '.')) / 100; // durch 100 dividiert, da Angabe in ct
 
     minCostPerModule = document.getElementById("minCostPerModule").value;
     maxCostPerModule = document.getElementById("maxCostPerModule").value;
@@ -154,7 +156,7 @@ function readInputValues() {
 function readElectricityConsumption(tabElement) {
     let consumption = [];
 
-    if (tabElement.className.includes("active") == "monthly") {
+    if (tabElement.className.includes("active")) {
         consumption["type"] = MONTHLY;
         consumption["data"] = [
             document.getElementById("januaryConsumption").value,
@@ -370,7 +372,7 @@ function updateCharts() {
     chartAmortization.update();
 
     document.getElementById("lblNeededModules").textContent = neededAmountOfModules;
-    document.getElementById("lblUsedRoofSurface").textContent = Math.round(neededRoofAreaTotal);
+    document.getElementById("lblUsedRoofSurface").textContent = neededRoofAreaTotal;
     document.getElementById("lblMaxRoofSurface").textContent = roofSurface;
     document.getElementById("lblRoofOrientation").textContent = roofOrientation;
     document.getElementById("lblRoofAngle").textContent = roofAngle;
