@@ -21,8 +21,14 @@ if (!isset($_POST['lon'])) {
 
 // Sind alle Parameter gesetzt? Dann Request durchführen
 if (!isset($result['error'])) {
-    $response = file_get_contents('https://re.jrc.ec.europa.eu/api/MRcalc?lat=' . $_POST['lat'] . '&lon=' . $_POST['lon'] . '&outputformat=json&horirrad=1');
+    $response = file_get_contents(
+        'https://re.jrc.ec.europa.eu/api/MRcalc?'
+        . 'lat=' . $_POST['lat'] 
+        . '&lon=' . $_POST['lon'] 
+        . '&outputformat=json&horirrad=1');
     $result['data'] = json_decode($response, true);
 }
 
 echo json_encode($result);
+
+

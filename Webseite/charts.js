@@ -95,11 +95,15 @@ function createPvYieldAndConsumptionChart() {
 function createAmortizationChart() {
 
     const data = {
-        labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"],
+        labels: Array.from(Array(21).keys()),
         datasets: [{
             label: 'Minimale Modulkosten: ' + minCostPerModule + '€',
             data: amortizationMinYearlyCosts,
-            fill: { above: 'rgba(255, 0, 0, 0.2)', below: 'rgba(0, 255, 0, 0.2)', target: { value: 0 } },
+            fill: { 
+                above: 'rgba(255, 0, 0, 0.2)', 
+                below: 'rgba(0, 255, 0, 0.2)', 
+                target: { value: 0 } 
+            },
             borderColor: 'rgba(156, 195, 229, 0.8)',
             backgroundColor: 'rgba(156, 195, 229, 0.8)',
         },
