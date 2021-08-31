@@ -54,6 +54,10 @@ include('utils.php');
             </p>
         </div>
 
+        <!-- ############# ##### ############# -->
+        <!-- ############# TAB 2 ############# -->
+        <!-- ############# ##### ############# -->
+
         <div class="tab">
             <h3>Informationen über das Dach</h3>
 
@@ -122,7 +126,7 @@ include('utils.php');
         </div>
 
         <!-- ############# ##### ############# -->
-        <!-- ############# TAB 2 ############# -->
+        <!-- ############# TAB 3 ############# -->
         <!-- ############# ##### ############# -->
 
         <div class="tab">
@@ -280,7 +284,7 @@ include('utils.php');
         </div>
 
         <!-- ############# ##### ############# -->
-        <!-- ############# TAB 3 ############# -->
+        <!-- ############# TAB 4 ############# -->
         <!-- ############# ##### ############# -->
 
         <div class="tab">
@@ -309,7 +313,7 @@ include('utils.php');
 
             <h4>Kosten der Solarmodule</h4>
             <p>
-                Die Preise von Solarmodulen kann variieren. Die Amortisationszeit (die Zeit, nach der die
+                Die Preise von Solarmodulen können variieren. Die Amortisationszeit (die Zeit, nach der die
                 Anschaffungskosten wieder 'reingeholt' wurden) wird sowohl für den minimalen als auch für den
                 maximalen angegebenen Preis pro Solarmodul berechnet.
             </p>
@@ -361,7 +365,7 @@ include('utils.php');
         </div>
 
         <!-- ############# ##### ############# -->
-        <!-- ############# TAB 4 ############# -->
+        <!-- ############# TAB 5 ############# -->
         <!-- ############# ##### ############# -->
 
         <div class="tab">
