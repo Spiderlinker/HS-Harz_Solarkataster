@@ -234,7 +234,7 @@ function calculatePVEfficiency() {
 calculate amounts of needed modules and area needed for installation
 */
 function calculateNeededModules(yearlyConsumption) {
-    // Anzahl von Modulen aufrunden (ceil). Es git schließlich nur ganze Module ;)
+    // round up amount of modules (ceil). We can only have full modules
     neededAmountOfModules = Math.ceil(yearlyConsumption / pvEfficiencyPerModule);
     neededRoofAreaTotal = neededAmountOfModules * neededRoofAreaPerModule;
 
