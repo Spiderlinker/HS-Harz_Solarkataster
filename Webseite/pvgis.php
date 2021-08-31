@@ -9,17 +9,17 @@ ini_set("allow_url_fopen", 1);
 
 $result = array();
 
-// Parameter überprüfen (lat)
+// Check parameter (lat)
 if (!isset($_POST['lat'])) {
     $result['error'] = 'No lat!';
 }
 
-// Parameter überprüfen (lon)
+// Check parameter (lon)
 if (!isset($_POST['lon'])) {
     $result['error'] = 'No lon!';
 }
 
-// Sind alle Parameter gesetzt? Dann Request durchführen
+// Are all needed parameter set? Perform request
 if (!isset($result['error'])) {
     $response = file_get_contents('https://re.jrc.ec.europa.eu/api/MRcalc?lat=' . $_POST['lat'] . '&lon=' . $_POST['lon'] . '&outputformat=json&horirrad=1');
     $result['data'] = json_decode($response, true);

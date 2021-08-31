@@ -103,26 +103,9 @@ function calculate() {
     readInputValues();
     getAverageIrradiationPerMonth(lat, lon, response => {
         monthlyIrradiation = response;
-
-        // Für Testzwecke zum Abgleich mit Berechnung aus Excel-Tabelle
-        // monthlyIrradiation = [
-        //     20.30,
-        //     37.25,
-        //     77.22,
-        //     122.39,
-        //     148.76,
-        //     157.27,
-        //     159.68,
-        //     132.39,
-        //     95.39,
-        //     56.17,
-        //     25.42,
-        //     17.19
-        // ]
         totalIrradiation = sumArray(monthlyIrradiation);
 
         // Do not calculate until irradiation was queried
-
         calculateNeededValues(electricityConsumption);
 
         calculateAmortizationYearlyCosts();
@@ -141,10 +124,10 @@ function readInputValues() {
     // daily consumption profile (Tagesverbrauchsprofil)
     dailyConsumptionProfile = document.getElementById("dailyConsumption").value;
 
-	// parseFloat ignoriert alle Zahlen nach einem ','. Deshalb wird hier (da es sich nur um Zahlen bis 100€ handeln)
-	// das Komma durch einen Punkt ersetzt. Ansonsten würde man Gefahr laufen, dass eine Zahl wie '35.000,00' falsch interpretiert werden würde.
-    eegPrice = parseFloat(document.getElementById("eegCostShare").value.replace(',', '.')) / 100; // durch 100 dividiert, da Angabe in ct
-    electricityCosts = parseFloat(document.getElementById("electricityCosts").value.replace(',', '.')) / 100; // durch 100 dividiert, da Angabe in ct
+	// parseFloat ignores all numbers after a ','. Therefore, here (since we are only dealing with numbers up to 100€)
+	// the comma is replaced by a dot. Otherwise, one would run the risk of a number like '35,000.00' being misinterpreted.
+    eegPrice = parseFloat(document.getElementById("eegCostShare").value.replace(',', '.')) / 100; // divide by 100 to get value in ct
+    electricityCosts = parseFloat(document.getElementById("electricityCosts").value.replace(',', '.')) / 100; // divide by  100 to get value in ct
 
     minCostPerModule = document.getElementById("minCostPerModule").value;
     maxCostPerModule = document.getElementById("maxCostPerModule").value;
@@ -156,6 +139,7 @@ function readInputValues() {
 function readElectricityConsumption(tabElement) {
     let consumption = [];
 
+    // Read entered electricity values (either monthly or yearly)
     if (tabElement.className.includes("active")) {
         consumption["type"] = MONTHLY;
         consumption["data"] = [
@@ -255,16 +239,15 @@ function calculateNeededModules(yearlyConsumption) {
     neededRoofAreaTotal = neededAmountOfModules * neededRoofAreaPerModule;
 
     if (neededRoofAreaTotal > roofSurface) {
-        // Die Dachfläche reicht nicht für die benötigten Module
-        // Also soll die gesamte Dachfläche benutzt werden. 
-        // > Berechnen, wie viele Module auf das Dach passen
-        // (abrunden, da nur ganze Module auf ein Dach passen und die 
-        // maximale Dachfläche nicht überschritten werden darf)
+        // The roof area is not sufficient for the required modules
+        // So the entire roof area is to be used.  
+        // > Calculate how many modules fit on the roof.
+        // (round off, since only whole modules fit on a roof and the maximum roof area must not be exceeded)
         neededAmountOfModules = Math.floor(roofSurface / neededRoofAreaPerModule);
-        // neededRoofAreaTotal nicht auf die zur Verfügung stehende Fläche setzen,
-        // da die Module diese möglicherweise nicht komplett ausfüllen (es sind
-        // immer nur 'ganze' Module zu verwenden und es muss berechnet werden,
-        // wie viel Platz diese einnehmen, anstatt die komplette Dachfläche zu setzen)
+        // Do not set neededRoofAreaTotal to the available area, 
+        // as the modules may not fill it completely 
+        // (always use 'whole' modules and calculate how much space 
+        // they take up instead of setting the complete roof area).
         neededRoofAreaTotal = neededAmountOfModules * neededRoofAreaPerModule;
     }
 }
@@ -381,10 +364,6 @@ function updateCharts() {
     document.getElementById("lblMinAmortization").textContent = amortizationMin.toPrecision(3);
     document.getElementById("lblMaxCostPerModule").textContent = maxCostPerModule;
     document.getElementById("lblMaxAmortization").textContent = amortizationMax.toPrecision(3);
-
-    // TODO: Anzeigen von:?
-    // Ersparte Energiepreise
-    // EEG-Umlage Preise
 
     let numberFormatter = new Intl.NumberFormat('de-DE', {
         style: 'currency',

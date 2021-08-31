@@ -1,6 +1,6 @@
 "use strict"
 
-// Name der PHP-Datei, die die Abfrage vom PVGIS durchführt
+// name of php-file which performs PVGIS query
 const PVGIS_PHP_REQUEST_FILE = "pvgis.php";
 const NUMBER_OF_MONTH = 12;
 
@@ -9,16 +9,16 @@ function getTotalAverageIrradiation(latitude, longitude, callback){
 }
 
 function getAverageIrradiationPerMonth(latitude, longitude, callback) {
-    // Funktion der PHP-Datei aufrufen, um Abfrage beim PVGIS vorzunehmen
+    // Call the function of the PHP file to query the PVGIS.
     $.ajax({
         type: "POST",
-        // PHP-Datei enthält PVGIS-Abfrage,
-        // PHP-Funktion aufrufen 
+        // PHP-File contains PVGIS-Query,
+        // Call PHP-function  
         url: PVGIS_PHP_REQUEST_FILE,
         dataType: 'json',
-        // Parameter für PHP-Datei übergeben
+        // Pass parameters to php file
         data: { lat: latitude, lon: longitude }
-        // Antwort von Methode parsen lassen
+        // parse returned answer of called method
     }).done(response => {
         const processedResponse = extractMonthlyAverageIrradiationFromJSON(response.data);
         callback(processedResponse);
@@ -26,25 +26,24 @@ function getAverageIrradiationPerMonth(latitude, longitude, callback) {
 }
 
 function extractMonthlyAverageIrradiationFromJSON(json) {
-    // Relevante Daten sind im JSON unter json -> outputs -> monthly
+    // needed values are expected in json @ json -> outputs -> monthly
     const rawMonthlyIrradiation = json.outputs.monthly;
 
-    // Array erstellen für monatliche durschnittliche Einstrahlung
-    // Jede Array-Zelle repräsentiert dabei ein Monat
-    // beginnend bei 0 = Januar und 11 = Dezember
+    // create array for average monthly irradiation 
+    // each array-celll represents a month
+    // starting at 0 = January to 11 = December
     const averageMonthlyIrradiation = Array(NUMBER_OF_MONTH).fill(0);
 
-    // Einstrahlung nach Monaten sortieren und erst einmal monatlich aufsummieren
+    // Sort irradiation by month and sum up
     for (let i = 0; i < rawMonthlyIrradiation.length; i++) {
         let currentIrradiation = rawMonthlyIrradiation[i];
         averageMonthlyIrradiation[currentIrradiation.month - 1] += currentIrradiation['H(h)_m'];
     }
 
-    // monatliche durschnittliche Einstrahlung errechnen
-    // Durch die Anzahl der ausgelesenen monatlichen Werte teilen
+    // calculate average monthly irradiation
     for (let i = 0; i < averageMonthlyIrradiation.length; i++) {
-        // Anzahl der Jahre = Anzahl aller verarbeiteten Monate (rawMonthlyIrradiation.length) 
-        // geteilt durch die Anzahl der Monate (12)
+        // Number of years = number of all processed months (rawMonthlyIrradiation.length) 
+        // divided by the number of month (12)
         averageMonthlyIrradiation[i] /= rawMonthlyIrradiation.length / NUMBER_OF_MONTH;
     }
 

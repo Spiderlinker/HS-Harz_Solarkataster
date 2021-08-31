@@ -16,7 +16,7 @@
     <script type="text/javascript" src="pvgis.js"></script>
 
     <script type="text/javascript" src="berechnung.js"></script>
-    <!-- tabControl.js ist weiter unten hinzugefügt (Ende <body>) -->
+    <!-- tabControl.js is added at the bottom (at the end of <body>) -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js"></script>
 </head>
@@ -459,8 +459,8 @@ include('utils.php');
         </div>
     </form>
 
-    <!-- Muss am Ende stehen, da sonst das Stylesheet noch nicht geladen wurde 
-         und das Script auf dieses zugreifen muss, siehe https://stackoverflow.com/a/42370248-->
+    <!-- Needs to be at the end of <body>. Otherwise the html document is not completely loaded 
+         and this script needs to access the document, > https://stackoverflow.com/a/42370248-->
     <script type="text/javascript" src="tabcontrol.js"></script>
     <script type="text/javascript" src="charts.js"></script>
     <script>

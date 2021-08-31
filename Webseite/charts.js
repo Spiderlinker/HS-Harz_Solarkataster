@@ -4,9 +4,12 @@ const MONTH_LABELS = ["Januar", "Februar", "März", "April",
     "September", "Oktober", "November", "Dezember"
 ];
 
+// initialize charts
 const chartConsumptionPerMonth = createConsumptionPerMonthChart();
 const chartPvYieldAndConsumption = createPvYieldAndConsumptionChart();
 const chartAmortization = createAmortizationChart();
+
+// ############ Methods for creating charts ############# 
 
 function createConsumptionPerMonthChart() {
 
@@ -48,6 +51,7 @@ function createConsumptionPerMonthChart() {
         }
     };
 
+    // create charts with previously defined settings
     return new Chart(
         document.getElementById('chartConsumptionPerMonth'),
         config
@@ -85,6 +89,7 @@ function createPvYieldAndConsumptionChart() {
         }
     };
 
+    // create charts with previously defined settings
     return new Chart(
         document.getElementById('chartPvYieldAndConsumption'),
         config
@@ -151,6 +156,7 @@ function createAmortizationChart() {
         },
     };
 
+    // create charts with previously defined settings
     return new Chart(
         document.getElementById('chartAmortization'),
         config

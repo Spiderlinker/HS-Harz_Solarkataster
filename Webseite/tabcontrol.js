@@ -64,10 +64,10 @@ function validateForm() {
   let inputFields = tabs[currentTab].getElementsByTagName("input");
   let valid = true;
 
-  // Sonderfall bei dem Verbrauchstab
-  // Hier ist die Form gültig, wenn
-  // ENTWEDER alle monatlichen Verbrauchsdaten
-  // ODER der jährliche Stromverbrauch eingetragen ist
+  // Consumption tab is a special case
+  // The form is valid if
+  // EITHER all monthly consumption values were entered
+  // OR the yearly consumption value was entered
   if (currentTab == TAB_COMSUMPTION) {
     console.log("consumption tab validation")
     valid = isConsumptionTabValid();
@@ -98,16 +98,16 @@ function isConsumptionTabValid() {
   // ++++ Check TabPane ++++
   // +++++++++++++++++++++++
 
-  // Ist monatlich oder jährlicher Stromverbrauch ausgewählt?
+  // Is monthly or yearly electricity consumption selected?
   let monthlyComsumption = document.getElementById("btnMonthlyTab");
   let tabToCheck;
   if (monthlyComsumption.className.includes("active")) {
-    // monatlicher Stromverbrauch aktiviert
+    // monthly electricity consumption selected
     tabToCheck = document.getElementById("monthly");
   }
   else {
-    // monatlicher Stromverbrauch ist nicht angewählt,
-    // dann muss der jährliche Verbrauch aktiv sein.
+    // monthly electricity consumption is not selected,
+    // so the annual consumption must be active.
     tabToCheck = document.getElementById("yearly");
   }
 

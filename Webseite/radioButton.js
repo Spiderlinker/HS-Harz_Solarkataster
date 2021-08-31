@@ -1,12 +1,12 @@
 "use strict"
 
-// Optimale Werte für Dächer. Werte können bei Flachdächern verwendet werden
+// Optimal values for roofs. Values can be used for flat roofs
 const OPTIMAL_ROOF_ANGLE = 30;
 const OPTIMAL_ROOF_ORIENTATION = 180;
 
 /*
- * Prozentwerte für den Strom, der tagsüber verbraucht wird.
- * Werte sind über ein Key-Value-Prinzip in dieser Variable hinterlegt
+ * Percentage values for electricity consumed during the day.
+ * Values are stored in this variable via a key-value principle
  */
 const dailyConsumptionPercentageMap = {
   privateDaytime: 50,
@@ -19,12 +19,12 @@ const dailyConsumptionPercentageMap = {
 }
 
 /* 
- * Diese Methode aktiviert die gegebene RadioGroup. 
- * Alle anderen RadioGroups werden versteckt. Zudem wird der erste
- * RadioButtons der gegebenen RadioGroup selektiert.
+ * This method activates the given RadioGroup. 
+ * All other RadioGroups are hidden. In addition, 
+ * the first RadioButtons of the given RadioGroup is selected.
  * 
- * @param evt Event des gedrückten RadioButtons
- * @param radioGroup Gruppe von RadioButtons, die aktiviert werden soll
+ * @param evt Event of pressed RadioButtons
+ * @param radioGroup Group of RadioButtons, which should be activated
  */
 function radioButtonChecked(evt, radioGroup) {
   // Get all elements with class="radioGroup" and hide them
@@ -50,10 +50,9 @@ function setDefaultRoofValues(){
 }
 
 /* 
- * Setzt die DailyConsumption in Prozent in das vorgesehene Textfeld.
- * Der zu setzende Wert wird aus der dailyConsumptionPercentageMap entnommen.
- * Der Key für den Wert aus der Map wird aus dem value des geklickten
- * RadioButtons entnommen.
+ * Sets the DailyConsumption in percent in the text field provided.
+ * The value to be set is taken from the dailyConsumptionPercentageMap. 
+ * The key for the value from the map is taken from the value of the clicked RadioButton.
  */
 function setDailyConsumptionPercentage(event) {
   document.getElementById("dailyConsumption").value = dailyConsumptionPercentageMap[event.currentTarget.value];
